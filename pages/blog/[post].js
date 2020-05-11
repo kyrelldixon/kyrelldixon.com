@@ -1,19 +1,18 @@
-import { getAllPostPaths, getPostData } from "../../lib/posts";
+import { getPostPaths, getPosts } from "../../lib/posts";
 
-export default function BlogPost({ postData }) {
-  console.log({ postData });
+export default function BlogPost({ posts }) {
   return (
     <div>
       <article className="max-w-2xl mx-auto">
         <header className="text-center">
-          <h1 className="mb-10 text-5xl font-semibold leading-tight md:text-6xl lg:text-7xl xl:text-8xl">
-            {postData.title}
+          <h1 className="mb-10 text-5xl font-semibold leading-tight md:text-6xl xl:text-7xl">
+            {posts.title}
           </h1>
-          <h2 className="mb-6 text-2xl leading-snug">{postData.excerpt}</h2>
+          <h2 className="mb-6 text-2xl leading-snug">{posts.excerpt}</h2>
         </header>
         <main
-          className="space-y-4"
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+          className="space-y-4 lg:text-xl"
+          dangerouslySetInnerHTML={{ __html: posts.contentHtml }}
         ></main>
       </article>
     </div>
@@ -21,7 +20,7 @@ export default function BlogPost({ postData }) {
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostPaths();
+  const paths = getPostPaths();
   return {
     paths,
     fallback: false,
@@ -29,11 +28,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const postData = await getPostData(params.post);
+  const posts = await getPosts(params.post);
 
   return {
     props: {
-      postData,
+      posts,
     },
   };
 }
