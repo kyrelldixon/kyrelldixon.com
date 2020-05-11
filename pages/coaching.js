@@ -1,9 +1,9 @@
 import PageLayout from "../components/page-layout";
 
-export default function IndexPage() {
+export default function CoachingPage() {
   return (
     <PageLayout>
-      <h1>Home</h1>
+      <h1>Coaching</h1>
     </PageLayout>
   );
 }
