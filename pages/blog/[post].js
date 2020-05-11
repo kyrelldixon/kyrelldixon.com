@@ -1,18 +1,18 @@
-import { getPostPaths, getPosts } from "../../lib/posts";
+import { getPostPaths, getPost } from "../../lib/posts";
 
-export default function BlogPost({ posts }) {
+export default function BlogPost({ post }) {
   return (
     <div>
       <article className="max-w-2xl mx-auto">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-semibold leading-tight md:text-6xl xl:text-7xl">
-            {posts.title}
+            {post.title}
           </h1>
-          <h2 className="mb-6 text-2xl leading-snug">{posts.excerpt}</h2>
+          <h2 className="mb-6 text-2xl leading-snug">{post.excerpt}</h2>
         </header>
         <main
           className="space-y-4 lg:text-xl"
-          dangerouslySetInnerHTML={{ __html: posts.contentHtml }}
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         ></main>
       </article>
     </div>
@@ -28,11 +28,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const posts = await getPosts(params.post);
-
+  const post = await getPost(params.post);
   return {
     props: {
-      posts,
+      post,
     },
   };
 }
