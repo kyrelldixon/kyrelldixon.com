@@ -1,8 +1,9 @@
 import { getPostPaths, getPost } from "../../lib/posts";
+import PageLayout from "../../components/page-layout";
 
 export default function BlogPost({ post }) {
   return (
-    <div>
+    <PageLayout hideNav>
       <article className="max-w-2xl mx-auto">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-semibold leading-tight md:text-6xl xl:text-7xl">
@@ -15,7 +16,7 @@ export default function BlogPost({ post }) {
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         ></main>
       </article>
-    </div>
+    </PageLayout>
   );
 }
 

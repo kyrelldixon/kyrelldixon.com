@@ -1,7 +1,9 @@
+import PageLayout from "../components/page-layout";
+
 export default function IndexPage() {
   return (
-    <div>
-      <h1>My Blog</h1>
-    </div>
+    <PageLayout>
+      <h1>Home</h1>
+    </PageLayout>
   );
 }
