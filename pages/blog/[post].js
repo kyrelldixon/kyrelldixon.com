@@ -19,7 +19,7 @@ export default function BlogPost({ post }) {
   );
 }
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   const paths = getPostPaths();
   return {
     paths,
