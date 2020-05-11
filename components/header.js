@@ -9,7 +9,7 @@ export default function Header({ navLinks }) {
         </a>
       </Link>
       <nav>
-        <ul className="hidden space-x-8 md:flex">
+        <ul className="hidden space-x-8 text-sm md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link href={link.href}>
@@ -20,7 +20,7 @@ export default function Header({ navLinks }) {
         </ul>
       </nav>
       <Link href="/coaching">
-        <a className="px-4 py-2 text-sm text-white bg-gray-500 rounded">
+        <a className="px-4 py-2 text-xs text-white bg-black rounded md:text-sm">
           Work With Me
         </a>
       </Link>
