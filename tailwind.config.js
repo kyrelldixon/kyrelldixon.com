@@ -6,6 +6,9 @@ module.exports = {
         "7xl": "5rem",
         "8xl": "6rem",
       },
+      spacing: {
+        "88": "22rem",
+      },
     },
   },
   variants: {},
