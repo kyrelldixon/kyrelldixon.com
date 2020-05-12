@@ -1,23 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Feedback() {
+  const formNode = useRef();
   const [fields, setFields] = useState({
     selectedEmoji: null,
     feedback: "",
   });
+  const [open, setOpen] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log(fields);
   }
-  function handleChange(e) {
+
+  function handleEmojiChange(e) {
+    setFields({
+      ...fields,
+      [e.target.name]: e.target.value,
+    });
+    setOpen(true);
+  }
+
+  function handleFeedbackChange(e) {
     setFields({
       ...fields,
       [e.target.name]: e.target.value,
     });
   }
+
+  function handleClickOutside(e) {
+    if (formNode.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    setFields({
+      selectedEmoji: null,
+      feedback: "",
+    });
+    setOpen(false);
+  }
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
   return (
     <form
+      ref={formNode}
       className="max-w-sm py-12 mx-auto text-center"
       onSubmit={handleSubmit}
     >
@@ -26,7 +64,7 @@ export default function Feedback() {
         <li>
           <input
             className="hidden"
-            onChange={handleChange}
+            onChange={handleEmojiChange}
             type="radio"
             id="test"
             name="selectedEmoji"
@@ -53,7 +91,7 @@ export default function Feedback() {
         <li>
           <input
             className="hidden"
-            onChange={handleChange}
+            onChange={handleEmojiChange}
             type="radio"
             id="test2"
             name="selectedEmoji"
@@ -80,7 +118,7 @@ export default function Feedback() {
         <li>
           <input
             className="hidden"
-            onChange={handleChange}
+            onChange={handleEmojiChange}
             type="radio"
             id="test3"
             name="selectedEmoji"
@@ -107,7 +145,7 @@ export default function Feedback() {
         <li>
           <input
             className="hidden"
-            onChange={handleChange}
+            onChange={handleEmojiChange}
             type="radio"
             id="test4"
             name="selectedEmoji"
@@ -132,13 +170,13 @@ export default function Feedback() {
           </label>
         </li>
       </ul>
-      {fields.selectedEmoji && (
+      {open && (
         <div className="flex flex-col items-end p-2 shadow-md">
           <textarea
             className="w-full h-24 overflow-y-scroll text-sm resize-none"
             name="feedback"
             value={fields.feedback}
-            onChange={handleChange}
+            onChange={handleFeedbackChange}
             placeholder="What are your honest thoughts?"
           />
           <button

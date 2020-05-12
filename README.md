@@ -8,7 +8,7 @@
 ## TODO
 
 - [ ] SEO for each page
-- [ ] Icons for mobile nav
+- [x] Icons for mobile nav
 - [ ] About page
 - [ ] Contact Page
 - [ ] Newsletter Page
@@ -20,8 +20,9 @@
   - Sign up
 - [ ] Fix blog post page
 - [ ] Blog categories
-- [ ] Banner
+- [x] Banner
 - [ ] Search bar
+- [x] Feedback component
 
 ## How to run
 
