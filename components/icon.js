@@ -1,4 +1,11 @@
-import { FiTwitter, FiGithub, FiMail, FiUser } from "react-icons/fi";
+import {
+  FiTwitter,
+  FiGithub,
+  FiMail,
+  FiUser,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 import { FaLaptopCode } from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
 import { TiContacts } from "react-icons/ti";
@@ -22,6 +29,10 @@ export default function Icon({ name }) {
       return <TiContacts />;
     case "close":
       return <MdClose />;
+    case "left-arrow":
+      return <FiChevronLeft />;
+    case "right-arrow":
+      return <FiChevronRight />;
     default:
       return null;
   }

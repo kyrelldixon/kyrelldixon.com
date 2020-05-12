@@ -3,6 +3,7 @@ import { useState } from "react";
 import PageLayout from "../components/page-layout";
 import reviews from "../data/reviews.json";
 import { fontSizeFromText } from "../lib/utils";
+import Icon from "../components/icon";
 
 export default function CoachingPage() {
   const [currentReview, setCurrentReview] = useState(0);
@@ -21,15 +22,15 @@ export default function CoachingPage() {
           </p>
           <cite>- {review.from}</cite>
         </blockquote>
-        <div className="flex justify-center mx-auto space-x-8">
+        <div className="flex justify-center mx-auto space-x-8 text-3xl">
           <button onClick={prevReview} disabled={currentReview === 0}>
-            Previous
+            <Icon name="left-arrow" />
           </button>
           <button
             onClick={nextReview}
             disabled={currentReview === reviews.length - 1}
           >
-            Next
+            <Icon name="right-arrow" />
           </button>
         </div>
       </main>
