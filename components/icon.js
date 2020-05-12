@@ -2,6 +2,7 @@ import { FiTwitter, FiGithub, FiMail, FiUser } from "react-icons/fi";
 import { FaLaptopCode } from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
 import { TiContacts } from "react-icons/ti";
+import { MdClose } from "react-icons/md";
 
 export default function Icon({ name }) {
   switch (name.toLowerCase()) {
@@ -19,6 +20,8 @@ export default function Icon({ name }) {
       return <FiUser />;
     case "contacts":
       return <TiContacts />;
+    case "close":
+      return <MdClose />;
     default:
       return null;
   }
