@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function Feedback() {
   const [fields, setFields] = useState({
-    selectedEmoji: "happy",
+    selectedEmoji: null,
     feedback: "",
   });
 
