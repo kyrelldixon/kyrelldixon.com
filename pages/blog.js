@@ -1,9 +1,9 @@
-import BlogList from "../components/blog-list";
-import MostPopular from "../components/most-popular";
-import PageLayout from "../components/page-layout";
-import CategoryList from "../components/category-list";
+import BlogList from "components/blog-list";
+import MostPopular from "components/most-popular";
+import PageLayout from "components/page-layout";
+import CategoryList from "components/category-list";
 
-import { getSortedPosts, getCategories } from "../lib/posts";
+import { getSortedPosts, getCategories } from "lib/posts";
 
 export default function BlogPage({ posts, categories }) {
   const mostPopularPosts = posts.slice(0, 5);

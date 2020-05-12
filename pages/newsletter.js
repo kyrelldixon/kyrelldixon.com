@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PageLayout from "../components/page-layout";
+import PageLayout from "components/page-layout";
 
 export default function NewsletterPage() {
   const [fields, setFields] = useState({

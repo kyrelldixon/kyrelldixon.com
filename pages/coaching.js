@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import PageLayout from "../components/page-layout";
-import reviews from "../data/reviews.json";
-import { fontSizeFromText } from "../lib/utils";
-import Icon from "../components/icon";
+import PageLayout from "components/page-layout";
+import reviews from "data/reviews.json";
+import { fontSizeFromText } from "lib/utils";
+import Icon from "components/icon";
 
 export default function CoachingPage() {
   const [currentReview, setCurrentReview] = useState(0);
