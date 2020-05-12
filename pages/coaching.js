@@ -23,10 +23,15 @@ export default function CoachingPage() {
           <cite>- {review.from}</cite>
         </blockquote>
         <div className="flex justify-center mx-auto space-x-8 text-3xl">
-          <button onClick={prevReview} disabled={currentReview === 0}>
+          <button
+            className="disabled:opacity-50"
+            onClick={prevReview}
+            disabled={currentReview === 0}
+          >
             <Icon name="left-arrow" />
           </button>
           <button
+            className="disabled:opacity-50"
             onClick={nextReview}
             disabled={currentReview === reviews.length - 1}
           >
