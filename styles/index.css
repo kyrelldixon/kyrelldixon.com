@@ -5,4 +5,8 @@ html {
   font-size: 18px;
 }
 
+.grayscale {
+  filter: grayscale(100%);
+}
+
 @tailwind utilities;

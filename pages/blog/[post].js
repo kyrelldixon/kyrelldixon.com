@@ -1,5 +1,6 @@
 import { getPostPaths, getPost } from "../../lib/posts";
 import PageLayout from "../../components/page-layout";
+import Feedback from "../../components/feedback";
 
 export default function BlogPost({ post }) {
   return (
@@ -16,6 +17,7 @@ export default function BlogPost({ post }) {
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         ></main>
       </article>
+      <Feedback />
     </PageLayout>
   );
 }
