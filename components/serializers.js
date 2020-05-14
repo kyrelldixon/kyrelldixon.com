@@ -57,8 +57,6 @@ const BlockRenderer = (props) => {
     return <blockquote>{children}</blockquote>;
   }
 
-  // Fall back to default handling
-  console.log(BasePortableText.defaultSerializers.types.block(props));
   return BasePortableText.defaultSerializers.types.block(props);
 };
 
