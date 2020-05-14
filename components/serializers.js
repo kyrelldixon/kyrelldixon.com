@@ -69,5 +69,6 @@ export default {
   marks: {
     code: InlineCode,
   },
+  container: ({ children }) => <>{children}</>,
   hardBreak: false,
 };
