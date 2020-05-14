@@ -7,7 +7,7 @@ export default function BlogPost({ post, preview }) {
   const { title, excerpt, body } = post;
   return (
     <PageLayout hideNav preview={preview}>
-      <article className="max-w-2xl mx-auto">
+      <article className="max-w-2xl px-2 mx-auto md:px-4">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-semibold leading-tight md:text-6xl xl:text-7xl">
             {title}
@@ -16,9 +16,9 @@ export default function BlogPost({ post, preview }) {
             {excerpt && <PortableText blocks={excerpt} />}
           </h2>
         </header>
-        <div className="max-w-2xl mx-auto">
+        <main className="max-w-2xl mx-auto space-y-6">
           <PortableText blocks={body} />
-        </div>
+        </main>
       </article>
       <Feedback />
     </PageLayout>
