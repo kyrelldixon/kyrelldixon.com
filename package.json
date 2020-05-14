@@ -7,6 +7,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sanity/block-content-to-react": "^2.0.7",
+    "@sanity/client": "^1.149.13",
+    "@sanity/image-url": "^0.140.19",
     "gray-matter": "^4.0.2",
     "next": "^9.4.0",
     "react": "^16.13.1",

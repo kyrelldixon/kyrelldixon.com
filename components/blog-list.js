@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PortableText from "./portable-text";
 
 export default function BlogList({ posts }) {
   return (
@@ -11,7 +12,7 @@ export default function BlogList({ posts }) {
                 <h2 className="mb-4 text-4xl font-semibold leading-tight lg:text-5xl">
                   {post.title}
                 </h2>
-                <p className="text-lg">{post.excerpt}</p>
+                {post.excerpt && <PortableText blocks={post.excerpt} />}
               </a>
             </Link>
           </li>
