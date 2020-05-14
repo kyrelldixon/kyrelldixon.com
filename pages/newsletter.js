@@ -16,7 +16,6 @@ export default function NewsletterPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(fields);
   }
 
   return (

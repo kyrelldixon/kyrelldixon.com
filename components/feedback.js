@@ -10,7 +10,6 @@ export default function Feedback() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(fields);
   }
 
   function handleEmojiChange(e) {
