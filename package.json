@@ -12,6 +12,7 @@
     "@sanity/image-url": "^0.140.19",
     "gray-matter": "^4.0.2",
     "next": "^9.4.0",
+    "prism-react-renderer": "^1.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",

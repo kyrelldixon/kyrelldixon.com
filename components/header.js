@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Header({ navLinks }) {
   return (
-    <header className="sticky inset-x-0 top-0 flex items-center justify-between p-4 bg-white">
+    <header className="sticky inset-x-0 top-0 z-10 flex items-center justify-between p-4 bg-white">
       <Link href="/">
         <a title="Go to Homepage">
           <h1 className="text-lg font-semibold">Kyrell Dixon</h1>

@@ -1,4 +1,6 @@
 import BasePortableText from "@sanity/block-content-to-react";
+import Highlight, { defaultProps } from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/nightOwlLight";
 
 const AuthorReference = ({ node }) => {
   if (node && node.author && node.author.name) {
@@ -8,14 +10,37 @@ const AuthorReference = ({ node }) => {
 };
 
 const InlineCode = (props) => {
-  return <code>{props.children}</code>;
+  return <code className="p-1 text-gray-500">{props.children}</code>;
 };
 
 const CodeBlock = (props) => {
+  const { code, language } = props.node;
   return (
-    <pre className="text-sm" data-language={props.node.language}>
-      <code>{props.node.code}</code>
-    </pre>
+    <Highlight {...defaultProps} theme={theme} code={code} language={language}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre
+          className={`text-sm overflow-x-scroll p-8 rounded ${className}`}
+          style={style}
+        >
+          {tokens.map((line, i) => (
+            <div
+              className="table-row"
+              key={i}
+              {...getLineProps({ line, key: i })}
+            >
+              <span className="hidden pr-4 text-right opacity-50 md:table-cell">
+                {i + 1}
+              </span>
+              <span className="md:table-cell">
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token, key })} />
+                ))}
+              </span>
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
   );
 };
 
