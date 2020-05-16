@@ -18,11 +18,16 @@
   - What I teach
   - Pricing
   - Sign up
-- [ ] Fix blog post page
-- [ ] Blog categories
+- [x] Fix blog post page
+- [x] Blog categories
 - [x] Banner
 - [ ] Search bar
 - [x] Feedback component
+- [ ] Post Page
+  - [ ] `new` or `latest` tag on post listing
+  - [ ] `fileName` on code blocks
+  - [ ] language on code blocks
+  - [ ] author on post listing
 
 ## How to run
 

@@ -2,9 +2,10 @@ import BlogList from "components/blog-list";
 import MostPopular from "components/most-popular";
 import PageLayout from "components/page-layout";
 
-import { getAllPostsForBlog } from "lib/api";
+import { getAllPostsForBlog, getCategories } from "lib/api";
+import CategoryList from "components/category-list";
 
-export default function BlogPage({ posts }) {
+export default function BlogPage({ posts, categories }) {
   const mostPopularPosts = posts.slice(0, 5);
 
   return (
@@ -15,6 +16,7 @@ export default function BlogPage({ posts }) {
         </section>
         <section className="hidden max-w-xs space-y-8 md:block">
           <MostPopular posts={mostPopularPosts} />
+          <CategoryList categories={categories || []} />
         </section>
       </main>
     </PageLayout>
@@ -23,9 +25,12 @@ export default function BlogPage({ posts }) {
 
 export async function getStaticProps(preview = false) {
   const posts = await getAllPostsForBlog(preview);
+  const categories = await getCategories();
+
   return {
     props: {
       posts,
+      categories,
     },
   };
 }
