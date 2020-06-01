@@ -6,8 +6,8 @@ export default function BlogList({ posts }) {
     <div>
       <ul className="space-y-4">
         {posts.map((post) => (
-          <li key={post.slug}>
-            <Link href="blog/[post]" as={`blog/${post.slug}`}>
+          <li key={post._id}>
+            <Link href="/blog/[post]" as={`/blog/${post.slug}`}>
               <a className="text-center">
                 <h2 className="mb-4 text-4xl font-semibold leading-tight lg:text-5xl">
                   {post.title}
