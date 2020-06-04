@@ -82,6 +82,10 @@ const BlockRenderer = (props) => {
     return <blockquote>{children}</blockquote>;
   }
 
+  if (style === "normal") {
+    return <p className="leading-relaxed md:leading-loose">{children}</p>;
+  }
+
   return BasePortableText.defaultSerializers.types.block(props);
 };
 
