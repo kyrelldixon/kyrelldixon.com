@@ -2,6 +2,8 @@ import BasePortableText from "@sanity/block-content-to-react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/nightOwlLight";
 
+import Link from "./link";
+
 const AuthorReference = ({ node }) => {
   if (node && node.author && node.author.name) {
     return <span>{node.author.name}</span>;
@@ -19,7 +21,7 @@ const CodeBlock = (props) => {
     <Highlight {...defaultProps} theme={theme} code={code} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
-          className={`text-sm overflow-x-scroll p-8 rounded ${className}`}
+          className={`text-sm overflow-x-scroll p-8 rounded mt-6 ${className}`}
           style={style}
         >
           {tokens.map((line, i) => (
@@ -63,10 +65,26 @@ const Heading = ({ children, level, className = "" }) => {
   }
 
   return (
-    <H className={`font-semibold ${getHeadingSize()} ${className}`}>
+    <H className={`font-bold mt-12 ${getHeadingSize()} ${className}`}>
       {children}
     </H>
   );
+};
+
+const List = ({ children, type }) => {
+  return type !== "number" ? (
+    <ul className="mt-6 text-lg font-semibold list-disc list-inside">
+      {children}
+    </ul>
+  ) : (
+    <ol className="mt-6 text-lg font-semibold list-decimal list-inside">
+      {children}
+    </ol>
+  );
+};
+
+const ListItem = (props) => {
+  return <li>{props.children}</li>;
 };
 
 const BlockRenderer = (props) => {
@@ -83,7 +101,7 @@ const BlockRenderer = (props) => {
   }
 
   if (style === "normal") {
-    return <p className="leading-relaxed md:leading-loose">{children}</p>;
+    return <p className="mt-6 leading-relaxed">{children}</p>;
   }
 
   return BasePortableText.defaultSerializers.types.block(props);
@@ -97,7 +115,10 @@ export default {
   },
   marks: {
     code: InlineCode,
+    link: Link,
   },
+  list: List,
+  listItem: ListItem,
   container: ({ children }) => <>{children}</>,
   hardBreak: false,
 };

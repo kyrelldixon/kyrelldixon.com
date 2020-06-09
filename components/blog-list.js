@@ -3,21 +3,21 @@ import PortableText from "./portable-text";
 
 export default function BlogList({ posts }) {
   return (
-    <div>
-      <ul className="space-y-4">
-        {posts.map((post) => (
-          <li key={post._id}>
+    <ul className="space-y-14">
+      {posts.map((post) => (
+        <li key={post._id}>
+          <h2 className="pb-4 text-3xl font-extrabold leading-tight text-center md:text-5xl">
             <Link href="/blog/[post]" as={`/blog/${post.slug}`}>
-              <a className="text-center">
-                <h2 className="mb-4 text-4xl font-semibold leading-tight lg:text-5xl">
-                  {post.title}
-                </h2>
-                {post.excerpt && <PortableText blocks={post.excerpt} />}
-              </a>
+              <a className="hover:underline">{post.title}</a>
             </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </h2>
+          {post.excerpt && (
+            <div className="max-w-md mx-auto md:max-w-xl">
+              <PortableText blocks={post.excerpt} />
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -6,13 +6,13 @@ import PortableText from "components/portable-text";
 export default function BlogPost({ post, preview }) {
   const { title, excerpt, body } = post;
   return (
-    <PageLayout hideNav preview={preview}>
-      <article className="max-w-2xl px-2 mx-auto md:px-4">
+    <PageLayout preview={preview}>
+      <article className="max-w-3xl px-2 pt-8 mx-auto md:px-4">
         <header className="text-center">
-          <h1 className="mb-10 text-5xl font-semibold leading-tight md:text-6xl xl:text-7xl">
+          <h1 className="mb-10 text-5xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
             {title}
           </h1>
-          <h2 className="mb-6 text-xl leading-snug">
+          <h2 className="mb-6 text-lg leading-snug md:text-xl">
             {excerpt && <PortableText blocks={excerpt} />}
           </h2>
         </header>
