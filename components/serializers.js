@@ -97,7 +97,9 @@ const BlockRenderer = (props) => {
   }
 
   if (style === "blockquote") {
-    return <blockquote>{children}</blockquote>;
+    return (
+      <blockquote className="mt-6 text-xl opacity-75">{children}</blockquote>
+    );
   }
 
   if (style === "normal") {

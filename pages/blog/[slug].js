@@ -16,7 +16,7 @@ export default function BlogPost({ post, preview }) {
             {excerpt && <PortableText blocks={excerpt} />}
           </h2>
         </header>
-        <main className="max-w-2xl mx-auto space-y-6">
+        <main className="max-w-2xl mx-auto">
           <PortableText blocks={body} />
         </main>
       </article>
