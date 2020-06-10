@@ -7,7 +7,7 @@ export default function BlogPage({ posts }) {
   return (
     <PageLayout>
       <main className="grid grid-flow-col col-gap-16 p-4">
-        <section className="max-w-3xl pt-8 mx-auto">
+        <section className="max-w-4xl pt-8 mx-auto">
           <BlogList posts={posts} />
         </section>
       </main>

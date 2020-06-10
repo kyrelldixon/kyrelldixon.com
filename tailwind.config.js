@@ -8,6 +8,9 @@ module.exports = {
         "7xl": "5rem",
         "8xl": "6rem",
       },
+      colors: {
+        black: "#181818",
+      },
       spacing: {
         "88": "22rem",
       },
