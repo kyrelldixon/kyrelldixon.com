@@ -2,7 +2,7 @@ import Header from "./header";
 import Alert from "./alert";
 import MobileNav from "./mobile-nav";
 
-const navLinks = [{ title: "Articles", href: "/blog", icon: "blog" }];
+const navLinks = [{ title: "Blog", href: "/blog", icon: "blog" }];
 
 export default function PageLayout({ children, preview = false }) {
   return (
