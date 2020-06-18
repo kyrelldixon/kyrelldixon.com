@@ -10,7 +10,7 @@ export default function Header({ navLinks }) {
           </a>
         </Link>
         <nav className="">
-          <ul className="hidden space-x-6 text-sm font-semibold uppercase md:flex">
+          <ul className="hidden space-x-6 text-sm uppercase md:flex">
             {navLinks.map(({ title, href }, i) => (
               <li key={i}>
                 <Link href={href}>
