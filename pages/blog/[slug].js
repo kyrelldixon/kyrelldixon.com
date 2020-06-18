@@ -7,7 +7,7 @@ export default function BlogPost({ post, preview }) {
   const { title, excerpt, body } = post;
   return (
     <PageLayout preview={preview}>
-      <article className="max-w-3xl px-2 pt-8 mx-auto md:px-4">
+      <article className="max-w-3xl px-4 pt-8 mx-auto">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
             {title}
