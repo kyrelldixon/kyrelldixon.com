@@ -5,6 +5,48 @@ html {
   font-size: 18px;
 }
 
+.transition-background {
+  transition-property: background;
+}
+
+@variants hover {
+  .text-blue-gradient {
+    background: linear-gradient(30deg, #09f, #08f);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-purple-gradient {
+    background: linear-gradient(30deg, #85f, #9966ff);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-teal-gradient {
+    background: linear-gradient(30deg, #0cf, #0af);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-green-gradient {
+    background: linear-gradient(30deg, #0c8, #0d6);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-yellow-gradient {
+    background: linear-gradient(30deg, #fc0, #fc0);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-red-gradient {
+    background: linear-gradient(30deg, #f36, #f24);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 .grayscale {
   filter: grayscale(100%);
 }

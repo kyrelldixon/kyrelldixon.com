@@ -3,13 +3,26 @@ import PortableText from "./portable-text";
 import toTitleCase from "utils/to-title-case";
 
 export default function BlogList({ posts }) {
+  const hoverGradients = [
+    "hover:text-purple-gradient",
+    "hover:text-blue-gradient",
+    "hover:text-yellow-gradient",
+    "hover:text-green-gradient",
+    "hover:text-teal-gradient",
+    "hover:text-red-gradient",
+  ];
+
   return (
     <ul className="space-y-14">
-      {posts.map((post) => (
+      {posts.map((post, i) => (
         <li key={post._id}>
-          <h2 className="pb-4 text-3xl font-extrabold leading-tight text-center md:text-5xl lg:text-6xl">
+          <h2
+            className={`transition transition-background ease-in-out duration-300 pb-4 text-3xl font-extrabold leading-tight text-center md:text-5xl lg:text-6xl ${
+              hoverGradients[i % hoverGradients.length]
+            }`}
+          >
             <Link href="/blog/[post]" as={`/blog/${post.slug}`}>
-              <a className="hover:underline">{toTitleCase(post.title)}</a>
+              <a>{toTitleCase(post.title)}</a>
             </Link>
           </h2>
           {post.excerpt && (
