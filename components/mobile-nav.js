@@ -12,7 +12,7 @@ export default function MobileNav({ navLinks }) {
                 <span className="p-1 text-base">
                   <Icon name={link.icon} />
                 </span>
-                <span className="uppercase">{link.title}</span>
+                <span className="font-semibold">{link.title}</span>
               </a>
             </Link>
           </li>
