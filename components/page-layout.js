@@ -5,6 +5,7 @@ import MobileNav from "./mobile-nav";
 const navLinks = [
   { title: "Blog", href: "/", icon: "blog" },
   { title: "Coaching", href: "/coaching", icon: "code" },
+  { title: "Projects", href: "/projects", icon: "code" },
 ];
 
 export default function PageLayout({ children, preview = false }) {

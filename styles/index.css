@@ -5,46 +5,57 @@ html {
   font-size: 18px;
 }
 
-.transition-background {
-  transition-property: background;
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: flow 0.2s ease-in-out;
+  color: rgba(255, 255, 255, 1);
+  background-position: right;
 }
 
-@variants hover {
-  .text-blue-gradient {
-    background: linear-gradient(30deg, #09f, #08f);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.animate-gradient:hover {
+  color: rgba(255, 255, 255, 0);
+}
 
-  .text-purple-gradient {
-    background: linear-gradient(30deg, #85f, #9966ff);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+@keyframes flow {
+  0% {
+    background-position: left;
   }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
 
-  .text-teal-gradient {
-    background: linear-gradient(30deg, #0cf, #0af);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.text-blue-gradient {
+  background-image: linear-gradient(30deg, #09f, #08f);
+  background-clip: text;
+}
 
-  .text-green-gradient {
-    background: linear-gradient(30deg, #0c8, #0d6);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.text-purple-gradient {
+  background-image: linear-gradient(30deg, #85f, #9966ff);
+  background-clip: text;
+}
 
-  .text-yellow-gradient {
-    background: linear-gradient(30deg, #fc0, #fc0);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.text-teal-gradient {
+  background-image: linear-gradient(30deg, #0cf, #0af);
+  background-clip: text;
+}
 
-  .text-red-gradient {
-    background: linear-gradient(30deg, #f36, #f24);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.text-green-gradient {
+  background-image: linear-gradient(30deg, #0c8, #0d6);
+  background-clip: text;
+}
+
+.text-yellow-gradient {
+  background-image: linear-gradient(30deg, #fc0, #fc0);
+  background-clip: text;
+}
+
+.text-red-gradient {
+  background-image: linear-gradient(30deg, #f36, #f24);
+  background-clip: text;
 }
 
 .grayscale {
