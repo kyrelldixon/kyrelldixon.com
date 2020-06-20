@@ -1,4 +1,5 @@
 import PageLayout from "components/page-layout";
+import Icon from "components/icon";
 
 export default function CoachingPage() {
   return (
@@ -16,13 +17,13 @@ export default function CoachingPage() {
             href="https://app.acuityscheduling.com/schedule.php?owner=19120506#selectedTimes"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-2 text-sm font-semibold bg-blue-600 rounded-lg hover:bg-blue-500"
+            className="px-6 py-2 text-sm font-semibold bg-green-400 rounded-lg hover:bg-green-500"
           >
             Schedule a Session
           </a>
         </section>
         <section className="py-16 md:py-20">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <h2 className="mb-10 text-2xl font-extrabold leading-tight md:mb-10 md:text-4xl">
               What to expect
             </h2>
@@ -47,7 +48,7 @@ export default function CoachingPage() {
               </p>
             </div>
           </div>
-          <div className="grid max-w-4xl grid-cols-1 gap-8 mx-auto mt-12 md:grid-cols-2 md:grid-rows-2">
+          <div className="grid max-w-3xl grid-cols-1 gap-8 mx-auto mt-12 md:grid-cols-2 md:grid-rows-2">
             <div className="p-4 bg-gray-900 rounded-lg shadow md:p-6 lg:p-8">
               <h3 className="mb-4 text-lg font-extrabold md:text-2xl">
                 1. Understanding
@@ -91,44 +92,69 @@ export default function CoachingPage() {
           </div>
         </section>
         <section className="py-8 md:py-12">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <h2 className="mb-10 text-2xl font-extrabold leading-tight md:mb-10 md:text-4xl">
               What you will learn
             </h2>
           </div>
         </section>
         <section className="py-8 md:py-12">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <h2 className="mb-10 text-2xl font-extrabold leading-tight md:mb-10 md:text-4xl">
-              Who is this for
+              Who this is for
             </h2>
             <div className="leading-relaxed">
               <p className="mb-8">
                 While I love to help people, I'm not for everyone. You should
                 reach out if:
               </p>
-              <ul className="mb-8 space-y-4 list-disc list-inside">
+              <ul className="mb-8 space-y-3">
                 <li>
+                  <span className="inline-block pb-1 mr-2 text-lg text-green-400">
+                    <Icon name="check-circle" />
+                  </span>
                   You are enrolled in a Web Development bootcamp and feel like
                   you are getting behind
                 </li>
                 <li>
+                  <span className="inline-block pb-1 mr-2 text-lg text-green-400">
+                    <Icon name="check-circle" />
+                  </span>
                   You are taking an online programming class and struggling
                   through assignments alone
                 </li>
                 <li>
+                  <span className="inline-block mr-2 text-lg text-green-400">
+                    <Icon name="check-circle" />
+                  </span>
                   You are changing careers and trying to pick up some coding
                   skills
                 </li>
                 <li>
+                  <span className="inline-block pb-1 mr-2 text-lg text-green-400">
+                    <Icon name="check-circle" />
+                  </span>
                   You are a designer or developer and getting skills to make
                   progress in your career
                 </li>
                 <li>
+                  <span className="inline-block pb-1 mr-2 text-lg text-green-400">
+                    <Icon name="check-circle" />
+                  </span>
                   You are business-minded and looking to make money from code
                 </li>
-                <li>You are a looking for guidance and support as you learn</li>
-                <li>You are stuck on a problem and just need some help</li>
+                <li>
+                  <span className="inline-block pb-1 mr-2 text-lg text-green-400">
+                    <Icon name="check-circle" />
+                  </span>
+                  You are a looking for guidance and support as you learn
+                </li>
+                <li>
+                  <span className="inline-block pb-1 mr-2 text-lg text-green-400">
+                    <Icon name="check-circle" />
+                  </span>
+                  You are stuck on a problem and just need some help
+                </li>
               </ul>
             </div>
             <p>
@@ -137,7 +163,7 @@ export default function CoachingPage() {
           </div>
         </section>
         <section className="py-8 md:py-12">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <h2 className="mb-10 text-2xl font-extrabold leading-tight md:mb-10 md:text-4xl">
               What other people say
             </h2>

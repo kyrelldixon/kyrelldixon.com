@@ -63,3 +63,7 @@ html {
 }
 
 @tailwind utilities;
+
+svg {
+  display: inline-block;
+}
