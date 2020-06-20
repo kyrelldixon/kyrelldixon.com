@@ -6,7 +6,7 @@ export default function Projects() {
     <PageLayout>
       <main className="px-4">
         <section className="max-w-4xl py-12 mx-auto text-center md:py-16">
-          <h1 className="text-4xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
+          <h1 className="text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl">
             Projects
           </h1>
         </section>
