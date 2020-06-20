@@ -5,6 +5,7 @@ import {
   FiUser,
   FiChevronLeft,
   FiChevronRight,
+  FiExternalLink,
 } from "react-icons/fi";
 import { FaLaptopCode } from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
@@ -33,6 +34,8 @@ export default function Icon({ name }) {
       return <FiChevronLeft />;
     case "right-arrow":
       return <FiChevronRight />;
+    case "external-link":
+      return <FiExternalLink />;
     default:
       return null;
   }
