@@ -6,12 +6,12 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiExternalLink,
+  FiCode,
 } from "react-icons/fi";
-import { FaLaptopCode, FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
 import { TiContacts } from "react-icons/ti";
-import { MdClose } from "react-icons/md";
-// import { IoIosCheckmarkCircle } from "react-icons/io";
+import { MdClose, MdVoiceChat } from "react-icons/md";
 
 export default function Icon({ name }) {
   switch (name.toLowerCase()) {
@@ -22,7 +22,7 @@ export default function Icon({ name }) {
     case "email":
       return <FiMail />;
     case "code":
-      return <FaLaptopCode />;
+      return <FiCode />;
     case "blog":
       return <RiArticleLine />;
     case "profile":
@@ -39,6 +39,8 @@ export default function Icon({ name }) {
       return <FiExternalLink />;
     case "check-circle":
       return <FaCheckCircle />;
+    case "video-chat":
+      return <MdVoiceChat />;
     default:
       return null;
   }
