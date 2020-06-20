@@ -186,11 +186,11 @@ export default function CoachingPage() {
                 students complete projects and improve their coding skills.
                 Here's what some of them have to say:
               </p>
-              <div className="space-y-6 md:space-y-8">
+              <div className="flex flex-col items-center space-y-6 md:space-y-8">
                 <Reviews reviews={reviews.slice(0, visible)} />
                 {visible < reviews.length && (
                   <button
-                    className="px-6 py-2 text-sm font-semibold bg-green-400 rounded-lg hover:bg-green-500"
+                    className="font-semibold rounded-lg opacity-75 hover:opacity-100"
                     onClick={loadMore}
                   >
                     Load More
