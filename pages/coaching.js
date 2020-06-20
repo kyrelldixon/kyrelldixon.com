@@ -1,7 +1,17 @@
+import { useState } from "react";
+
 import PageLayout from "components/page-layout";
 import Icon from "components/icon";
+import allReviews from "data/reviews.json";
 
 export default function CoachingPage() {
+  const [reviews] = useState(allReviews);
+  const [visible, setVisible] = useState(5);
+
+  const loadMore = () => {
+    setVisible((v) => (v + 5 < reviews.length ? v + 5 : reviews.length));
+  };
+
   return (
     <PageLayout>
       <main className="p-4 md:mx-auto">
@@ -105,8 +115,9 @@ export default function CoachingPage() {
             </h2>
             <div className="leading-relaxed">
               <p className="mb-8">
-                While I love to help people, I'm not for everyone. You should
-                reach out if:
+                I have worked with college students, bootcamp students,
+                designers, entrepreneurs, and developers of all skill levels.
+                You should reach out if:
               </p>
               <ul className="mb-8 space-y-3">
                 <li>
@@ -134,20 +145,22 @@ export default function CoachingPage() {
                   <span className="inline-block pb-1 mr-2 text-lg text-green-400">
                     <Icon name="check-circle" />
                   </span>
-                  You are a designer or developer and getting skills to make
+                  You want to improve your coding skills in a certain area to
                   progress in your career
                 </li>
                 <li>
                   <span className="inline-block pb-1 mr-2 text-lg text-green-400">
                     <Icon name="check-circle" />
                   </span>
-                  You are business-minded and looking to make money from code
+                  You have an idea of an app or website and would like some tips
+                  on how to make it
                 </li>
                 <li>
                   <span className="inline-block pb-1 mr-2 text-lg text-green-400">
                     <Icon name="check-circle" />
                   </span>
-                  You are a looking for guidance and support as you learn
+                  You want a mentor that you can ask questions and get support
+                  from
                 </li>
                 <li>
                   <span className="inline-block pb-1 mr-2 text-lg text-green-400">
@@ -167,9 +180,41 @@ export default function CoachingPage() {
             <h2 className="mb-10 text-2xl font-extrabold leading-tight md:mb-10 md:text-4xl">
               What other people say
             </h2>
+            <div>
+              <p className="mb-8">
+                I got my start teaching on Wyzant where I've helped hundreds of
+                students complete projects and improve their coding skills.
+                Here's what some of them have to say:
+              </p>
+              <div className="space-y-6 md:space-y-8">
+                <Reviews reviews={reviews.slice(0, visible)} />
+                {visible < reviews.length && (
+                  <button
+                    className="px-6 py-2 text-sm font-semibold bg-green-400 rounded-lg hover:bg-green-500"
+                    onClick={loadMore}
+                  >
+                    Load More
+                  </button>
+                )}
+              </div>
+              <p></p>
+            </div>
           </div>
         </section>
       </main>
     </PageLayout>
   );
+}
+
+function Reviews({ reviews }) {
+  return reviews.map((review, i) => (
+    <blockquote
+      className="p-4 bg-gray-900 rounded-lg shadow md:p-8"
+      key={`${review.from}-${i}`}
+    >
+      <h3 className="text-xl font-extrabold">{review.title}</h3>
+      <p className="my-6">{review.quote}</p>
+      <cite className="font-bold">{review.from}</cite>
+    </blockquote>
+  ));
 }
