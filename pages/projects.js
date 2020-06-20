@@ -1,7 +1,7 @@
 import PageLayout from "components/page-layout";
 import Icon from "components/icon";
 
-export default function ProjectType() {
+export default function Projects() {
   return (
     <PageLayout>
       <main className="px-4">
