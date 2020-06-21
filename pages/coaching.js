@@ -45,9 +45,12 @@ export default function CoachingPage() {
             href="https://app.acuityscheduling.com/schedule.php?owner=19120506#selectedTimes"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-2 text-sm font-semibold bg-green-400 rounded-lg hover:bg-green-500"
+            className="inline-flex items-center justify-center px-6 py-2 text-sm font-bold bg-green-400 rounded-lg hover:bg-green-500"
           >
-            Schedule a Session
+            <span className="mr-2">Book Now</span>{" "}
+            <span className="text-lg">
+              <Icon name="external-link" />
+            </span>
           </a>
         </section>
         <section className="py-16 md:py-20">
@@ -117,6 +120,19 @@ export default function CoachingPage() {
                 and progress in your development career.
               </p>
             </div>
+            <div className="max-w-2xl mx-auto">
+              <a
+                href="https://app.acuityscheduling.com/schedule.php?owner=19120506#selectedTimes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-2 text-sm font-bold bg-green-400 rounded-lg hover:bg-green-500"
+              >
+                <span className="mr-2">Book Now</span>{" "}
+                <span className="text-lg">
+                  <Icon name="external-link" />
+                </span>
+              </a>
+            </div>
           </div>
         </section>
         <section className="py-8 md:py-12">
@@ -130,10 +146,21 @@ export default function CoachingPage() {
               help with:
             </p>
             <SkillsList skills={skills} />
-            <p>
+            <p className="mb-8">
               If there is something missing that you want help with, feel free
               to reach out for more info.
             </p>
+            <a
+              href="https://app.acuityscheduling.com/schedule.php?owner=19120506#selectedTimes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-bold bg-green-400 rounded-lg hover:bg-green-500"
+            >
+              <span className="mr-2">Book Now</span>{" "}
+              <span className="text-lg">
+                <Icon name="external-link" />
+              </span>
+            </a>
           </div>
         </section>
         <section className="py-8 md:py-12">
@@ -198,9 +225,20 @@ export default function CoachingPage() {
                 </li>
               </ul>
             </div>
-            <p>
-              If at least one of these sounds like you, we will be a great fit.
+            <p className="mb-8">
+              If at least one of these sounds like you, we will be a great fit!
             </p>
+            <a
+              href="https://app.acuityscheduling.com/schedule.php?owner=19120506#selectedTimes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-bold bg-green-400 rounded-lg hover:bg-green-500"
+            >
+              <span className="mr-2">Book Now</span>{" "}
+              <span className="text-lg">
+                <Icon name="external-link" />
+              </span>
+            </a>
           </div>
         </section>
         <section className="py-8 md:py-12">
@@ -214,7 +252,7 @@ export default function CoachingPage() {
                 students complete projects and improve their coding skills.
                 Here's what some of them have to say:
               </p>
-              <div className="flex flex-col items-center space-y-6 md:space-y-8">
+              <div className="flex flex-col items-center mb-8 space-y-6 md:space-y-8">
                 <Reviews reviews={reviews.slice(0, visible)} />
                 {visible < reviews.length && (
                   <button
@@ -225,7 +263,17 @@ export default function CoachingPage() {
                   </button>
                 )}
               </div>
-              <p></p>
+              <a
+                href="https://app.acuityscheduling.com/schedule.php?owner=19120506#selectedTimes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-2 text-sm font-bold bg-green-400 rounded-lg hover:bg-green-500"
+              >
+                <span className="mr-2">Book Now</span>{" "}
+                <span className="text-lg">
+                  <Icon name="external-link" />
+                </span>
+              </a>
             </div>
           </div>
         </section>
