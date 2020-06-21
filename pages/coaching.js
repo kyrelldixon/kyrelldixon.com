@@ -4,8 +4,26 @@ import PageLayout from "components/page-layout";
 import Icon from "components/icon";
 import allReviews from "data/reviews.json";
 
+const allSkills = [
+  { icon: "node", name: "NodeJs" },
+  { icon: "typescript", name: "TypeScript" },
+  { icon: "css", name: "CSS" },
+  { icon: "html", name: "HTML" },
+  { icon: "react", name: "React" },
+  { icon: "nextjs", name: "NextJs" },
+  { icon: "vue", name: "Vue" },
+  { icon: "tailwind", name: "TailwindCSS" },
+  { icon: "git", name: "Git" },
+  { icon: "aws", name: "AWS" },
+  { icon: "graphql", name: "GraphQL" },
+  { icon: "postgres", name: "PostgreSQL" },
+  { icon: "python", name: "Python" },
+  { icon: "java", name: "Java" },
+];
+
 export default function CoachingPage() {
   const [reviews] = useState(allReviews);
+  const [skills] = useState(allSkills);
   const [visible, setVisible] = useState(5);
 
   const loadMore = () => {
@@ -111,98 +129,7 @@ export default function CoachingPage() {
               languages, tools, and frameworks. Here are just a few things I can
               help with:
             </p>
-            <ul className="flex flex-wrap items-center justify-center mb-8">
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="node" />
-                </span>
-                <span className="inline-block text-xs font-bold">NodeJs</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="typescript" />
-                </span>
-                <span className="inline-block text-xs font-bold">
-                  TypeScript
-                </span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="css" />
-                </span>
-                <span className="inline-block text-xs font-bold">CSS</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="html" />
-                </span>
-                <span className="inline-block text-xs font-bold">HTML</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="react" />
-                </span>
-                <span className="inline-block text-xs font-bold">React</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="nextjs" />
-                </span>
-                <span className="inline-block text-xs font-bold">NextJs</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="vue" />
-                </span>
-                <span className="inline-block text-xs font-bold">Vue</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="tailwind" />
-                </span>
-                <span className="inline-block text-xs font-bold">
-                  TailwindCSS
-                </span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="git" />
-                </span>
-                <span className="inline-block text-xs font-bold">Git</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="aws" />
-                </span>
-                <span className="inline-block text-xs font-bold">AWS</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="graphql" />
-                </span>
-                <span className="inline-block text-xs font-bold">GraphQL</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="postgres" />
-                </span>
-                <span className="inline-block text-xs font-bold">
-                  PostgreSQL
-                </span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="python" />
-                </span>
-                <span className="inline-block text-xs font-bold">Python</span>
-              </li>
-              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
-                <span className="inline-block mb-2 text-2xl">
-                  <Icon name="java" />
-                </span>
-                <span className="inline-block text-xs font-bold">Java</span>
-              </li>
-            </ul>
+            <SkillsList skills={skills} />
             <p>
               If there is something missing that you want help with, feel free
               to reach out for more info.
@@ -304,6 +231,24 @@ export default function CoachingPage() {
         </section>
       </main>
     </PageLayout>
+  );
+}
+
+function SkillsList({ skills }) {
+  return (
+    <ul className="flex flex-wrap items-center justify-center mb-8">
+      {skills.map(({ icon, name }) => (
+        <li
+          key={icon}
+          className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow"
+        >
+          <span className="inline-block mb-2 text-2xl">
+            <Icon name={icon} />
+          </span>
+          <span className="inline-block text-xs font-bold">{name}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
