@@ -106,6 +106,107 @@ export default function CoachingPage() {
             <h2 className="mb-10 text-2xl font-extrabold leading-tight md:mb-10 md:text-4xl">
               What you will learn
             </h2>
+            <p className="mb-8">
+              As a full-stack developer, I've gained experience in a variety of
+              languages, tools, and frameworks. Here are just a few things I can
+              help with:
+            </p>
+            <ul className="flex flex-wrap items-center justify-center mb-8">
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="node" />
+                </span>
+                <span className="inline-block text-xs font-bold">NodeJs</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="typescript" />
+                </span>
+                <span className="inline-block text-xs font-bold">
+                  TypeScript
+                </span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="css" />
+                </span>
+                <span className="inline-block text-xs font-bold">CSS</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="html" />
+                </span>
+                <span className="inline-block text-xs font-bold">HTML</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="react" />
+                </span>
+                <span className="inline-block text-xs font-bold">React</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="nextjs" />
+                </span>
+                <span className="inline-block text-xs font-bold">NextJs</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="vue" />
+                </span>
+                <span className="inline-block text-xs font-bold">Vue</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="tailwind" />
+                </span>
+                <span className="inline-block text-xs font-bold">
+                  TailwindCSS
+                </span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="git" />
+                </span>
+                <span className="inline-block text-xs font-bold">Git</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="aws" />
+                </span>
+                <span className="inline-block text-xs font-bold">AWS</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="graphql" />
+                </span>
+                <span className="inline-block text-xs font-bold">GraphQL</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="postgres" />
+                </span>
+                <span className="inline-block text-xs font-bold">
+                  PostgreSQL
+                </span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="python" />
+                </span>
+                <span className="inline-block text-xs font-bold">Python</span>
+              </li>
+              <li className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow">
+                <span className="inline-block mb-2 text-2xl">
+                  <Icon name="java" />
+                </span>
+                <span className="inline-block text-xs font-bold">Java</span>
+              </li>
+            </ul>
+            <p>
+              If there is something missing that you want help with, feel free
+              to reach out for more info.
+            </p>
           </div>
         </section>
         <section className="py-8 md:py-12">
