@@ -3,23 +3,7 @@ import { useState } from "react";
 import PageLayout from "components/page-layout";
 import Icon from "components/icon";
 import allReviews from "data/reviews.json";
-
-const allSkills = [
-  { icon: "node", name: "NodeJs" },
-  { icon: "typescript", name: "TypeScript" },
-  { icon: "css", name: "CSS" },
-  { icon: "html", name: "HTML" },
-  { icon: "react", name: "React" },
-  { icon: "nextjs", name: "NextJs" },
-  { icon: "vue", name: "Vue" },
-  { icon: "tailwind", name: "TailwindCSS" },
-  { icon: "git", name: "Git" },
-  { icon: "aws", name: "AWS" },
-  { icon: "graphql", name: "GraphQL" },
-  { icon: "postgres", name: "PostgreSQL" },
-  { icon: "python", name: "Python" },
-  { icon: "java", name: "Java" },
-];
+import allSkills from "data/skills.json";
 
 export default function CoachingPage() {
   const [reviews] = useState(allReviews);
