@@ -21,7 +21,7 @@ export default function BlogList({ posts }) {
               gradients[i % gradients.length]
             } pb-4 text-3xl font-extrabold leading-tight text-center md:text-5xl lg:text-6xl`}
           >
-            <Link href="/blog/[post]" as={`/blog/${post.slug}`}>
+            <Link href="/blog/[slug]" as={`/blog/${post.slug}`}>
               <a>{toTitleCase(post.title)}</a>
             </Link>
           </h2>

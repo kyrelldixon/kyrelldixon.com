@@ -7,7 +7,7 @@ export default function MostPopular({ posts }) {
       <ol className="space-y-4 text-lg">
         {posts.map((post) => (
           <li key={post.slug}>
-            <Link href="blog/[post]" as={`blog/${post.slug}`}>
+            <Link href="blog/[slug]" as={`blog/${post.slug}`}>
               <a>{post.title}</a>
             </Link>
           </li>
