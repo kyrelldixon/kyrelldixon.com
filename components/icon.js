@@ -191,7 +191,7 @@ const Css3Icon = () => (
     <g
       id="Update-on-Series-Page"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
       fillRule="evenodd"
     >
@@ -616,7 +616,6 @@ const AwsIcon = () => (
     height="1em"
     width="1em"
     viewBox="-.1 1.1 304.9 179.8"
-    width="2500"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
