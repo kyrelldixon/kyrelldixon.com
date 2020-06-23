@@ -32,6 +32,8 @@ module.exports = {
   },
   variants: {
     opacity: ["responsive", "hover", "focus", "disabled"],
+    borderWidth: ["responsive", "hover", "focus"],
+    // borderColor: ["responsive", "hover", "focus", "disabled"],
   },
   plugins: [require("@tailwindcss/ui")],
 };

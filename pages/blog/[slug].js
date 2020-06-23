@@ -1,7 +1,8 @@
 import { getAllPostsWithSlug, getPostAndMorePosts } from "lib/api";
 import PageLayout from "components/page-layout";
-import Feedback from "components/feedback";
+// import Feedback from "components/feedback";
 import PortableText from "components/portable-text";
+import Newsletter from "components/newsletter";
 
 export default function BlogPost({ post, preview }) {
   const { title, excerpt, body } = post;
@@ -20,7 +21,10 @@ export default function BlogPost({ post, preview }) {
           <PortableText blocks={body} />
         </main>
       </article>
-      <Feedback />
+      {/* <Feedback /> */}
+      <div className="px-4 pt-12 pb-12">
+        <Newsletter />
+      </div>
     </PageLayout>
   );
 }
