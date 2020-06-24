@@ -1,16 +1,21 @@
 import { useState } from "react";
+import Icon from "./icon";
 
 export default function Newsletter() {
   const [fields, setFields] = useState({
     firstName: "",
     email: "",
   });
+  const [error, setError] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     setFields({
       ...fields,
       [e.target.name]: e.target.value,
     });
+    setError("");
   }
 
   function handleSubmit(e) {
@@ -32,7 +37,7 @@ export default function Newsletter() {
       <section className="flex flex-col flex-wrap text-sm">
         <div className="flex flex-col mb-2 space-y-2 md:flex-row md:space-y-0">
           <input
-            className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-400 rounded-lg md:mr-2 md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-300"
+            className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-300 rounded-lg md:mr-2 md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-200"
             type="text"
             name="firstName"
             placeholder="First Name"
@@ -40,7 +45,7 @@ export default function Newsletter() {
             onChange={handleChange}
           />
           <input
-            className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-400 rounded-lg md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-300"
+            className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-300 rounded-lg md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-200"
             type="email"
             name="email"
             placeholder="Email"
@@ -49,11 +54,30 @@ export default function Newsletter() {
           />
         </div>
         <button
-          className="w-full px-4 py-2 font-semibold text-white transition-colors duration-100 ease-in-out bg-blue-500 rounded-lg shadow-xl md:w-auto hover:bg-blue-600"
+          className={`inline-flex justify-center items-center w-full px-4 py-2 font-semibold text-white transition-colors duration-100 ease-in-out ${
+            subscribed ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"
+          } rounded-lg shadow-xl md:w-auto disabled:cursor-not-allowed`}
           type="submit"
+          disabled={subscribed || loading}
         >
-          Subscribe
+          {subscribed ? (
+            <>
+              <span className="mr-2">
+                <Icon name="check-circle" />
+              </span>
+              <span>Subscribed!</span>
+            </>
+          ) : loading ? (
+            "Submitting"
+          ) : (
+            "Subscribe"
+          )}
         </button>
+        {error && (
+          <div className="mt-2 text-center">
+            <p className="text-xs text-red-500">{error}</p>
+          </div>
+        )}
       </section>
       <p className="mt-3 text-xs text-center">
         You will never receive spam. Unsubscribe at any time.
