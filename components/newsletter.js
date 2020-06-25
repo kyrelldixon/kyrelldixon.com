@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Icon from "./icon";
+import addToConvertKit from "lib/convertkit";
 
 export default function Newsletter() {
   const [fields, setFields] = useState({
@@ -18,9 +19,35 @@ export default function Newsletter() {
     setError("");
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(fields);
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    setLoading(true);
+    const { email, firstName } = fields;
+    const formId = 1253732;
+
+    console.log(`submitting with ${email} and ${firstName}`);
+    addToConvertKit(formId, email, { firstName })
+      .then(() => {
+        setSubscribed(true);
+        setFields({ firstName: "", email: "" });
+
+        setTimeout(() => {
+          setSubscribed(false);
+        }, 6000);
+      })
+      .catch((error) => {
+        if (!error.message) {
+          // If there is a timeout error, then there is no error message
+          // and the error is likely due to content blocking.
+          setError(
+            "Looks like your browser is blocking this. Try to disable any tracker-blocking feature and resubmit."
+          );
+          return;
+        }
+        setError(error.response.data.error);
+      })
+      .finally(() => setLoading(false));
   }
 
   return (
@@ -43,6 +70,7 @@ export default function Newsletter() {
             placeholder="First Name"
             value={fields.firstName}
             onChange={handleChange}
+            required
           />
           <input
             className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-300 rounded-lg md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-200"
@@ -51,6 +79,7 @@ export default function Newsletter() {
             placeholder="Email"
             value={fields.email}
             onChange={handleChange}
+            required
           />
         </div>
         <button
