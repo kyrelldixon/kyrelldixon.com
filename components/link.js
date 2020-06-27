@@ -8,7 +8,6 @@ export default function Link({
 }) {
   const isExternal = href.includes("http");
 
-  console.log({ href, isExternal });
   return isExternal ? (
     <a
       className={className}
