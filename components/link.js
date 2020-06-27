@@ -1,20 +1,27 @@
 import NextLink from "next/link";
 
-export default function Link(props) {
-  const isExternal = props.mark.href.includes("http");
-  const className = "text-blue-500";
+export default function Link({
+  href,
+  children,
+  className = "text-blue-500",
+  ...rest
+}) {
+  const isExternal = href.includes("http");
+
+  console.log({ href, isExternal });
   return isExternal ? (
     <a
       className={className}
-      href={props.mark.href}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
+      {...rest}
     >
-      {props.children}
+      {children}
     </a>
   ) : (
-    <NextLink href={props.mark.href}>
-      <a className={className}>{props.children}</a>
+    <NextLink href={href} {...rest}>
+      <a className={className}>{children}</a>
     </NextLink>
   );
 }
