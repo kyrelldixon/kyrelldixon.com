@@ -1,6 +1,6 @@
 import BasePortableText from "@sanity/block-content-to-react";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/nightOwlLight";
+import theme from "prism-react-renderer/themes/nightOwl";
 
 import Link from "./link";
 
@@ -21,7 +21,7 @@ const CodeBlock = (props) => {
     <Highlight {...defaultProps} theme={theme} code={code} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
-          className={`text-xs md:text-sm overflow-x-scroll p-8 rounded my-12 ${className}`}
+          className={`text-xs overflow-x-scroll p-8 rounded my-12 ${className}`}
           style={style}
         >
           {tokens.map((line, i) => (

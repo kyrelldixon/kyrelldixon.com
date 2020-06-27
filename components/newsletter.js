@@ -52,7 +52,7 @@ export default function Newsletter() {
 
   return (
     <form className="max-w-sm mx-auto md:max-w-lg " onSubmit={handleSubmit}>
-      <header className="pb-6 text-center">
+      <header className="pb-8 text-center">
         <h2 className="mb-2 text-2xl font-bold leading-tight md:text-4xl">
           Sign up for the newsletter
         </h2>
@@ -62,7 +62,7 @@ export default function Newsletter() {
         </p>
       </header>
       <section className="flex flex-col flex-wrap text-sm">
-        <div className="flex flex-col mb-2 space-y-2 md:flex-row md:space-y-0">
+        <div className="flex flex-col mb-4 space-y-2 md:flex-row md:space-y-0">
           <input
             className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-300 rounded-lg md:mr-2 md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-200"
             type="text"
@@ -108,7 +108,7 @@ export default function Newsletter() {
           </div>
         )}
       </section>
-      <p className="mt-3 text-xs text-center">
+      <p className="mt-4 text-xs text-center">
         You will never receive spam. Unsubscribe at any time.
       </p>
     </form>

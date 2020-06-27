@@ -22,7 +22,7 @@ export default function BlogPost({ post, preview }) {
         </main>
       </article>
       {/* <Feedback /> */}
-      <div className="px-4 pt-12 pb-12">
+      <div className="px-4 py-16">
         <Newsletter />
       </div>
     </PageLayout>
