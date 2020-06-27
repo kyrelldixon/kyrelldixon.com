@@ -21,7 +21,7 @@ const CodeBlock = (props) => {
     <Highlight {...defaultProps} theme={theme} code={code} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
-          className={`text-sm overflow-x-scroll p-8 rounded mt-6 ${className}`}
+          className={`text-xs md:text-sm overflow-x-scroll p-8 rounded my-12 ${className}`}
           style={style}
         >
           {tokens.map((line, i) => (
@@ -49,35 +49,33 @@ const CodeBlock = (props) => {
 const Heading = ({ children, level, className = "" }) => {
   const H = `h${level}`;
 
-  function getHeadingSize() {
+  function getHeadingClass() {
     switch (level) {
       case 1:
-        return "text-4xl";
+        return "text-4xl mt-16";
       case 2:
-        return "text-3xl";
+        return "text-3xl mt-16";
       case 3:
-        return "text-2xl";
+        return "text-2xl mt-14";
       case 4:
-        return "text-xl";
+        return "text-xl mt-12";
       default:
-        return "text-base";
+        return "text-base mt-10";
     }
   }
 
   return (
-    <H className={`font-bold mt-12 ${getHeadingSize()} ${className}`}>
-      {children}
-    </H>
+    <H className={`font-bold ${getHeadingClass()} ${className}`}>{children}</H>
   );
 };
 
 const List = ({ children, type }) => {
   return type !== "number" ? (
-    <ul className="mt-6 text-lg font-semibold list-disc list-inside">
+    <ul className="pl-4 mt-8 space-y-2 text-lg list-disc list-inside">
       {children}
     </ul>
   ) : (
-    <ol className="mt-6 text-lg font-semibold list-decimal list-inside">
+    <ol className="pl-4 mt-8 space-y-2 text-lg list-decimal list-inside">
       {children}
     </ol>
   );
@@ -98,12 +96,12 @@ const BlockRenderer = (props) => {
 
   if (style === "blockquote") {
     return (
-      <blockquote className="mt-6 text-xl opacity-75">{children}</blockquote>
+      <blockquote className="mt-8 text-xl opacity-75">{children}</blockquote>
     );
   }
 
   if (style === "normal") {
-    return <p className="mt-6 leading-relaxed">{children}</p>;
+    return <p className="mt-8 leading-loose">{children}</p>;
   }
 
   return BasePortableText.defaultSerializers.types.block(props);
