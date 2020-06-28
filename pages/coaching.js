@@ -64,7 +64,7 @@ export default function CoachingPage() {
             </div>
           </div>
           <div className="grid max-w-3xl grid-cols-1 gap-8 mx-auto mt-12 md:grid-cols-2 md:grid-rows-2">
-            <div className="p-4 bg-gray-900 rounded-lg shadow md:p-6 lg:p-8">
+            <div className="p-4 bg-gray-900 rounded-lg shadow light:bg-gray-100 md:p-6 lg:p-8">
               <h3 className="mb-4 text-lg font-extrabold md:text-2xl">
                 1. Understanding
               </h3>
@@ -74,7 +74,7 @@ export default function CoachingPage() {
                 me to deliver specific actionable advice for your development.
               </p>
             </div>
-            <div className="p-4 bg-gray-900 rounded-lg shadow md:p-6 lg:p-8">
+            <div className="p-4 bg-gray-900 rounded-lg shadow light:bg-gray-100 md:p-6 lg:p-8">
               <h3 className="mb-4 text-lg font-extrabold md:text-2xl">
                 2. Direction
               </h3>
@@ -84,7 +84,7 @@ export default function CoachingPage() {
                 success and provide resources for you to learn from.
               </p>
             </div>
-            <div className="p-4 bg-gray-900 rounded-lg shadow md:p-6 lg:p-8">
+            <div className="p-4 bg-gray-900 rounded-lg shadow light:bg-gray-100 md:p-6 lg:p-8">
               <h3 className="mb-4 text-xl font-extrabold md:text-2xl">
                 3. Support
               </h3>
@@ -94,7 +94,7 @@ export default function CoachingPage() {
                 can be confident moving forward with me on your team.
               </p>
             </div>
-            <div className="p-4 bg-gray-900 rounded-lg shadow md:p-6 lg:p-8">
+            <div className="p-4 bg-gray-900 rounded-lg shadow light:bg-gray-100 md:p-6 lg:p-8">
               <h3 className="mb-4 text-xl font-extrabold md:text-2xl">
                 4. Success
               </h3>
@@ -272,7 +272,7 @@ function SkillsList({ skills }) {
       {skills.map(({ icon, name }) => (
         <li
           key={icon}
-          className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow"
+          className="flex flex-col items-center justify-center w-24 h-24 m-2 bg-gray-900 rounded-lg shadow light:bg-gray-100"
         >
           <span className="inline-block mb-2 text-2xl">
             <Icon name={icon} />
@@ -287,7 +287,7 @@ function SkillsList({ skills }) {
 function Reviews({ reviews }) {
   return reviews.map((review, i) => (
     <blockquote
-      className="p-4 bg-gray-900 rounded-lg shadow md:p-8"
+      className="p-4 bg-gray-900 rounded-lg shadow light:bg-gray-100 md:p-8"
       key={`${review.from}-${i}`}
     >
       <h3 className="text-xl font-extrabold">{review.title}</h3>

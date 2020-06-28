@@ -16,6 +16,19 @@ html {
   color: rgba(255, 255, 255, 0);
 }
 
+@media (prefers-color-scheme: light) {
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: flow 0.2s ease-in-out;
+    color: rgba(255, 255, 255, 0);
+    background-position: right;
+  }
+
+  /* .animate-gradient:hover {
+    color: rgba(255, 255, 255, 1);
+  } */
+}
+
 @keyframes flow {
   0% {
     background-position: left;

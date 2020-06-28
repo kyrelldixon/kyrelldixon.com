@@ -5,7 +5,7 @@ export default function Header({ navLinks }) {
   const router = useRouter();
 
   return (
-    <header className="inset-x-0 top-0 z-10 px-8 py-8 bg-black">
+    <header className="inset-x-0 top-0 z-10 px-8 py-8 bg-black light:bg-white">
       <div className="flex items-center justify-center max-w-4xl mx-auto text-center md:justify-between md:text-left">
         <Link href="/">
           <a title="Go to Homepage">

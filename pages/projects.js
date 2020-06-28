@@ -12,7 +12,7 @@ export default function Projects() {
           </h1>
         </section>
         <section className="grid max-w-3xl grid-flow-row grid-cols-1 gap-4 py-8 mx-auto md:gap-8 md:grid-cols-2">
-          <div className="p-8 bg-gray-900 rounded-lg shadow-md">
+          <div className="p-8 bg-gray-900 rounded-lg shadow-md light:bg-gray-100">
             <h3 className="text-lg font-extrabold">Write More App</h3>
             <div className="flex mt-4">
               <Link
@@ -35,7 +35,7 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="p-8 bg-gray-900 rounded-lg shadow-md">
+          <div className="p-8 bg-gray-900 rounded-lg shadow-md light:bg-gray-100">
             <h3 className="text-lg font-extrabold">Huddle Landing Page</h3>
             <div className="flex mt-4">
               <Link
@@ -60,7 +60,7 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="p-8 bg-gray-900 rounded-lg shadow-md">
+          <div className="p-8 bg-gray-900 rounded-lg shadow-md light:bg-gray-100">
             <h3 className="text-lg font-extrabold">Lonely Planet</h3>
             <div className="flex mt-4">
               <Link
@@ -85,7 +85,7 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="p-8 bg-gray-900 rounded-lg shadow-md">
+          <div className="p-8 bg-gray-900 rounded-lg shadow-md light:bg-gray-100">
             <h3 className="text-lg font-extrabold">Recipe Site Skeleton</h3>
             <div className="flex mt-4">
               <Link
@@ -110,7 +110,7 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="p-8 bg-gray-900 rounded-lg shadow-md">
+          <div className="p-8 bg-gray-900 rounded-lg shadow-md light:bg-gray-100">
             <h3 className="text-lg font-extrabold">Core Values</h3>
             <div className="flex mt-4">
               <Link
@@ -135,7 +135,7 @@ export default function Projects() {
               </Link>
             </div>
           </div>
-          <div className="p-8 bg-gray-900 rounded-lg shadow-md">
+          <div className="p-8 bg-gray-900 rounded-lg shadow-md light:bg-gray-100">
             <h3 className="text-lg font-extrabold">Shopify Demo App</h3>
             <div className="flex mt-4">
               <Link

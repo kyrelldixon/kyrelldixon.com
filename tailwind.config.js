@@ -21,12 +21,21 @@ module.exports = {
           "800": "#424242",
           "900": "#212121",
         },
+        "f-blue": "#09f",
+        "f-purple": "#85f",
+        "f-teal": "#0cf",
+        "f-green": "#0c8",
+        "f-yellow": "#fc0",
+        "f-red": "#f36",
       },
       spacing: {
         "88": "22rem",
       },
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+      screens: {
+        light: { raw: "(prefers-color-scheme: light)" },
       },
     },
   },
