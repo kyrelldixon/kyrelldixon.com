@@ -1,5 +1,5 @@
 import Link from "next/link";
-import PortableText from "./portable-text";
+// import PortableText from "./portable-text";
 import toTitleCase from "utils/to-title-case";
 
 export default function BlogList({ posts }) {
