@@ -14,7 +14,7 @@ export default function BlogList({ posts }) {
   return (
     <ul className="space-y-14">
       {posts.map((post, i) => (
-        <li key={post._id}>
+        <li key={post.slug}>
           <h2
             className={`transition-colors duration-200 ease-in-out ${
               gradients[i % gradients.length]

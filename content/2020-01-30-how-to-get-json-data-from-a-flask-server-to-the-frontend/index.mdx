@@ -3,8 +3,9 @@ title: How to display JSON data to a front-end app using Flask
 author: Kyrell Dixon
 date: 2020-01-30
 hero: ./images/hero.jpg
+slug: display-json-data-in-html-with-flask
 excerpt: Learn multiple ways to get JSON data from a Flask server to a front-end interface
-tags: ['Python', 'JavaScript', 'Full Stack']
+tags: ["Python", "JavaScript", "Full Stack"]
 secret: true
 ---
 
@@ -30,24 +31,24 @@ touch app.py templates/index.html touch data/pets.json .flaskenv
 > You can press the `tab` key to navigate through each field and set the value
 
 `index.html`
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Flask JSON Data Tutorial</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Flask JSON Data Tutorial</title>
+  </head>
+  <body></body>
 </html>
 ```
 
 Add this JSON data to `pets.json` in the data folder.
 
 `pets.json`
+
 ```json
 {
   "dogs": [
@@ -68,6 +69,7 @@ Add this JSON data to `pets.json` in the data folder.
 ```
 
 `.flaskenv`
+
 ```bash
 FLASK_APP=app
 FLASK_ENV=development
@@ -105,18 +107,18 @@ the data variable to the `tojson` function and it will convert it to a text stri
 ```html {10-13}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Flask JSON Data Tutorial</title>
-</head>
-<body>
-  <script>
-    const pets = {{ pets|tojson }}
-    console.log(pets)
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Flask JSON Data Tutorial</title>
+  </head>
+  <body>
+    <script>
+      const pets = {{ pets|tojson }}
+      console.log(pets)
+    </script>
+  </body>
 </html>
 ```
 
@@ -139,12 +141,12 @@ def pets_api():
 
 ```html
 <script>
-  const URL = 'http://127.0.0.1:5000/api/pets'
+  const URL = "http://127.0.0.1:5000/api/pets";
   fetch(URL)
-    .then(res => res.json())
-    .then(pets => {
-      console.log(pets)
-    })
+    .then((res) => res.json())
+    .then((pets) => {
+      console.log(pets);
+    });
 </script>
 ```
 
