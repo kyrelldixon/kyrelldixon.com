@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import darkTheme from "prism-react-renderer/themes/nightOwl";
 import lightTheme from "prism-react-renderer/themes/nightOwlLight";
 
@@ -36,7 +37,7 @@ export const InlineCode = (props) => {
   return <code className="p-1 text-gray-500">{props.children}</code>;
 };
 
-export const CodeBlock = ({ children, className }) => {
+export const CodeBlock = ({ children, className, live }) => {
   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") {
       return darkTheme;
@@ -67,6 +68,18 @@ export const CodeBlock = ({ children, className }) => {
         .matchMedia("(prefers-color-scheme: dark)")
         .removeEventListener("change", handleSetTheme);
   }, [darkTheme, lightTheme]);
+
+  if (live) {
+    return (
+      <div style={{ marginTop: "40px" }}>
+        <LiveProvider code={children}>
+          <LivePreview />
+          <LiveEditor />
+          <LiveError />
+        </LiveProvider>
+      </div>
+    );
+  }
 
   return (
     <Highlight {...defaultProps} theme={theme} code={code} language={language}>
