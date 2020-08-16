@@ -8,11 +8,11 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" className="overflow-x-hidden antialiased smooth-scroll">
         <Head>
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         </Head>
-        <body className="overflow-x-hidden antialiased">
+        <body>
           <Main />
           <NextScript />
         </body>

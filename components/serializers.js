@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import NextLink from "next/link";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/nightOwl";
@@ -6,6 +7,10 @@ import lightTheme from "prism-react-renderer/themes/nightOwlLight";
 
 const Link = ({ href, children }) => {
   const isExternal = href.includes("http");
+  const isToInPageElement = !isExternal && href.includes("#");
+  const router = useRouter();
+  const inlineHref =
+    router && router.query ? `/blog/${router.query.slug}${href}` : "";
   const className = "text-blue-500";
   return isExternal ? (
     <a
@@ -16,6 +21,10 @@ const Link = ({ href, children }) => {
     >
       {children}
     </a>
+  ) : isToInPageElement ? (
+    <NextLink href={inlineHref}>
+      <a className={className}>{children}</a>
+    </NextLink>
   ) : (
     <NextLink href={href}>
       <a className={className}>{children}</a>
@@ -88,7 +97,7 @@ export const CodeBlock = ({ children, className }) => {
   );
 };
 
-const Heading = ({ children, level, className = "" }) => {
+const Heading = ({ children, level, className = "", ...rest }) => {
   const H = `h${level}`;
 
   function getHeadingClass() {
@@ -107,7 +116,9 @@ const Heading = ({ children, level, className = "" }) => {
   }
 
   return (
-    <H className={`font-bold ${getHeadingClass()} ${className}`}>{children}</H>
+    <H {...rest} className={`font-bold ${getHeadingClass()} ${className}`}>
+      {children}
+    </H>
   );
 };
 
@@ -135,8 +146,10 @@ const Paragraph = ({ children }) => (
 
 const headings = {};
 for (let level = 1; level <= 6; ++level) {
-  headings[`h${level}`] = ({ children }) => (
-    <Heading level={level}>{children}</Heading>
+  headings[`h${level}`] = ({ children, ...rest }) => (
+    <Heading {...rest} level={level}>
+      {children}
+    </Heading>
   );
 }
 
