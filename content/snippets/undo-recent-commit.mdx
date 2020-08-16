@@ -1,0 +1,15 @@
+---
+title: Undo the Most Recent Commit
+date: 2019-01-10
+slug: undo-recent-commit
+description: The exact steps to undo the most recent commit.
+category: Git
+---
+
+```bash
+git commit -m "Something terribly misguided"              #(1)
+git reset HEAD~                                           #(2)
+<< edit files as necessary >>                             #(3)
+git add .                                                 #(4)
+git commit -c ORIG_HEAD                                   #(5)
+```
