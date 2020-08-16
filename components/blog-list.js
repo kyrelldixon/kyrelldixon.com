@@ -1,5 +1,4 @@
 import Link from "next/link";
-// import PortableText from "./portable-text";
 import toTitleCase from "utils/to-title-case";
 
 export default function BlogList({ posts }) {
@@ -27,7 +26,7 @@ export default function BlogList({ posts }) {
           </h2>
           {post.excerpt && (
             <div className="max-w-md mx-auto text-sm md:max-w-xl md:text-base">
-              <PortableText blocks={post.excerpt} />
+              <p>{post.excerpt}</p>
             </div>
           )}
         </li>

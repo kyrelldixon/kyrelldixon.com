@@ -1,40 +1,64 @@
+import { useEffect, useState } from "react";
 import NextLink from "next/link";
-import BasePortableText from "@sanity/block-content-to-react";
 import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/nightOwl";
+import darkTheme from "prism-react-renderer/themes/nightOwl";
+import lightTheme from "prism-react-renderer/themes/nightOwlLight";
 
-const Link = (props) => {
-  const isExternal = props.mark.href.includes("http");
+const Link = ({ href, children }) => {
+  const isExternal = href.includes("http");
   const className = "text-blue-500";
   return isExternal ? (
     <a
       className={className}
-      href={props.mark.href}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
-      {props.children}
+      {children}
     </a>
   ) : (
-    <NextLink href={props.mark.href}>
-      <a className={className}>{props.children}</a>
+    <NextLink href={href}>
+      <a className={className}>{children}</a>
     </NextLink>
   );
 };
 
-const AuthorReference = ({ node }) => {
-  if (node && node.author && node.author.name) {
-    return <span>{node.author.name}</span>;
-  }
-  return <></>;
-};
-
-const InlineCode = (props) => {
+export const InlineCode = (props) => {
   return <code className="p-1 text-gray-500">{props.children}</code>;
 };
 
-const CodeBlock = (props) => {
-  const { code, language } = props.node;
+export const CodeBlock = ({ children, className }) => {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") {
+      return darkTheme;
+    }
+
+    const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches;
+    return isDarkMode ? darkTheme : lightTheme;
+  });
+  const language = className.replace(/language-/, "");
+  const code = children.trim();
+
+  useEffect(() => {
+    const handleSetTheme = (event) => {
+      if (event.matches) {
+        setTheme(darkTheme);
+      } else {
+        setTheme(lightTheme);
+      }
+    };
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", handleSetTheme);
+
+    return () =>
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", handleSetTheme);
+  }, [darkTheme, lightTheme]);
+
   return (
     <Highlight {...defaultProps} theme={theme} code={code} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
@@ -87,56 +111,43 @@ const Heading = ({ children, level, className = "" }) => {
   );
 };
 
-const List = ({ children, type }) => {
-  return type !== "number" ? (
-    <ul className="pl-4 mt-8 space-y-2 text-lg list-disc list-inside">
-      {children}
-    </ul>
-  ) : (
-    <ol className="pl-4 mt-8 space-y-2 text-lg list-decimal list-inside">
-      {children}
-    </ol>
+const OrderedList = ({ children }) => (
+  <ol className="pl-4 mt-8 space-y-2 text-lg list-decimal list-inside">
+    {children}
+  </ol>
+);
+
+const UnorderedList = ({ children }) => (
+  <ul className="pl-4 mt-8 space-y-2 text-lg list-disc list-inside">
+    {children}
+  </ul>
+);
+
+const ListItem = ({ children }) => <li>{children}</li>;
+
+const BlockQuote = ({ children }) => (
+  <blockquote className="mt-8 text-xl opacity-75">{children}</blockquote>
+);
+
+const Paragraph = ({ children }) => (
+  <p className="mt-8 leading-loose">{children}</p>
+);
+
+const headings = {};
+for (let level = 1; level <= 6; ++level) {
+  headings[`h${level}`] = ({ children }) => (
+    <Heading level={level}>{children}</Heading>
   );
-};
-
-const ListItem = (props) => {
-  return <li>{props.children}</li>;
-};
-
-const BlockRenderer = (props) => {
-  const { style = "normal" } = props.node;
-  const { children } = props;
-
-  if (/^h\d/.test(style)) {
-    const level = parseInt(style.replace(/[^\d]/g, ""));
-    return <Heading level={level}>{children}</Heading>;
-  }
-
-  if (style === "blockquote") {
-    return (
-      <blockquote className="mt-8 text-xl opacity-75">{children}</blockquote>
-    );
-  }
-
-  if (style === "normal") {
-    return <p className="mt-8 leading-loose">{children}</p>;
-  }
-
-  return BasePortableText.defaultSerializers.types.block(props);
-};
+}
 
 export default {
-  types: {
-    authorReference: AuthorReference,
-    code: CodeBlock,
-    block: BlockRenderer,
-  },
-  marks: {
-    code: InlineCode,
-    link: Link,
-  },
-  list: List,
-  listItem: ListItem,
-  container: ({ children }) => <>{children}</>,
-  hardBreak: false,
+  p: Paragraph,
+  code: CodeBlock,
+  blockquote: BlockQuote,
+  inlineCode: InlineCode,
+  a: Link,
+  ol: OrderedList,
+  ul: UnorderedList,
+  li: ListItem,
+  ...headings,
 };

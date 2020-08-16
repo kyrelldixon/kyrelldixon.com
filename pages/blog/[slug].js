@@ -1,26 +1,25 @@
-// import { getAllPostsWithSlug, getPostAndMorePosts } from "lib/api";
+import hydrate from "next-mdx-remote/hydrate";
 import PageLayout from "components/page-layout";
+import serializers from "components/serializers";
 // import Feedback from "components/feedback";
-// import PortableText from "components/portable-text";
 import Newsletter from "components/newsletter";
+import { getAllMdxPaths, getMdxPost } from "lib/api";
 
-export default function BlogPost({ post, preview }) {
-  const { title, excerpt, body } = post;
+export default function BlogPost({ mdxSource, frontMatter }) {
+  const { title, excerpt, body } = frontMatter;
+  const content = hydrate(mdxSource, serializers);
+
   return (
     <PageLayout>
-      {/* <article className="max-w-3xl px-4 pt-8 mx-auto">
+      <article className="max-w-3xl px-4 pt-8 mx-auto">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
             {title}
           </h1>
-          <h2 className="mb-6 text-lg leading-snug md:text-xl">
-            {excerpt && <PortableText blocks={excerpt} />}
-          </h2>
+          <h2 className="mb-6 text-lg leading-snug md:text-xl">{excerpt}</h2>
         </header>
-        <main className="max-w-2xl mx-auto">
-          <PortableText blocks={body} />
-        </main>
-      </article> */}
+        <main className="max-w-2xl mx-auto">{content}</main>
+      </article>
       {/* <Feedback /> */}
       <div className="px-4 py-16">
         <Newsletter />
@@ -29,26 +28,21 @@ export default function BlogPost({ post, preview }) {
   );
 }
 
-// export async function getStaticProps({ params, preview = false }) {
-//   const data = await getPostAndMorePosts(params.slug, preview);
-//   return {
-//     props: {
-//       preview,
-//       post: data.post || null,
-//       morePosts: data.morePosts || null,
-//     },
-//   };
-// }
+export async function getStaticPaths() {
+  const paths = await getAllMdxPaths();
 
-// export async function getStaticPaths() {
-//   const allPosts = await getAllPostsWithSlug();
-//   return {
-//     paths:
-//       allPosts?.map((post) => ({
-//         params: {
-//           slug: post.slug,
-//         },
-//       })) || [],
-//     fallback: false,
-//   };
-// }
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params: { slug } }) {
+  const { mdx, frontMatter } = await getMdxPost(slug);
+  return {
+    props: {
+      mdxSource: mdx,
+      frontMatter,
+    },
+  };
+}
