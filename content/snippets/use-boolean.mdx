@@ -1,0 +1,26 @@
+---
+title: useBoolean
+date: 2019-01-10
+slug: use-boolean
+description: A custom hook optimized for turning things on and off.
+category: React Hooks
+---
+
+```jsx
+import React, { useState, useCallback, useMemo } from "react";
+
+function useBoolean(initialState) {
+  const [state, setState] = useState(false);
+
+  const setTrue = useCallback(() => setState(true), []);
+  const setFalse = useCallback(() => setState(false), []);
+  const toggle = useCallback(() => setState((state) => !state), []);
+  const actions = useMemo(() => ({ setValue, toggle, setTrue, setFalse }), [
+    setFalse,
+    setTrue,
+    toggle,
+  ]);
+
+  return [state, actions];
+}
+```

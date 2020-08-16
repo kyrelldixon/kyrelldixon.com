@@ -12,6 +12,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
 import { TiContacts } from "react-icons/ti";
 import { MdClose, MdVoiceChat } from "react-icons/md";
+import { AiFillSnippets } from "react-icons/ai";
 
 const VueIcon = () => (
   <svg
@@ -628,12 +629,13 @@ const AwsIcon = () => (
     </g>
   </svg>
 );
-// const Redux = () => ();
 
 export default function Icon({ name }) {
   switch (name.toLowerCase()) {
     case "github":
       return <FiGithub />;
+    case "snippet":
+      return <AiFillSnippets />;
     case "twitter":
       return <FiTwitter />;
     case "email":

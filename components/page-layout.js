@@ -4,6 +4,7 @@ import MobileNav from "./mobile-nav";
 
 const navLinks = [
   { title: "Blog", href: "/", icon: "blog" },
+  { title: "Snippets", href: "/snippets", icon: "snippet" },
   { title: "Coaching", href: "/coaching", icon: "video-chat" },
   { title: "Projects", href: "/projects", icon: "code" },
 ];
