@@ -1,7 +1,7 @@
 import BlogList from "components/blog-list";
 import PageLayout from "components/page-layout";
 
-import { getAllPostsForBlog, getAllPostsForBlogNotSecret } from "lib/api";
+import { getSortedPosts } from "lib/api";
 
 export default function BlogPage({ posts }) {
   return (
@@ -16,11 +16,7 @@ export default function BlogPage({ posts }) {
 }
 
 export async function getStaticProps() {
-  const getPosts =
-    process.env.NODE_ENV === "development"
-      ? getAllPostsForBlog
-      : getAllPostsForBlogNotSecret;
-  const posts = await getPosts();
+  const posts = await getSortedPosts();
 
   return {
     props: {
