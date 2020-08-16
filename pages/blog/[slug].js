@@ -3,7 +3,7 @@ import PageLayout from "components/page-layout";
 import serializers from "components/serializers";
 // import Feedback from "components/feedback";
 import Newsletter from "components/newsletter";
-import { getAllMdxPaths, getMdxPost } from "lib/api";
+import { getAllMdxPaths, getMdxPost, getAllMdxPathsNotSecret } from "lib/api";
 
 export default function BlogPost({ mdxSource, frontMatter }) {
   const { title, excerpt, body } = frontMatter;
@@ -29,7 +29,11 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllMdxPaths();
+  const getPaths =
+    process.env.NODE_ENV === "development"
+      ? getAllMdxPaths
+      : getAllMdxPathsNotSecret;
+  const paths = await getPaths();
 
   return {
     paths,
