@@ -1,16 +1,8 @@
 import Link from "next/link";
 import toTitleCase from "utils/to-title-case";
+import { gradients } from "styles/gradients";
 
 export default function BlogList({ posts }) {
-  const gradients = [
-    "hover:text-f-blue",
-    "hover:text-f-green",
-    "hover:text-f-yellow",
-    "hover:text-f-teal",
-    "hover:text-f-purple",
-    "hover:text-f-red",
-  ];
-
   return (
     <ul className="space-y-14">
       {posts.map((post, i) => (

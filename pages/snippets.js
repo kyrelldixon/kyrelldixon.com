@@ -2,6 +2,7 @@ import PageLayout from "components/page-layout";
 import Icon from "components/icon";
 import Link from "components/link";
 import { getSnippets } from "lib/api";
+import { gradients } from "styles/gradients";
 
 export default function Snippets({ snippets }) {
   return (
@@ -17,11 +18,13 @@ export default function Snippets({ snippets }) {
           </p>
         </section>
         <section className="grid max-w-3xl grid-flow-row grid-cols-1 gap-4 py-8 mx-auto md:gap-8 md:grid-cols-2">
-          {snippets.map((snippet) => (
+          {snippets.map((snippet, i) => (
             <Link
               key={snippet.slug}
               href={`snippets/${snippet.slug}`}
-              className="p-8 space-y-4 bg-gray-900 rounded-lg shadow-md light:bg-gray-100"
+              className={`transition-colors duration-200 ease-in-out ${
+                gradients[i % gradients.length]
+              } p-8 space-y-4 bg-gray-900 rounded-lg shadow-md light:bg-gray-100`}
             >
               <h2 className="text-xl font-black">{snippet.title}</h2>
               <p>{snippet.description}</p>
