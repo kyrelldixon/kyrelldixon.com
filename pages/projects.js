@@ -1,8 +1,9 @@
 import PageLayout from "components/page-layout";
 import Icon from "components/icon";
 import Link from "components/link";
+import { getProjects } from "lib/api";
 
-export default function Projects() {
+export default function Projects({ projects }) {
   return (
     <PageLayout>
       <main className="px-4">
@@ -12,35 +13,9 @@ export default function Projects() {
           </h1>
         </section>
         <section className="grid max-w-3xl grid-flow-row grid-cols-1 gap-4 py-8 mx-auto md:gap-8 md:grid-cols-2">
-          <Project
-            name="Write More App"
-            site="https://write-more.now.sh/"
-            github="https://github.com/kyrelldixon/write-more"
-          />
-          <Project
-            name="Huddle Landing Page"
-            site="https://huddle-landing-demo.now.sh/"
-            github="https://github.com/kyrelldixon/huddle-landing-page"
-          />
-          <Project
-            name="Lonely Planet"
-            site="https://lonely-planet.now.sh/"
-            github="https://github.com/kyrelldixon/lonely-planet"
-          />
-          <Project
-            name="Recipe Site Skeleton"
-            site="https://recipe-skeleton.vercel.app/"
-            github="https://github.com/kyrelldixon/recipe"
-          />
-          <Project
-            name="Core Values"
-            site="https://values.netlify.app/"
-            github="https://github.com/kyrelldixon/values"
-          />
-          <Project
-            name="Shopify Demo App"
-            github="https://github.com/kyrelldixon/shopify-demo-app-hooks"
-          />
+          {projects.map(({ name, site, github }) => (
+            <Project key={name} name={name} site={site} github={github} />
+          ))}
         </section>
       </main>
     </PageLayout>
@@ -77,4 +52,14 @@ function Project({ name, site, github }) {
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const projects = await getProjects();
+
+  return {
+    props: {
+      projects,
+    },
+  };
 }
