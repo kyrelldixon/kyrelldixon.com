@@ -15,12 +15,12 @@ function useBoolean(initialState) {
   const setTrue = useCallback(() => setState(true), []);
   const setFalse = useCallback(() => setState(false), []);
   const toggle = useCallback(() => setState((state) => !state), []);
-  const actions = useMemo(() => ({ setValue, toggle, setTrue, setFalse }), [
+  const actions = useMemo(() => ({ setState, toggle, setTrue, setFalse }), [
     setFalse,
     setTrue,
     toggle,
   ]);
 
-  return [state, actions];
+  return useMemo(() => [state, actions], [actions, state]);
 }
 ```
