@@ -94,7 +94,7 @@ export const CodeBlock = ({ children, className, live }) => {
               key={i}
               {...getLineProps({ line, key: i })}
             >
-              <span className="hidden w-8 text-right opacity-50 md:table-cell">
+              <span className="hidden w-8 opacity-50 md:table-cell">
                 {i + 1}
               </span>
               <span className="md:table-cell">
