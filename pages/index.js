@@ -1,11 +1,12 @@
 import BlogList from "components/blog-list";
 import PageLayout from "components/page-layout";
-
+import SEO from "components/seo";
 import { getSortedPosts } from "lib/api";
 
 export default function BlogPage({ posts }) {
   return (
     <PageLayout>
+      <SEO title="Home" />
       <main className="grid grid-flow-col col-gap-16 p-4">
         <section className="max-w-4xl py-8 mx-auto">
           <BlogList posts={posts} />

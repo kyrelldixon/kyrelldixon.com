@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import PageLayout from "components/page-layout";
 import Icon from "components/icon";
+import SEO from "components/seo";
 import allReviews from "data/reviews.json";
 import allSkills from "data/skills.json";
 
@@ -16,6 +17,7 @@ export default function CoachingPage() {
 
   return (
     <PageLayout>
+      <SEO title="Coaching" />
       <main className="p-4 md:mx-auto">
         <section className="flex flex-col items-center max-w-4xl py-12 text-center md:mx-auto md:py-12">
           <h1 className="mb-6 text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl">

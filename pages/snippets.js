@@ -1,12 +1,14 @@
 import PageLayout from "components/page-layout";
 import Icon from "components/icon";
 import Link from "components/link";
+import SEO from "components/seo";
 import { getSnippets } from "lib/api";
 import { gradients } from "styles/gradients";
 
 export default function Snippets({ snippets }) {
   return (
     <PageLayout>
+      <SEO title="Snippets" />
       <main className="px-4">
         <section className="flex flex-col items-center max-w-4xl py-10 text-center md:mx-auto md:py-8">
           <h1 className="mb-6 text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl">
