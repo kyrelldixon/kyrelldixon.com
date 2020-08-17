@@ -1,0 +1,347 @@
+---
+title: How to Conditionally Render a List of Cards with React
+author: Kyrell Dixon
+slug: how-to-conditionally-render-a-list-of-cards-with-react
+excerpt: Learn how to build a simple app that will conditionally display a Trello-like list of cards based on a user submitted card title.
+tags: ["React"]
+secret: true
+---
+
+Conditionally rendering components in React can be confusing when you are first getting started. There are a lot of little quirks and patterns that take time to get used to. This post will show you a very common pattern of conditionally displaying a list of data with React so that you can be one step closer to building full-blown web apps.
+
+## Prerequisites
+
+I will be using the `react-bootstrap` library to help with styling, but I **will not** be going over the details of how to use it.
+
+Before going through this post, you should be familiar with:
+
+- setting up a React project from scratch or with `create-react-app`
+- passing props
+- creating components
+- installing and using a React component library
+
+If you'd like me to write about these topics, reach out to me on [Twitter](https://twitter.com/kyrelldixon) or shoot me an email.
+
+## Creating the layout
+
+Here is a layout with a `Navbar` and a group of hard-coded cards.
+
+```jsx
+import React from "react";
+
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function App() {
+  return (
+    <Container fluid="lg">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="/">Trello Clone</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="Enter title"
+            className="mr-sm-2"
+          />
+          <Button variant="primary">Add Card</Button>
+        </Form>
+      </Navbar>
+      <Row noGutters={true}>
+        <Col>
+          <Card style={{ width: "18rem" }}>
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+            </Card.Body>
+          </Card>
+          <Card style={{ width: "18rem" }}>
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+            </Card.Body>
+          </Card>
+          <Card style={{ width: "18rem" }}>
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+export default App;
+```
+
+The section that we care about is the `Col` containing the three `Card` components. We are going to convert this into a conditionally rendered set of cards.
+
+The first thing that we need to do is move the card titles to state. For that we import `useState` and add an array of card titles. Let's also get rid of the hard-coded `Card` components.
+
+```jsx
+import React, { useState } from "react";
+
+// other imports
+
+function App() {
+  const [titles, setTitles] = useState(["title1", "title2", "title3"]);
+
+  return (
+    <Container fluid="lg">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="/">Trello Clone</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="Enter title"
+            className="mr-sm-2"
+          />
+          <Button variant="primary">Add Card</Button>
+        </Form>
+      </Navbar>
+      <Row noGutters={true}>
+        <Col></Col>
+      </Row>
+    </Container>
+  );
+}
+
+export default App;
+```
+
+From here, we want need to `map` over the titles, and create an array of `Card` components for each title.
+
+```jsx
+function App() {
+  const [titles, setTitles] = useState(["title1", "title2", "title3"]);
+
+  return (
+    <Container fluid="lg">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="/">Trello Clone</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="Enter title"
+            className="mr-sm-2"
+          />
+          <Button variant="primary">Add Card</Button>
+        </Form>
+      </Navbar>
+      <Row noGutters={true}>
+        <Col>
+          {titles.map((title) => (
+            <Card style={{ width: "18rem" }}>
+              <Card.Body>
+                <Card.Title>{title}</Card.Title>
+              </Card.Body>
+            </Card>
+          ))}
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+```
+
+This will display the cards with a dynamic title coming from state. inside the `Card.Title` component. At this point, we have a static list of titles, but we want this to be dynamic. This is where the conditional rendering comes in.
+
+## Conditionally rendering an array
+
+Let's handle the case where there are no cards to display. First, we want to remove all the titles from array. Then, we need to use the [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) to handle the case where the array has no elements.
+
+```jsx
+import React, { useState } from "react";
+
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Alert from "react-bootstrap/Alert";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function App() {
+  const [titles, setTitles] = useState([]);
+
+  return (
+    <Container fluid="lg">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="/">Trello Clone</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="Enter title"
+            className="mr-sm-2"
+          />
+          <Button variant="primary">Add Card</Button>
+        </Form>
+      </Navbar>
+      <Row noGutters={true}>
+        <Col>
+          {titles.length > 0 ? (
+            titles.map((title) => (
+              <Card style={{ width: "18rem" }}>
+                <Card.Body>
+                  <Card.Title>{title}</Card.Title>
+                </Card.Body>
+              </Card>
+            ))
+          ) : (
+            <Alert variant={"warning"}>
+              Add a card title to see it display
+            </Alert>
+          )}
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+export default App;
+```
+
+Here we are displaying titles if there are any contained in the titles state. Otherwise, we display an `Alert` component telling the user to add a card title. If the ternary operator is a little confusing, here's an equivalent `App` component using an `if-else` block.
+
+```jsx
+function App() {
+  const [titles, setTitles] = useState([]);
+
+  const renderTitles = () => {
+    if (titles.length > 0) {
+      return titles.map((title) => (
+        <Card style={{ width: "18rem" }}>
+          <Card.Body>
+            <Card.Title>{title}</Card.Title>
+          </Card.Body>
+        </Card>
+      ));
+    } else {
+      return (
+        <Alert variant={"warning"}>Add a card title to see it display</Alert>
+      );
+    }
+  };
+
+  return (
+    <Container fluid="lg">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="/">Trello Clone</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="Enter title"
+            className="mr-sm-2"
+          />
+          <Button variant="primary">Add Card</Button>
+        </Form>
+      </Navbar>
+      <Row noGutters={true}>
+        <Col>{renderTitles()}</Col>
+      </Row>
+    </Container>
+  );
+}
+```
+
+This example uses a normal `if-else` block to display the exact same output as the previous example. Both the ternary operator and `if-else` statements are completely valid ways to conditionally render components, but the ternary operator syntax is usually shorter and commonly used.
+
+Now that we are conditionally rendering the `Card` components or an `Alert`, let's finish this up by allowing the user to update the array of titles from the navbar.
+
+## Taking user input to update state
+
+We will be using the form in the navbar to allow the user to submit new titles. First, let's take a look at the code.
+
+```jsx
+import React, { useState } from "react";
+
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Alert from "react-bootstrap/Alert";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function App() {
+  const [title, setTitle] = useState("");
+  const [titles, setTitles] = useState([]);
+
+  const addTitle = () => {
+    setTitles((allTitles) => [...allTitles, title]);
+  };
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addTitle();
+    setTitle("");
+  };
+
+  return (
+    <Container fluid="lg">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="/">Trello Clone</Navbar.Brand>
+        <Form inline onSubmit={handleSubmit}>
+          <FormControl
+            type="text"
+            placeholder="Enter title"
+            className="mr-sm-2"
+            onChange={handleTitleChange}
+            value={title}
+          />
+          <Button variant="primary">Add Card</Button>
+        </Form>
+      </Navbar>
+      <Row noGutters={true}>
+        <Col>
+          {titles.length > 0 ? (
+            titles.map((title) => (
+              <Card style={{ width: "18rem" }}>
+                <Card.Body>
+                  <Card.Title>{title}</Card.Title>
+                </Card.Body>
+              </Card>
+            ))
+          ) : (
+            <Alert variant={"warning"}>
+              Add a card title to see it display
+            </Alert>
+          )}
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+export default App;
+```
+
+Both `title` and `setTitle` were added to state so that they can keep track of the value the user enters in the `FormControl` component. We set the `value` of the `FormControl` to the title from state so React is aware of what the user enters into the input. We also created a `handleTitleChange` function so the title can be updated `onChange`.
+
+We also created the `addTitle` function to handle updating state by creating a new titles array including the user input title.
+
+Finally, we added a `handleSubmit` function and added it to the `onSubmit` property of the `Form` component. Now, whenever the "Add Card" button is clicked or the user presses enter, the form will get submitted. This will run `handleSubmit` which adds the new title to state and resets the input value.
+
+Since the titles are rendered based on state, submitting the form will automatically cause a new card to be created!
+
+## Wrapping up
+
+We have covered conditionally rendering a list of cards based on state and updating the state when a form is submitted. If you have any questions, or if you liked this article, feel free to reach out!

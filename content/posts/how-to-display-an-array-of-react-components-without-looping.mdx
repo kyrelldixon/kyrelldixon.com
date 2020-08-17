@@ -1,0 +1,63 @@
+---
+title: How to Display an Array of React Components Without Looping
+author: Kyrell Dixon
+date: 2020-06-26
+slug: how-to-display-an-array-of-react-components-without-looping
+excerpt: You have used yourArrayOfData.map to create an array of components, but how is it rendered without looping through each element?
+tags: ["React"]
+---
+
+Let's say you have an array of product data that you want to convert to a component and display. Here is an example of what that data could look like.
+
+```js
+export default [
+  {
+    id: "some-random-id-1",
+    name: "Can of Beans",
+    price: 8.99,
+    description: "Beans that will change your life.",
+  },
+  {
+    id: "some-random-id-2",
+    name: "Naruto's Ramen",
+    price: 28.99,
+    description: "Official ramen taken straight from the anime.",
+  },
+];
+```
+
+After getting that code into your App component, you use `items.map` to create an array called productComponents that stores each Product component. After passing the entire array into a div, React somehow displays all the components _without_ needing to loop! **Why does this work?**
+
+```jsx
+import items from "./products.js";
+
+const Product = (props) => {
+  return (
+    <div>
+      <h3>{props.name}</h3>
+      <p>{props.price}</p>
+      <p>{props.description}</p>
+    </div>
+  );
+};
+
+const App = () => {
+  const productComponents = items.map((item) => {
+    return (
+      <Product
+        key={item.id}
+        name={item.name}
+        price={item.price}
+        description={item.description}
+      />
+    );
+  });
+  return <div>{productComponents}</div>;
+};
+```
+
+The answer is simple: **JSX automatically converts an array of components into elements.**
+
+With vanilla JavaScript, you _would_ need to loop through each element and add it to the HTML document, but JSX is smart enough to display them **automatically**. Since React is using JSX under the hood, you get that functionality completely for free!
+
+For more information and a few more examples: take a look at the React documentation for [displaying lists](https://reactjs.org/docs/lists-and-keys.html).

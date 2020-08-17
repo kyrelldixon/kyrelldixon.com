@@ -1,0 +1,198 @@
+---
+title: How to Copy to Clipboard from a Browser Extension
+author: Kyrell Dixon
+date: 2020-06-11
+slug: how-to-copy-to-clipboard-in-javascript
+excerpt: Learn a few different ways to take text and save it to the clipboard using only JavaScript.
+tags: ["JavaScript"]
+secret: true
+---
+
+## Before getting started
+
+This tutorial is based on building an extension for **Firefox** and **Chrome**. Other browsers may work, but I only tested these two browsers. This tutorial also assumes you have a basic understanding of HTML, CSS, and JavaScript.
+
+## Setting up the project
+
+We are setting up the project for a lightweight, **popup-based extension**. A popup-based extension is basically a mini-website built with HTML, CSS, and JavaScript that opens up when you click the extension button in the toolbar.
+Before we can build the popup, first we have to create the project folder and `manifest.json`. To make them from a bash command line write:
+
+```sh
+mkdir copy-to-clipboard-ext
+cd copy-to-clipboard-ext
+touch manifest.json
+```
+
+This creates a folder called `copy-to-clipboard-ext` and adds the `manifest.json` file to the folder. You can also do this without the command line from wherever you create files and folders.
+
+Inside of the same folder (you'll already be there if you're using the command line), let's add the HTML, CSS, and JavaScript popup files like you would when building a normal website.
+
+```sh
+touch popup.{js,html,css}
+```
+
+This command uses the `{}` syntax to add the files:
+
+- `popup.html`
+- `popup.css`
+- `popup.js`
+
+Outside of the command line, just make sure you add those files individually. At this point, your project structure should look like:
+
+```sh
+copy-to-clipboard-ext
+  manifest.json
+  popup.html
+  popup.css
+  popup.js
+```
+
+### The manifest file
+
+After you create all the files, you can set up the manifest file. We need to add some basic information about the extension and then tell it where to find the popup code. Inside the `manifest.json` file, add:
+
+```json
+{
+  "manifest_version": 2,
+  "name": "Copy to Clipboard",
+  "description": "A simple extension to copy text to the clipboard",
+  "version": "1.0.0",
+  "permissions": ["clipboardWrite"],
+  "browser_action": {
+    "default_title": "Copy to Clipboad",
+    "default_popup": "popup.html"
+  }
+}
+```
+
+There are a few key pieces here. The `manifest_version`, `name`, `description`, and `version` are all there to give the browser some details about the extension.
+
+The `permissions` key takes an array of strings where you give the extension access to certain functionality. This adds an extra layer of security by making sure the user understands what the extension can do.
+
+Lastly, the `browser_action` key is what the browser uses for the popup. The `default_title` is what will show up when hovering over the extension in the toolbar. The `default_popup` is the filepath to the HTML file for the popup.
+
+After setting up the manifest, let's get the popup set up.
+
+### The popup
+
+The popup is just a normal webpage with access to some extra extension code. All we need to set this up is link the CSS and JavaScript files to the HTML. Inside the popup.html file, add:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <script src="popup.js"></script>
+  </body>
+</html>
+```
+
+After setting up the manifest and the popup, you're now ready to add the extension to the browser!
+
+## Add the extension to the browser
+
+The steps to add the extension to the browser will depend on what browser you're using. I'll show you how to add it to both Chrome and Firefox.
+
+### Adding an extension to Firefox
+
+Loading up an extension in Firefox takes a few steps:
+
+1. Open up Firefox and navigate to `about:debugging#/runtime/this-firefox` to load the extension.
+2. Click "Load Temporary Add-on..."
+3. Navigate to and open the `copy-to-clipboard-ext` folder
+4. Select the `manifest.json` file
+5. Click "Open" to load the extension
+
+From there, you should see an icon popup in the extensions section of the toolbar. If you don't, make sure you have an extensions section displayed by customizing the toolbar.
+
+### Adding an extension to Chrome
+
+1. Open up Chrome and navigate to chrome://extensions
+2. Enable developer mode by clicking the toggle in the top right corner
+3. Click "Load unpacked"
+4. Navigate to the copy-to-clipboard-ext folder and select it without opening
+5. Click "Select" to load the extension
+
+Once you've added the extension to the toolbar, we can update the popup to actually copy text to the clipboard when it opens.
+
+## Copying text to the Clipboard with vanilla JavaScript
+
+The main ways to copy text are with the **Clipboard** and **Document** APIs. I'll show you an example of how you can use each one.
+
+Let's write a "Hello, World!" example to automatically copy text when you open the popup.
+
+### The Clipboard API
+
+If you're building a site that doesn't need to support older versions of Internet Explorer, the **Clipboard API** is the go-to way to copy text from a browser extension. It takes advantage of ES6 Promises to make it easier to handle a successfully attempted copy and a failed one.
+
+To use it, add this code to your `popup.js` file:
+
+```js
+function copy(text) {
+  navigator.clipboard.writeText(text).then(onCopySuccess, onCopyFailure);
+}
+
+function onCopySuccess() {
+  console.log("Copied!");
+}
+
+function onCopyFailure() {
+  console.log(`failed to copy`);
+}
+
+copy("Hello, World!");
+```
+
+This code will automatically copy "Hello, World!" to the clipboard after you click on extension icon. To test it, click the extension icon and then paste the output somewhere.
+
+The second line containing `navigator.clipboard.writeText` is using the Clipboard API to copy text every time the popup is opened.
+
+### The Document API
+
+To copy text with the Document API, you have to have an HTML element to copy from. Let's create another example to see how it would be used. First, let's update the HTML in `popup.html` to include an `input` and a `button` element.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <input type="text" />
+    <button>Copy</button>
+    <script src="popup.js"></script>
+  </body>
+</html>
+```
+
+We will be copying whatever is contained to the input tag whenever the copy button is clicked. In the `popup.js` file, replace the existing code with:
+
+```js
+const copyInput = document.querySelector("input");
+const copyButton = document.querySelector("button");
+
+function copy() {
+  // selects the current text in the input
+  copyInput.select();
+  // copies the selected text
+  document.execCommand("copy");
+}
+
+copyButton.onclick = copy;
+```
+
+In order to copy text with the Document API, you can **only** copy text from the currently selected element.
+
+## Final Thoughts
+
+In closing, here are a few extra points to keep in mind when working using the Clipboard and Document APIs to copy to clipboard:
+
+- The Document API will work outside of an extension while the Clipboard API will not
+- The Clipboard API is one of the few that will work in Chrome and Firefox with **no extra setup**
+- You cannot use the Clipboard API from a background script
+
+With that cleared up, you should have no problem working copying text to the clipboard! For more information you can also check out the Mozilla post on [interacting with the clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).

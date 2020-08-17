@@ -1,0 +1,342 @@
+---
+title: Making Sense of the JavaScript Map Array Method
+author: Kyrell Dixon
+date: 2020-07-01
+slug: making-sense-of-the-javascript-map-array-method
+excerpt: This is the first article of a series about the map, filter, and reduce array methods to clear up the confusion on how these methods work.
+tags: ["JavaScript"]
+---
+
+> Omg my brain--dude just lost me with map and filter
+
+Yeah, I know the feeling. The first time I saw some code using `map`, `filter`, and `reduce`, I had no idea how they worked. Hours of Youtube and about 200 Chrome tabs later, and I finally figured them out. This post aims to save you from the same struggle by diving deep into the `map` array method.
+
+## What you should know first
+
+Before you try to understand the array methods, there are a few concepts you should _at least_ be familiar with first:
+
+- What is an array
+- What is an arrow function
+- Passing functions to other functions (think setInterval and setTimeout)
+
+If you're not at least familiar with these topics, bookmark this tab and look into those first. I plan to write some posts on them too, but for now you'll have to open up tab 201 and head back to Google.
+
+If Google isn't working and you don't have time to spend all day learning them on your own, you can also [book a session](https://www.kyrelldixon.com/coaching) with me. If you feel ready, let's get into it!
+
+## Array methods make common tasks simpler
+
+You may not realize this, but you can do everything that `map` does with only a `for` loop. **Everything**. In fact, you can replicate _almost all_ of the array methods with just a `for` loop, `.push`, and some `if-else` statements. **So why use the array methods at all?**
+
+The main value you get from using array methods like `map` is they allow you to do things you would already do with **simpler, cleaner syntax**. To demonstrate this, l'll show you an example using `for` and `forEach` loops.
+
+Let's say you have an array of ages and you want to calculate if that age would make you middle-aged or not. According to Wikipedia, a person is middle-aged "from about 45 to 65" years old. Let's use some code to represent that.
+
+```js
+function isMiddleAged(age) {
+  return age >= 45 && age <= 65;
+}
+
+isMiddleAged(50); // returns true
+isMiddleAged(21); // returns false
+```
+
+Here we just created a simple function that returns `true` if the age is between 45 and 65 and false otherwise. At the bottom we called `isMiddleAged` just to test it out. So far, so good.
+
+But now, we want to calculate this for an array of ages. If "use a for loop" is screaming at you as a solution, then your intuition is right! Let's use one.
+
+```js
+function isMiddleAged(age) {
+  return age >= 45 && age <= 65;
+}
+
+// create some random ages
+const ages = [21, 54, 89, 23, 61, 48, 49];
+
+for (let i = 0; i < ages.length; i++) {
+  // pull out the age from the array
+  const age = ages[i];
+  // print out true or false
+  console.log(isMiddleAged(age));
+}
+```
+
+Here we used the standard `for` loop to print out if each age is considered middle aged or not, but we could have used the `forEach` array method to accomplish the same goal.
+
+```js
+function isMiddleAged(age) {
+  return age >= 45 && age <= 65;
+}
+
+// the same ages as before
+const ages = [21, 54, 89, 23, 61, 48, 49];
+
+// printing if each age isMiddleAged
+ages.forEach((age) => {
+  console.log(isMiddleAged(age));
+});
+```
+
+If this is confusing, copy the code, open up the console or your code editor, and run both examples. You will see that both the normal `for` loop and the `forEach` loop both give the same output.
+
+> If you can use both a `for` loop and a `forEach` loop to output the values, why should you use one or the other?
+
+There are a few reasons, but in this case 3 stand out:
+
+- Here we just want to do something "for each" value, so the forEach makes that intent more clear
+- We are only using i as an index to get each value from the array, so it is not necessary
+- You get to write less code
+
+There are [multiple other ways to loop](https://www.kyrelldixon.com/blog/5-ways-to-loop-through-an-array-with-javascript) like with the `for..of` or the `for..in` loops that could have also been used here. I used the `forEach` method because it keeps the code **simple** and **clean**.
+
+> Makes sense...but what does this have to do with `map` and `filter`?
+
+The `map`, `filter`, and `reduce` functions simplify _other_ common array operations the same way `forEach` did in this example.
+
+## A world without map, filter, and reduce
+
+Let's use a few more examples with normal for loops to really show the value of each function.
+
+For the first example, let's say you have an array of containing the number of years a student has been in college. The goal is to convert them into a "classification" based on the number of years.
+
+For example, if the number of years is "1", then the classification would be "freshman." If it's "3" than the classification is "junior." Here is a function that captures all that logic:
+
+```js
+function yearsToClassification(years) {
+  if (years === 1) {
+    return "freshman";
+  } else if (years === 2) {
+    return "sophomore";
+  } else if (years === 3) {
+    return "junior";
+  } else if (years === 4) {
+    return "senior";
+  } else {
+    return "no classification";
+  }
+}
+```
+
+This works, but we could make the code a lot cleaner with the `switch/case` syntax.
+
+```js
+function yearsToClassification(years) {
+  switch (years) {
+    case 1:
+      return "freshman";
+    case 2:
+      return "sophomore";
+    case 3:
+      return "junior";
+    case 4:
+      return "senior";
+    default:
+      return "no classification";
+  }
+}
+
+let classification = yearsToClassification(1);
+console.log(classification); // prints "freshman"
+
+classification = yearsToClassification(5);
+console.log(classification); // prints "no classification"
+```
+
+Both examples do the same thing, so you can decide which function is more readable and use that for this next part. Like before, let's iterate over each value, but this time let's create a _new_ array containing all the classifications.
+
+With a `for` loop that would look something like:
+
+```js
+function yearsToClassification(years) {
+  switch (years) {
+    case 1:
+      return "freshman";
+    case 2:
+      return "sophomore";
+    case 3:
+      return "junior";
+    case 4:
+      return "senior";
+    default:
+      return "no classification";
+  }
+}
+
+const years = [1, 2, 3, 2, 9, 1, 4];
+const classifications = [];
+
+for (let i = 0; i < years.length; i++) {
+  // get the current year
+  const year = years[i];
+  // convert the year to a classification
+  const classification = yearsToClassification(year);
+  // add the classification to the end of the
+  // classifications array
+  classifications.push(classification);
+}
+
+// print out a nicely formatted table of all
+// the classifications
+console.table(classifications);
+```
+
+Job done! It did not take too much code, but what if I told you that you could replace all of the for loop logic with **one line of code**?
+
+> bro...you're lying
+
+Talk is cheap, let's look at the code.
+
+```js
+function yearsToClassification(years) {
+  switch (years) {
+    case 1:
+      return "freshman";
+    case 2:
+      return "sophomore";
+    case 3:
+      return "junior";
+    case 4:
+      return "senior";
+    default:
+      return "no classification";
+  }
+}
+
+const years = [1, 2, 3, 2, 9, 1, 4];
+const classifications = years.map(yearsToClassification);
+
+console.table(classifications);
+```
+
+Still skeptical? Run it and see for yourself.
+
+> Show me your ways, sensei.
+
+## Breaking down the `Array.map` method
+
+So what is `map` anyway? Similarly to the `forEach` method, the name tells you what it does. We are "`map`ping" each value in the array to another value. The function that gets passed to the `map` method determines what each value will turn into.
+
+In this case each **year** in the array is mapped to a **classification**. Once all the mapping is done, **a new array** is returned containing all the new values. That's why we created a new variable called `classifications` on the same line as `years.map`.
+
+This can be very confusing the first time you see it, so let's look at it again a different way.
+
+```js
+function yearsToClassification(years) {
+  switch (years) {
+    case 1:
+      return "freshman";
+    case 2:
+      return "sophomore";
+    case 3:
+      return "junior";
+    case 4:
+      return "senior";
+    default:
+      return "no classification";
+  }
+}
+
+const years = [1, 2, 3, 2, 9, 1, 4];
+
+// This line of code...
+const classifications1 = years.map(yearsToClassifcation);
+
+// does the same thing as this...
+const classifications2 = years.map((year) => yearsToClassifcation(year));
+
+// ...which does the same thing as these...
+const classifications3 = years.map((year) => {
+  return yearsToClassification(year);
+});
+
+// ...and these lines too.
+const classifications4 = years.map((year) => {
+  switch (years) {
+    case 1:
+      return "freshman";
+    case 2:
+      return "sophomore";
+    case 3:
+      return "junior";
+    case 4:
+      return "senior";
+    default:
+      return "no classification";
+  }
+});
+
+// These all print the same thing
+console.table(classifications1);
+console.table(classifications2);
+console.table(classifications3);
+console.table(classifications4);
+```
+
+No matter how you write it, `map` is just taking the current year and converting it to a classification. When it's done, it returns an array of all the classifications.
+
+Here is a simpler example where we create a new array with all the years doubled.
+
+```js
+const years = [1, 2, 3, 2, 9, 1, 4];
+const doubledYears = years.map((year) => year * 2);
+
+console.table(doubledYears);
+```
+
+The function that gets run for each value in `years` is `year => year * 2`. Here is another way to do the exact same thing:
+
+```js
+const double = (num) => num * 2;
+
+const years = [1, 2, 3, 2, 9, 1, 4];
+const doubledYears = years.map(double);
+
+console.table(doubledYears);
+```
+
+The only difference in the second case is that we created a function called `double` and passed it to `years.map` directly. Each year is still getting mapped to the doubled year like before.
+
+To really dial it in, here's another example where we double the year and then convert it to the classification:
+
+```js
+function yearsToClassification(years) {
+  switch (years) {
+    case 1:
+      return "freshman";
+    case 2:
+      return "sophomore";
+    case 3:
+      return "junior";
+    case 4:
+      return "senior";
+    default:
+      return "no classification";
+  }
+}
+
+function double(num) {
+  return num * 2;
+}
+
+const years = [1, 2, 3, 2, 9, 1, 4];
+
+const classificationsAfterDoubling = years.map((year) => {
+  // double the year
+  const doubledYear = double(year);
+  // get the classification
+  const classification = yearsToClassification(doubledYear);
+  // return it so it can be added to the new array
+  return classification;
+});
+
+console.table(classificationsAfterDoubling);
+```
+
+## Wrapping up
+
+There are a few **key takeaways** from this article:
+
+- The `map` method maps **each value** of an array to a **new value** and returns a **new array**
+- There is **more than one way to solve a problem**
+- Array methods can help make your code simpler and more readable
+
+This article primarily focuses on the `map` array method, but I will be writing more about the `filter` and `reduce` next! If you'd like to get updates when they come up, then be sure to sign up for the newsletter!
