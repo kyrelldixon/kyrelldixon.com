@@ -1,0 +1,59 @@
+---
+title: useInterval
+date: 2020-08-23
+slug: use-interval
+description: A custom hook inspired by Dan Abramov.
+category: React Hooks
+---
+
+## The Code
+
+```js
+import { useRef, useEffect } from "react";
+
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+  const intervalId = useRef(null);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    const handler = (...args) => savedCallback.current(...args);
+
+    if (delay !== null) {
+      intervalId.current = setInterval(handler, delay);
+      // we only need to cleanup if the interval was set in the first
+      // place
+      return () => clearInterval(intervalId.current);
+    }
+  }, [delay]);
+
+  return intervalId.current;
+};
+```
+
+## Example Usage
+
+```jsx
+import React from "react";
+import useInterval from "hooks/use-interval"; // fake import
+
+export const Timer = () => {
+  const [time, setTime] = useState(0);
+  const intervalId = useInterval(() => {
+    // use a function to set new state based on previous state
+    setTime((currentTime) => currentTime + 1);
+  }, 1000);
+
+  return (
+    <>
+      <p>
+        Time is: <span>{time}</span>
+      </p>
+      <button onClick={() => clearInterval(intervalId)}>Stop</button>
+    </>
+  );
+};
+```

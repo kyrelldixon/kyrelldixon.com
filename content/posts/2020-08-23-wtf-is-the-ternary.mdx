@@ -1,0 +1,101 @@
+---
+title: WTF is a Ternary Statement
+author: Kyrell Dixon
+slug: wtf-is-a-ternary-statement
+date: "2020-08-23"
+excerpt: TL;DR The ternary (pronounced "turn hairy" if you said it really fast) statement is just an if-else block made with symbols.
+tags: ["JavaScript"]
+secret: true
+---
+
+Let's use an example.
+
+Say you want to shorten some text that is longer than 40 characters. First we'll need to check if the text
+has more than 40 characters. If it does, we'll take the first 40 and drop the rest. Otherwise we'll just keep the original text. Let's make a function
+that will do exactly that.
+
+```js
+function shortenLongerThan40(text) {
+  if (text.length > 40) {
+    // return a substring starting from the 0 index up to the 40th character
+    return text.substr(0, 40);
+  } else {
+    // if it is shorter than 40, we just give back the original text
+    return text;
+  }
+}
+```
+
+Here I just checked if the string has more than 40 characters `text.length > 40` and used [the `substr` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring)
+to take care of shortening the string. The ternary operator can be used here to make the code even shorter.
+
+```js
+function shortenLongerThan40(text) {
+  return text.length > 40 ? text.substr(0, 40) : text;
+}
+```
+
+Both functions will give you the same output, but the ternary operator let's you do it **in one line**. So how does it work?
+
+The trick to understanding the
+ternary operator is to imagine it as just an `if-else` block. Let's break down the `if-else` block from the first example, and
+compare it to the second.
+
+```js
+function shortenLongerThan40(text) {
+  //  condition
+  if (text.length > 40) {
+    // what to return if true
+    return text.substr(0, 40);
+  } else {
+    // what to return if false
+    return text;
+  }
+}
+```
+
+The `if-else` block has 3 parts:
+
+- The condition
+- What to do when it's true
+- What to do when it's not
+
+The same is true for the ternary operator except we just add in some symbols to separate the 3 parts.
+
+```js
+function shortenLongerThan40(text) {
+  //     condition        ? if it's true       : if it's false
+  return text.length > 40 ? text.substr(0, 40) : text;
+}
+```
+
+Now we are immediately returning a value based on the `text` length. When using the ternary, the **condition** goes _before_ the `?` and the value you want to return if it's true comes _after_.
+Everything after the `:` is the `else` statement.
+
+Let's use another example to drive this home. Say we want to make a function that simulates flipping a coin. Some logical steps to accomplish could be:
+
+1. Get a random number between 0 and 1
+2. Check if the number is less than 0.5
+3. If it's true, return `"Heads"`, otherwise return `"Tails"`
+
+Let's code out this logic using an `if-else` block and a ternary statement. First, here's the `if-else` version:
+
+```js
+function simulateCoinToss() {
+  if (Math.random < 0.5) {
+    return "Heads";
+  } else {
+    return "Tails";
+  }
+}
+```
+
+Now compare that to a function that gives the same output using the ternary operator:
+
+```js
+function simulateCoinToss() {
+  return Math.random() < 0.5 ? "Heads" : "Tails";
+}
+```
+
+Both get the job done, but the ternary statement provides a concise way to accomplish the same goal.
