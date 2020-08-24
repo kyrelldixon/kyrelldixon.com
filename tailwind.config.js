@@ -44,5 +44,8 @@ module.exports = {
     borderWidth: ["responsive", "hover", "focus"],
     cursor: ["disabled"],
   },
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
   plugins: [require("@tailwindcss/ui")],
 };
