@@ -1,0 +1,209 @@
+---
+title: How to Set Up Jest and React Testing Library with Next.js
+excerpt: An opinionated, no BS guide to setting up a modern test environment with Jest and React Testing Library in a Next.js project.
+slug: setup-jest-and-react-testing-library-with-nextjs
+author: Kyrell Dixon
+date: 2020-08-30
+tags: ["React", "Next.js", "Testing"]
+---
+
+## 1. Install your dependencies
+
+We're going to be install the recommended React setup with:
+
+- [Jest](https://jestjs.io/)
+- [Jest DOM](https://github.com/testing-library/jest-dom)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- [babel-jest](https://github.com/facebook/jest/tree/master/packages/babel-jest)
+
+To install them run:
+
+```sh
+yarn add -D @testing-library/jest-dom @testing-library/react babel-jest jest
+```
+
+## 2. Set up Babel
+
+Here we need to explicitly tell Babel to use the Next.js Babel preset so Jest doesn't get confused. Create a `.babelrc` file and add the following:
+
+```json
+{
+  "presets": ["next/babel"]
+}
+```
+
+## 3. Set up Jest
+
+First, make sure Jest has been added to the `scripts` section of your `package.json` file. Here's an example of what `package.json` should look like when you're done.
+
+```json
+{
+  "name": "your-app-name",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^10.4.9",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2"
+  },
+  "license": "MIT"
+}
+```
+
+Once that's done, you need to set up `jest-dom`. Create a `jest.setup.js` file and add:
+
+```js
+import "@testing-library/jest-dom";
+```
+
+Once you've added it to the setup file, create a `jest.config.js` file to make sure `jest.setup.js` is loaded in correctly. Inside the config file add:
+
+```js
+module.exports = {
+  setupFilesAfterEnv: ["./jest.setup.js"],
+};
+```
+
+Creating a setup file allows you to use it in all your tests without needing to import `jest-dom` into every test file directly. You can just add it once and forget about it.
+
+It's also important to note that there is nothing special about the `jest.setup.js` file name. In other projects, you'll see that it's called `setupTests.js`, but you can call it whatever you like.
+Just make sure that the file name matches what you add to `setupFilesAfterEnv`.
+
+### (Optional) Configure ESLint with Jest
+
+If you're using an `.eslintrc` file then you need to make sure it gets configured correctly too.
+
+```json
+{
+  "env": {
+    "jest": true
+  }
+}
+```
+
+### (Optional) Make Jest aware of abolute path aliases
+
+If you're using [absolute imports or module path aliases](https://nextjs.org/docs/advanced-features/module-path-aliases) in your project (which you should), then you will need to do a little extra setup to make Jest aware of them.
+Inside of your `jsconfig.json` or `tsconfig.json` file, you might have aliases like:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@hooks/*": ["hooks/*"]
+    }
+  }
+}
+```
+
+To make sure Jest knows how to resolve these paths, you can use the [`moduleNameMapper`](https://jestjs.io/docs/en/configuration#modulenamemapper-objectstring-string--arraystring) property in your `jest.config.js` file.
+
+```js
+// jest.config.js
+module.exports = {
+  setupFilesAfterEnv: ["./jest.setup.js"],
+  moduleNameMapper: {
+    "^@components(.*)$": "<rootDir>/components$1",
+    "^@pages(.*)$": "<rootDir>/pages$1",
+    "^@hooks(.*)$": "<rootDir>/hooks$1",
+  },
+};
+```
+
+If your path aliases are different, then you will need to modify the regex key for each of your aliases.
+
+## 4. Set up React Testing Library
+
+Create a folder for handling all your test related code. I called mine `test`. Inside the `test` folder, create a `test-utils.js` file for handling all the custom utilities you'll need to run the tests.
+This isn't strictly required, but it will make it easy to add `Providers` and other test utilities later.
+
+```js
+// test-utils.js
+import { render } from "@testing-library/react";
+
+// Add in any providers here if necessary:
+// (ReduxProvider, ThemeProvider, etc)
+const Providers = ({ children }) => {
+  return children;
+};
+
+const customRender = (ui, options = {}) =>
+  render(ui, { wrapper: Providers, ...options });
+
+// re-export everything
+export * from "@testing-library/react";
+
+// override render method
+export { customRender as render };
+```
+
+## 5. Write your tests
+
+Here's an example of how you would test a simple `HomePage` component with the current setup. Pretend you have the following `HomePage` component with just a heading.
+
+```jsx
+// pages/index.js
+
+export default function HomePage() {
+  return (
+    <main>
+      <h1>Testing Next.js With Jest and React Testing Library</h1>
+    </main>
+  );
+}
+```
+
+Here's what a test would look like
+
+```jsx
+// test/pages/index.test.js
+
+import React from "react";
+// Using render and screen from test-utils.js instead of
+// @testing-library/react
+import { render, screen } from "../test-utils";
+import HomePage from "@pages/index";
+
+describe("HomePage", () => {
+  it("should render the heading", () => {
+    render(<HomePage />);
+
+    const heading = screen.getByText(
+      /Testing Next.js With Jest and React Testing Library/i
+    );
+
+    // we can only use toBeInTheDocument because it was imported
+    // in the jest.setup.js and configured in jest.config.js
+    expect(heading).toBeInTheDocument();
+  });
+});
+```
+
+That's all there is to it! If you have any questions, reach out to me on [Twitter](https://twitter.com/kyrelldixon)!
+
+## Resources
+
+### Docs
+
+- [jest-dom Github repo](https://github.com/testing-library/jest-dom)
+- [Jest setupFilesAfterEnv docs](https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array)
+- [getting work abolute imports with Jest](https://medium.com/@benjaminwfox/next-js-setup-config-for-testing-linting-and-absolute-imports-605959d7bd6f#1f77)
+
+### Example Repos
+
+- [with-jest-typescript](https://github.com/vercel/next.js/tree/canary/examples/with-typescript-eslint-jest)
+- [with-jest](https://github.com/vercel/next.js/tree/canary/examples/with-jest)
