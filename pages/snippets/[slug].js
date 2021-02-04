@@ -2,13 +2,12 @@ import React from "react";
 import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
-import serializers from "components/serializers";
 import SEO from "components/seo";
 import { getSnippetPaths, getSnippet } from "lib/api";
 
 export default function Snippet({ mdxSource, frontMatter }) {
   const { title, description } = frontMatter;
-  const content = hydrate(mdxSource, serializers);
+  const content = hydrate(mdxSource);
   const router = useRouter();
   const fullUrl = `${router.asPath}`;
 

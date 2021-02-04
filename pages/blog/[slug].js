@@ -1,14 +1,13 @@
 import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
-import serializers from "components/serializers";
 import Newsletter from "components/newsletter";
 import SEO from "components/seo";
-import { getPaths, getMdxPost } from "lib/api";
+import { getAllMdxPathsNotSecret, getMdxPost } from "lib/api";
 
 export default function BlogPost({ mdxSource, frontMatter }) {
   const { title, excerpt, body } = frontMatter;
-  const content = hydrate(mdxSource, serializers);
+  const content = hydrate(mdxSource);
   const router = useRouter();
   const fullUrl = `${router.asPath}`;
 
@@ -32,7 +31,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getPaths();
+  const paths = await getAllMdxPathsNotSecret();
 
   return {
     paths,
