@@ -12,7 +12,7 @@ const navLinks = [
 
 export default function PageLayout({ children, preview = false }) {
   return (
-    <div className="pb-12 text-white bg-black md:pb-0 light:text-black light:bg-white">
+    <div className="pb-12 md:pb-0">
       {preview && <Alert preview={preview} />}
       <Header navLinks={navLinks} />
       {children}

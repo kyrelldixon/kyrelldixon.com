@@ -26,7 +26,7 @@ export default function Snippets({ snippets }) {
               href={`snippets/${snippet.slug}`}
               className={`transition-colors duration-200 ease-in-out ${
                 gradients[i % gradients.length]
-              } p-8 space-y-4 bg-gray-900 rounded-lg shadow-md light:bg-gray-100`}
+              } p-8 space-y-4 rounded-lg shadow-md`}
             >
               <h2 className="text-xl font-black">{snippet.title}</h2>
               <p>{snippet.description}</p>

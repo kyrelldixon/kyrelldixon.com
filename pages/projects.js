@@ -33,7 +33,7 @@ export default function Projects({ projects }) {
 
 function Project({ name, site, github, textGradient }) {
   return (
-    <div className="p-8 bg-gray-900 rounded-lg shadow-md light:bg-gray-100">
+    <div className="p-8 rounded-lg shadow-md">
       <h3 className="text-lg font-extrabold">{name}</h3>
       <div className="flex mt-4">
         {site && (

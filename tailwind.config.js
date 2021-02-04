@@ -1,35 +1,43 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: ['./components/**/*.js', './pages/**/*.js', './styles/**/*.js'],
-  darkMode: 'media',
+  purge: ["./components/**/*.js", "./pages/**/*.js", "./styles/**/*.js"],
+  darkMode: "media",
   theme: {
     extend: {
       colors: {
-        black: '#181818',
-        'f-blue': '#09f',
-        'f-purple': '#85f',
-        'f-teal': '#0cf',
-        'f-green': '#0c8',
-        'f-yellow': '#fc0',
-        'f-red': '#f36',
+        black: "#181818",
+        "f-blue": "#09f",
+        "f-purple": "#85f",
+        "f-teal": "#0cf",
+        "f-green": "#0c8",
+        "f-yellow": "#fc0",
+        "f-red": "#f36",
       },
       spacing: {
-        88: '22rem',
+        88: "22rem",
       },
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            pre: {},
+            "pre code": {},
+          },
+        },
       },
     },
   },
   variants: {
-    opacity: ['responsive', 'hover', 'focus', 'disabled'],
-    borderWidth: ['responsive', 'hover', 'focus'],
-    cursor: ['disabled'],
+    opacity: ["responsive", "hover", "focus", "disabled"],
+    borderWidth: ["responsive", "hover", "focus"],
+    cursor: ["disabled"],
   },
   plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/aspect-ratio"),
   ],
-}
+};

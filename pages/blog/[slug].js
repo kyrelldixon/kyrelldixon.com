@@ -20,9 +20,9 @@ export default function BlogPost({ mdxSource, frontMatter }) {
           <h1 className="mb-10 text-5xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
             {title}
           </h1>
-          <h2 className="mb-6 text-lg leading-snug md:text-xl">{excerpt}</h2>
+          <p className="mb-6 text-lg leading-snug md:text-xl">{excerpt}</p>
         </header>
-        <main className="max-w-2xl mx-auto">{content}</main>
+        <main className="prose prose-lg">{content}</main>
       </article>
       <div className="px-4 py-16">
         <Newsletter />
