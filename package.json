@@ -9,6 +9,7 @@
     "stage": "yarn build && yarn serve"
   },
   "dependencies": {
+    "@tryghost/content-api": "^1.4.13",
     "axios": "^0.21.1",
     "fast-glob": "^3.2.5",
     "gray-matter": "^4.0.2",
