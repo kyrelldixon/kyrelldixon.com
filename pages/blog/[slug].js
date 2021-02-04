@@ -21,7 +21,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
           </h1>
           <p className="mb-6 text-lg leading-snug md:text-xl">{excerpt}</p>
         </header>
-        <main className="prose prose-lg">{content}</main>
+        <main className="prose md:prose-lg">{content}</main>
       </article>
       <div className="px-4 py-16">
         <Newsletter />
