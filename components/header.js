@@ -5,8 +5,8 @@ export default function Header({ navLinks }) {
   const router = useRouter();
 
   return (
-    <header className="inset-x-0 top-0 z-10 px-8 py-8">
-      <div className="flex items-center justify-between max-w-4xl mx-auto text-left">
+    <header className="inset-x-0 top-0 z-10 py-8">
+      <div className="flex items-center justify-between max-w-2xl mx-auto">
         <Link href="/">
           <a title="Go to Homepage">
             <h1 className="text-xl font-bold">Kyrell Dixon</h1>

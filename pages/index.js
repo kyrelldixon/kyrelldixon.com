@@ -7,8 +7,8 @@ export default function BlogPage({ posts }) {
   return (
     <PageLayout>
       <SEO title="Home" />
-      <main className="grid grid-flow-col col-gap-16 p-4">
-        <section className="max-w-4xl py-8 mx-auto">
+      <main className="py-4">
+        <section className="max-w-2xl py-8 mx-auto">
           <BlogList posts={posts} />
         </section>
       </main>

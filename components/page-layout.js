@@ -7,7 +7,7 @@ const navLinks = [{ title: "Blog", href: "/", icon: "blog" }];
 
 export default function PageLayout({ children, preview = false }) {
   return (
-    <div className="pb-12 md:pb-0">
+    <div className="px-8 pb-12 md:pb-0">
       {preview && <Alert preview={preview} />}
       <Header navLinks={navLinks} />
       {children}

@@ -14,7 +14,7 @@ export default function BlogPost({ mdxSource, frontMatter }) {
   return (
     <PageLayout>
       <SEO title={title} description={excerpt} url={fullUrl} />
-      <article className="max-w-3xl px-4 pt-8 mx-auto">
+      <article className="max-w-2xl pt-8 mx-auto">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
             {title}
@@ -23,9 +23,6 @@ export default function BlogPost({ mdxSource, frontMatter }) {
         </header>
         <main className="prose md:prose-lg">{content}</main>
       </article>
-      <div className="px-4 py-16">
-        <Newsletter />
-      </div>
     </PageLayout>
   );
 }
