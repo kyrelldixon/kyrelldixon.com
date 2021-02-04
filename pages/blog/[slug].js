@@ -4,10 +4,16 @@ import PageLayout from "components/page-layout";
 import Newsletter from "components/newsletter";
 import SEO from "components/seo";
 import { getAllMdxPathsNotSecret, getMdxPost } from "lib/api";
+import { getPostBySlug, getPosts } from "lib/ghost";
 
-export default function BlogPost({ mdxSource, frontMatter }) {
-  const { title, excerpt, body } = frontMatter;
-  const content = hydrate(mdxSource);
+export default function BlogPost({
+  mdxSource,
+  frontMatter,
+  ghostPost,
+  isGhostPost,
+}) {
+  const { title, excerpt, body } = !isGhostPost ? frontMatter : ghostPost;
+  const content = !isGhostPost ? hydrate(mdxSource) : ghostPost.html;
   const router = useRouter();
   const fullUrl = `${router.asPath}`;
 
@@ -21,14 +27,28 @@ export default function BlogPost({ mdxSource, frontMatter }) {
           </h1>
           <p className="mb-6 text-lg leading-snug md:text-xl">{excerpt}</p>
         </header>
-        <main className="prose md:prose-lg">{content}</main>
+        {!isGhostPost ? (
+          <main className="prose md:prose-lg">{content}</main>
+        ) : (
+          <main
+            className="prose md:prose-lg"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        )}
       </article>
     </PageLayout>
   );
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllMdxPathsNotSecret();
+  const mdxPaths = await getAllMdxPathsNotSecret();
+  const ghostPosts = await getPosts();
+
+  const ghostPaths = ghostPosts.map(({ slug }) => ({
+    params: { slug },
+  }));
+
+  const paths = [...mdxPaths, ...ghostPaths];
 
   return {
     paths,
@@ -37,11 +57,25 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const { mdx, frontMatter } = await getMdxPost(slug);
+  const mdxPaths = await getAllMdxPathsNotSecret();
+
+  if (mdxPaths.some((val) => val.params.slug === slug)) {
+    const { mdx, frontMatter } = await getMdxPost(slug);
+    return {
+      props: {
+        mdxSource: mdx,
+        frontMatter,
+        isGhostPost: false,
+      },
+    };
+  }
+
+  const ghostPost = await getPostBySlug(slug);
+
   return {
     props: {
-      mdxSource: mdx,
-      frontMatter,
+      ghostPost,
+      isGhostPost: true,
     },
   };
 }
