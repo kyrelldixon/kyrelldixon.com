@@ -4,14 +4,13 @@ import SEO from "components/seo";
 import { getSortedPosts } from "lib/api";
 import { getPosts } from "lib/ghost";
 
-export default function BlogPage({ posts, ghostPosts }) {
-  const allPosts = [...posts, ...ghostPosts];
+export default function BlogPage({ posts }) {
   return (
     <PageLayout>
       <SEO title="Home" />
       <main className="py-4">
         <section className="max-w-2xl py-8 mx-auto">
-          <BlogList posts={allPosts} />
+          <BlogList posts={posts} />
         </section>
       </main>
     </PageLayout>
@@ -19,13 +18,27 @@ export default function BlogPage({ posts, ghostPosts }) {
 }
 
 export async function getStaticProps() {
-  const posts = await getSortedPosts();
+  const mdxPosts = await getSortedPosts();
   const ghostPosts = await getPosts();
+  const posts = [
+    ...mdxPosts,
+    ...ghostPosts.map((post) => ({
+      date: post.updated_at,
+      excerpt: post.excerpt,
+      title: post.title,
+      slug: post.slug,
+    })),
+  ];
+
+  posts.sort(mostRecentDateFirst);
 
   return {
     props: {
       posts,
-      ghostPosts,
     },
   };
+}
+
+function mostRecentDateFirst(a, b) {
+  return new Date(b.date) - new Date(a.date);
 }
