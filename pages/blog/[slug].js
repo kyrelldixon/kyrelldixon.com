@@ -1,7 +1,6 @@
 import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
-import Newsletter from "components/newsletter";
 import SEO from "components/seo";
 import { getAllMdxPathsNotSecret, getMdxPost } from "lib/api";
 import { getPostBySlug, getPosts } from "lib/ghost";
@@ -12,7 +11,7 @@ export default function BlogPost({
   ghostPost,
   isGhostPost,
 }) {
-  const { title, excerpt, body } = !isGhostPost ? frontMatter : ghostPost;
+  const { title, excerpt } = !isGhostPost ? frontMatter : ghostPost;
   const content = !isGhostPost ? hydrate(mdxSource) : ghostPost.html;
   const router = useRouter();
   const fullUrl = `${router.asPath}`;
