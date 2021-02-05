@@ -2,7 +2,7 @@ import PageLayout from "components/page-layout";
 import Icon from "components/icon";
 import Link from "components/link";
 import SEO from "components/seo";
-import { getProjects } from "lib/api";
+import { getProjects } from "lib/mdx";
 import { gradients } from "styles/gradients";
 
 export default function Projects({ projects }) {

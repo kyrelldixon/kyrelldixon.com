@@ -1,7 +1,7 @@
 import BlogList from "components/blog-list";
 import PageLayout from "components/page-layout";
 import SEO from "components/seo";
-import { getSortedPosts } from "lib/api";
+import { getSortedPosts } from "lib/mdx";
 import { getPosts } from "lib/ghost";
 
 export default function BlogPage({ posts }) {

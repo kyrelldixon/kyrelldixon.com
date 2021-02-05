@@ -3,7 +3,7 @@ import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
 import SEO from "components/seo";
-import { getSnippetPaths, getSnippet } from "lib/api";
+import { getSnippetPaths, getSnippet } from "lib/mdx";
 
 export default function Snippet({ mdxSource, frontMatter }) {
   const { title, description } = frontMatter;

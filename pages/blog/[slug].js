@@ -2,7 +2,7 @@ import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
 import SEO from "components/seo";
-import { getAllMdxPathsNotSecret, getMdxPost } from "lib/api";
+import { getAllMdxPathsNotSecret, getMdxPost } from "lib/mdx";
 import { getPostBySlug, getPosts } from "lib/ghost";
 
 export default function BlogPost({
