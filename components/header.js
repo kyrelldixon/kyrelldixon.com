@@ -1,34 +1,50 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function Header({ navLinks }) {
+const navItems = [{ title: "Blog", href: "/", icon: "blog" }];
+
+export default function Header() {
   const router = useRouter();
 
   return (
     <header className="inset-x-0 top-0 z-10 py-8">
-      <div className="flex items-center justify-between max-w-2xl mx-auto">
+      <div className="flex items-baseline justify-between max-w-2xl mx-auto">
         <Link href="/">
-          <a title="Go to Homepage">
-            <h1 className="text-xl font-bold">Kyrell Dixon</h1>
+          <a className="text-xl font-bold" title="Go to Homepage">
+            Kyrell Dixon
           </a>
         </Link>
-        <nav>
-          <ul className="flex space-x-6 text-sm font-semibold">
-            {navLinks.map(({ title, href }, i) => (
-              <li
-                className={`transition duration-200 ease-in-out ${
-                  router.pathname === href ? "" : "opacity-75 hover:opacity-100"
-                }`}
-                key={i}
-              >
-                <Link href={href}>
-                  <a>{title}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <Nav navItems={navItems} />
       </div>
     </header>
+  );
+}
+
+function Nav({ navItems }) {
+  return (
+    <nav>
+      <ul className="flex space-x-6 text-sm font-semibold">
+        {navItems.map(({ title, href }) => (
+          <NavItem key={href}>
+            <Link href={href}>
+              <a>{title}</a>
+            </Link>
+          </NavItem>
+        ))}
+        <NavItem>
+          <a href="https://twitter.com/kyrelldixon" target="_blank">
+            Twitter
+          </a>
+        </NavItem>
+      </ul>
+    </nav>
+  );
+}
+
+function NavItem({ children }) {
+  return (
+    <li className="transition duration-200 ease-in-out opacity-75 hover:opacity-100">
+      {children}
+    </li>
   );
 }
