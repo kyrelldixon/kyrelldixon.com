@@ -1,9 +1,11 @@
+import "prismjs/themes/prism-okaidia.css";
 import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
 import SEO from "components/seo";
 import { getAllMdxPathsNotSecret, getMdxPost } from "lib/mdx";
 import { getPostBySlug, getPosts } from "lib/ghost";
+import { useSyntaxHighlighting } from "../../hooks/useSyntaxHighlighting";
 
 export default function BlogPost({
   mdxSource,
@@ -15,6 +17,8 @@ export default function BlogPost({
   const content = !isGhostPost ? hydrate(mdxSource) : ghostPost.html;
   const router = useRouter();
   const fullUrl = `${router.asPath}`;
+
+  useSyntaxHighlighting(content);
 
   return (
     <PageLayout>
