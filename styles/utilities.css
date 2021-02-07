@@ -1,0 +1,7 @@
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+.grayscale {
+  filter: grayscale(100%);
+}

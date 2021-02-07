@@ -1,4 +1,3 @@
-import "prismjs/themes/prism-okaidia.css";
 import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
