@@ -9,9 +9,8 @@ export function useFathom() {
   const router = useRouter();
   useEffect(() => {
     // Initialize Fathom when the app loads
-    Fathom.load(process.env.FATHOM_SITE_ID, {
-      includedDomains: [process.env.FATHOM_CUSTOM_URL],
-    });
+    Fathom.load(process.env.FATHOM_SITE_ID);
+    console.log(process.env.FATHOM_SITE_ID);
 
     function onRouteChangeComplete() {
       console.log("TEST: calling on route change complete");
