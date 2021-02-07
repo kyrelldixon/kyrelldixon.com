@@ -12,6 +12,7 @@
     "@tryghost/content-api": "^1.4.13",
     "axios": "^0.21.1",
     "fast-glob": "^3.2.5",
+    "fathom-client": "^3.0.0",
     "gray-matter": "^4.0.2",
     "next": "^10.0.6",
     "next-mdx-remote": "^2.1.3",
