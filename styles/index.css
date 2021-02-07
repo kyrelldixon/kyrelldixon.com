@@ -79,4 +79,19 @@ html {
   filter: grayscale(100%);
 }
 
+/* .kg-embed-card is for Ghost embeds. This displays Youtube videos nicely */
+
+.kg-embed-card {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.kg-embed-card iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
 @tailwind utilities;
