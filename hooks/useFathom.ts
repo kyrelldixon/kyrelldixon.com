@@ -14,6 +14,7 @@ export function useFathom() {
     });
 
     function onRouteChangeComplete() {
+      console.log("TEST: calling on route change complete");
       Fathom.trackPageview();
     }
     // Record a pageview when route changes
