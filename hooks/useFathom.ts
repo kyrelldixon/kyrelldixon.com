@@ -10,10 +10,8 @@ export function useFathom() {
   useEffect(() => {
     // Initialize Fathom when the app loads
     Fathom.load(process.env.FATHOM_SITE_ID);
-    console.log(process.env.FATHOM_SITE_ID);
 
     function onRouteChangeComplete() {
-      console.log("TEST: calling on route change complete");
       Fathom.trackPageview();
     }
     // Record a pageview when route changes
