@@ -23,7 +23,7 @@ export default function BlogPost({
   return (
     <PageLayout>
       <SEO title={title} description={excerpt} url={fullUrl} />
-      <article className="max-w-2xl py-8 mx-auto">
+      <article className="py-8">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
             {title}

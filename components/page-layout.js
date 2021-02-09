@@ -4,7 +4,7 @@ import Footer from "./footer";
 
 export default function PageLayout({ children, preview = false }) {
   return (
-    <div className="px-8 pb-12 md:pb-0">
+    <div className="max-w-2xl px-4 mx-auto">
       {preview && <Alert preview={preview} />}
       <Header />
       {children}

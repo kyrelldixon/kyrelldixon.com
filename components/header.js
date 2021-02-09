@@ -7,7 +7,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <header className="inset-x-0 top-0 z-10 py-8">
+    <header className="py-8">
       <div className="flex items-baseline justify-between max-w-2xl mx-auto">
         <Link href="/">
           <a className="text-xl font-bold" title="Go to Homepage">
