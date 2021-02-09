@@ -17,13 +17,12 @@ export default async (req, res) => {
     const apiKey = process.env.CONVERTKIT_API_KEY;
 
     const URL = `https://api.convertkit.com/v3/forms/${formId}/subscribe`;
-    console.log(`making another request to ${URL}`);
 
     const body = {
       email,
+      api_key: apiKey,
       ...(first_name && { first_name }),
       ...(tags && { tags }),
-      api_key: apiKey,
     };
 
     const { data, status } = await axios.post(URL, body);

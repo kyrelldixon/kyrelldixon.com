@@ -2,6 +2,7 @@ import hydrate from "next-mdx-remote/hydrate";
 import { useRouter } from "next/router";
 import PageLayout from "components/page-layout";
 import SEO from "components/seo";
+import Subscribe from "components/subscribe";
 import { getAllMdxPathsNotSecret, getMdxPost } from "lib/mdx";
 import { getPostBySlug, getPosts } from "lib/ghost";
 import { useSyntaxHighlighting } from "../../hooks/useSyntaxHighlighting";
@@ -22,7 +23,7 @@ export default function BlogPost({
   return (
     <PageLayout>
       <SEO title={title} description={excerpt} url={fullUrl} />
-      <article className="max-w-2xl pt-8 mx-auto">
+      <article className="max-w-2xl py-8 mx-auto">
         <header className="text-center">
           <h1 className="mb-10 text-5xl font-extrabold leading-tight md:text-6xl xl:text-7xl">
             {title}
@@ -38,6 +39,7 @@ export default function BlogPost({
           />
         )}
       </article>
+      <Subscribe />
     </PageLayout>
   );
 }

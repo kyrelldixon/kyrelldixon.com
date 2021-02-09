@@ -2,7 +2,7 @@ import { useState } from "react";
 import Icon from "./icon";
 import addToConvertKit from "lib/convertkit";
 
-export default function Newsletter() {
+export default function Subscribe() {
   const [fields, setFields] = useState({
     firstName: "",
     email: "",
@@ -26,7 +26,6 @@ export default function Newsletter() {
     const { email, firstName } = fields;
     const formId = 1253732;
 
-    console.log(`submitting with ${email} and ${firstName}`);
     addToConvertKit(formId, email, { firstName })
       .then(() => {
         setSubscribed(true);
@@ -51,20 +50,22 @@ export default function Newsletter() {
   }
 
   return (
-    <form className="max-w-sm mx-auto md:max-w-lg " onSubmit={handleSubmit}>
-      <header className="pb-8 text-center">
-        <h2 className="mb-2 text-2xl font-bold leading-tight md:text-4xl">
-          Sign up for the newsletter
+    <form
+      className="p-4 mx-auto bg-gray-200 rounded-md md:p-8"
+      onSubmit={handleSubmit}
+    >
+      <header className="pb-4">
+        <h2 className="mb-2 text-xl font-bold leading-tight md:text-2xl">
+          Follow along
         </h2>
-        <p className="text-lg md:text-xl">
-          Join the newsletter and get resources, curated content, and project
-          inspiration delivered straight to your inbox.{" "}
+        <p className="text-base">
+          Drop your name and email below to get updates when I post.
         </p>
       </header>
       <section className="flex flex-col flex-wrap text-sm">
         <div className="flex flex-col mb-4 space-y-2 md:flex-row md:space-y-0">
           <input
-            className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-300 rounded-lg md:mr-2 md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-200"
+            className="flex-1 px-3 py-2 text-sm text-black rounded-lg md:mr-2 md:flex-auto focus:border focus:border-blue-500"
             type="text"
             name="firstName"
             placeholder="First Name"
@@ -73,7 +74,7 @@ export default function Newsletter() {
             required
           />
           <input
-            className="flex-1 px-4 py-2 text-black placeholder-black bg-gray-300 rounded-lg md:flex-auto focus:border focus:border-blue-500 focus:bg-gray-200"
+            className="flex-1 px-3 py-2 text-sm text-black rounded-lg md:flex-auto focus:border focus:border-blue-500"
             type="email"
             name="email"
             placeholder="Email"
