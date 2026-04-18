@@ -11,7 +11,9 @@
     "lint": "biome check --error-on-warnings .",
     "lint:fix": "biome check --write --error-on-warnings .",
     "format": "biome format --write .",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "cf:dev": "bun run build && wrangler dev",
+    "deploy": "bun run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.12",
     "@tailwindcss/forms": "^0.5.11",
-    "@tailwindcss/typography": "^0.5.19"
+    "@tailwindcss/typography": "^0.5.19",
+    "wrangler": "^4.83.0"
   }
 }
