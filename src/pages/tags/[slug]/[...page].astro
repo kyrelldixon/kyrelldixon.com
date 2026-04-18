@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
-import type { Page } from "astro";
+import type { GetStaticPathsOptions, Page } from "astro";
 // import ListLayout from "@/layouts/ListLayout.astro";
 import { ITEMS_PER_PAGE } from "@/consts";
 import { excludeDrafts, sortBlogPosts } from "@/functions";
@@ -14,7 +14,7 @@ interface Props {
   entry: CollectionEntry<"tags">;
 }
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const tags = await getCollection("tags");
   const posts = await getCollection("blog", excludeDrafts).then(sortBlogPosts);
 

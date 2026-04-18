@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { type CollectionEntry, getEntries, render } from "astro:content";
 import ScrollTop from "@/components/solidjs/ScrollTop.tsx";
-import { POST_METADATA, SITE_METADATA } from "@/consts";
+import { POST_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
 import DetailsSummary from "../components/DetailsSummary.astro";
 import FormattedDate from "../components/FormattedDate.astro";
@@ -10,7 +10,6 @@ import Link from "../components/Link.astro";
 import PageTitle from "../components/PageTitle.astro";
 import PostCover from "../components/PostCover.astro";
 import SectionContainer from "../components/SectionContainer.astro";
-import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
 import Tag from "../components/Tag.astro";
 import RootLayout from "./RootLayout.astro";
 
@@ -147,11 +146,6 @@ const { Content, headings } = await render(post);
               )
             }
             {
-              ['top', 'both'].includes(POST_METADATA.showShareButtons) ? (
-                <SocialShareButtons title={post.data.title} description={post.data.summary} class="mt-4" />
-              ) : null
-            }
-            {
               headings.length > 0 && POST_METADATA.showTableOfContents && (
                 <DetailsSummary
                   class="border border-gray-100 dark:border-gray-600 rounded mt-4 max-w-none"
@@ -182,11 +176,6 @@ const { Content, headings } = await render(post);
               <slot />
               <Content />
             </div>
-            {
-              ['bottom', 'both'].includes(POST_METADATA.showShareButtons) ? (
-                <SocialShareButtons title={post.data.title} description={post.data.summary} />
-              ) : null
-            }
             <!--    )}-->
           </div>
           <footer>

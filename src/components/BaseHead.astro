@@ -2,12 +2,14 @@
 import "@/styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { SITE_METADATA } from "@/consts";
+import { useTranslations } from "@/i18n";
 import "@fontsource/onest";
 import { getImage } from "astro:assets";
 import { type CollectionEntry, getEntry } from "astro:content";
 import { SEO } from "astro-seo";
 import Favicon from "@/assets/favicon.svg";
-import Analytics from "./Analytics.astro";
+
+const t = useTranslations();
 
 interface Props {
   title: string;
@@ -62,18 +64,17 @@ if (article?.cover) {
 }
 
 const twitterCreator = article?.authorTwitter || creator?.data?.twitter;
-const isProduction = import.meta.env.PROD;
 ---
 
 <head>
   <SEO
     title={title}
     {titleTemplate}
-    titleDefault={SITE_METADATA.title}
+    titleDefault={t("siteMetadata.title")}
     description={description}
     nofollow={robots.includes("nofollow")}
     noindex={robots.includes("noindex")}
-    url={Astro.url}
+    canonical={Astro.url.toString()}
     charset="utf-8"
     extend={{
       meta: [
@@ -94,7 +95,7 @@ const isProduction = import.meta.env.PROD;
         { rel: "apple-touch-icon", sizes: "76x76", href: appleTouchIcon.src },
         { rel: "icon", type: "image/svg", sizes: "32x32", href: favicon32.src },
         { rel: "icon", type: "image/svg", sizes: "16x16", href: favicon16.src },
-        { rel: "mask-icon", href: favicon16.src, color: "black" },
+        { rel: "mask-icon", href: favicon16.src },
         { rel: "alternate", type: "application/rss+xml", href: "/rss.xml" },
       ],
     }}
@@ -124,7 +125,7 @@ const isProduction = import.meta.env.PROD;
         alt: title,
       },
       optional: {
-        locale: SITE_METADATA.language,
+        locale: t("siteMetadata.language"),
         description,
       },
       ...(article && {
@@ -137,6 +138,5 @@ const isProduction = import.meta.env.PROD;
       }),
     }}
   />
-  {isProduction && <Analytics />}
   <ClientRouter />
 </head>

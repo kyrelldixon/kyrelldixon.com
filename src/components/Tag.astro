@@ -4,12 +4,12 @@ import Link from "./Link.astro";
 
 interface Props {
   tag?: CollectionEntry<"tags">;
-  slug?: CollectionEntry<"tags">["id"];
+  id?: CollectionEntry<"tags">["id"];
 }
 let TagProp = Astro.props.tag;
 
-if (!TagProp && Astro.props.slug) {
-  TagProp = await getEntry("tags", Astro.props.slug);
+if (!TagProp && Astro.props.id) {
+  TagProp = await getEntry("tags", Astro.props.id);
 }
 ---
 

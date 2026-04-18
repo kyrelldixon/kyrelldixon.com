@@ -12,10 +12,10 @@ const authors = defineCollection({
     shortBio: z.string(),
     company: z.string().optional(),
     email: z.email(),
-    twitter: z.string().url().optional(),
-    linkedin: z.string().url().optional(),
-    github: z.string().url().optional(),
-    layout: z.string().url().optional(),
+    twitter: z.url().optional(),
+    linkedin: z.url().optional(),
+    github: z.url().optional(),
+    layout: z.url().optional(),
   }),
 });
 

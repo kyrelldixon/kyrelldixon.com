@@ -120,7 +120,7 @@ const isBlogPage = Astro.url.pathname.startsWith("/blog");
                       </h3>
                       <div class="flex flex-wrap">
                         {tags.map(({ id }) => (
-                          <Tag slug={id} />
+                          <Tag id={id} />
                         ))}
                       </div>
                     </div>

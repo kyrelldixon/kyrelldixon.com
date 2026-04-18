@@ -12,32 +12,6 @@ export const SITE_METADATA = {
   github: "https://github.com/kyrelldixon",
   linkedin: "https://www.linkedin.com/in/kyrelldixon",
   twitter: "https://x.com/kyrelldixon",
-
-  // These are not supported yet
-  analytics: {
-    fathom: {
-      site: "", // Add your site id here
-      src: "https://cdn.usefathom.com/fathom.js",
-    },
-    googleAnalyticsId: null, // Add your Google Analytics id here
-    metricalApp: null, // Add your Metrical app here
-    plausible: {
-      domain: "", // Add your domain here
-      src: "https://plausible.io/js/plausible.js",
-    },
-    simpleAnalytics: false, // Activate Simple Analytics
-    umami: {
-      site: "", // Add your site id here
-      dataId: "", // Add your data id here
-      host: "/umami.js", // Add your host here
-    },
-    // amplitudeApiKey: null, // Add your Amplitude Api Key here, not yet implemented
-    matomo: {
-      id: "", // Add your Matomo id here
-      url: "", // Add your Matomo url here
-    },
-    minimalAnalyticsId: null, // Add your Minimal Analytics id here
-  },
   search: {
     provider: "custom", // Custom Solid.js search implementation
     kbarConfig: {
@@ -74,5 +48,4 @@ export const POST_METADATA = {
   showAuthors: true, // Show authors in blog post, TODO: Add support for hiding authors
   showRelatedPosts: true, // Show related posts in blog post, TODO: Add support for hiding related posts
   showTableOfContents: true, // Show table of contents in blog post
-  showShareButtons: "both", // Show share buttons in blog post, options: top, bottom, both, none
 };

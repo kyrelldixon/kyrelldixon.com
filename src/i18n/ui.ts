@@ -37,8 +37,6 @@ export const ui = {
     "components.listPostCover.publishedAt": "Published at",
     "components.pagination.previous": "Previous",
     "components.pagination.next": "Next",
-    "components.socialShareButtons.sharing": "Sharing is caring!",
-    "components.comments.title": "Comments",
 
     // Navigation
     "nav.home": "Home",

@@ -17,4 +17,12 @@ hooks = [
     files = "\\.(ts|tsx|js|jsx|json|css)$",
     pass_filenames = true,
   },
+  {
+    id = "astro-check",
+    name = "Astro check",
+    language = "system",
+    entry = "bun run typecheck",
+    files = "\\.(astro|ts|tsx|js|jsx|mjs|mdx)$",
+    pass_filenames = false,
+  },
 ]

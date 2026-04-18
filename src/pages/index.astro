@@ -51,7 +51,7 @@ const posts = await getCollection("blog", excludeDrafts).then(sortBlogPosts);
                         </h2>
                         <div class="flex flex-wrap">
                           {tags.map((ref) => (
-                            <Tag slug={ref.id} />
+                            <Tag id={ref.id} />
                           ))}
                         </div>
                       </div>
