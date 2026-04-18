@@ -3,7 +3,6 @@ import { type CollectionEntry, getEntries, render } from "astro:content";
 import ScrollTopAndComments from "@/components/solidjs/ScrollTopAndComments.tsx";
 import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
-import Comments from "../components/Comments.astro";
 import DetailsSummary from "../components/DetailsSummary.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Link from "../components/Link.astro";
@@ -138,18 +137,6 @@ const { Content, headings } = await render(post);
             />
           ) : null
         }
-        {
-          SITE_METADATA.comments?.provider === 'giscus' && POST_METADATA.showComments && (
-            <div id="comments">
-              <Comments />
-            </div>
-          )
-        }
-        <!--{siteMetadata.comments && (-->
-        <!--        <div class="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">-->
-        <!--            <Comments slug={slug} />-->
-        <!--        </div>-->
-        <!--)}-->
         <footer>
           <div
             class="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base"
