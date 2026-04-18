@@ -8,6 +8,10 @@ export const SITE_METADATA = {
   siteUrl: "https://kyrelldixon.com/",
   siteRepo: "https://github.com/kyrelldixon/kyrelldixon.com",
   robots: "index, follow", // Options: index, noindex, follow, nofollow
+  email: "kyrell@kyrelldixon.com",
+  github: "https://github.com/kyrelldixon",
+  linkedin: "https://www.linkedin.com/in/kyrelldixon",
+  twitter: "https://x.com/kyrelldixon",
 
   // These are not supported yet
   analytics: {

@@ -1,15 +1,16 @@
 ---
-import { Image } from "astro:assets";
-import LogoImage from "@/assets/logo.svg";
-import { useTranslations } from "@/i18n";
+type Props = {
+  class?: string;
+};
 
-const t = useTranslations();
+const { class: className } = Astro.props;
 ---
 
-<Image
-  src={LogoImage}
-  alt={t("siteMetadata.title")}
-  widths={[40, 80]}
-  sizes={`(max-width: 640px) 40px, 80px`}
-  loading="eager"
-/>
+<span
+  class:list={[
+    "text-xl md:text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100",
+    className,
+  ]}
+>
+  kyrelldixon
+</span>
