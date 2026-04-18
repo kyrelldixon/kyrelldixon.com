@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { type CollectionEntry, getEntries, render } from "astro:content";
-import ScrollTopAndComments from "@/components/solidjs/ScrollTopAndComments.tsx";
+import ScrollTop from "@/components/solidjs/ScrollTop.tsx";
 import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
 import DetailsSummary from "../components/DetailsSummary.astro";
@@ -47,7 +47,7 @@ const { Content, headings } = await render(post);
   article={articleOgDetails}
 >
   <SectionContainer>
-    <ScrollTopAndComments client:only="solid-js" />
+    <ScrollTop client:only="solid-js" />
     <article>
       <div class="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
         <header class="pt-6 xl:pb-6">

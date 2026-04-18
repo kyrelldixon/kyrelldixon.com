@@ -5,7 +5,7 @@ const t = useTranslations();
 
 const SCROLL_TOP_THRESHOLD = 50;
 
-export default function ScrollTopAndComments() {
+export default function ScrollTop() {
   let scrollTopRef!: HTMLDivElement;
 
   const handleScrollToTop = () => {
@@ -32,7 +32,7 @@ export default function ScrollTopAndComments() {
     >
       <button
         type="button"
-        aria-label={t("components.scrollTopAndComments.scrollTop")}
+        aria-label={t("components.scrollTop.scrollTop")}
         onClick={handleScrollToTop}
         class="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
       >

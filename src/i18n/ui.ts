@@ -30,8 +30,7 @@ export const ui = {
     "pages.404.backToHome": "Back to home",
 
     // Components
-    "components.scrollTopAndComments.scrollTop": "Scroll To Top",
-    "components.scrollTopAndComments.scrollToComments": "Scroll To Comments",
+    "components.scrollTop.scrollTop": "Scroll To Top",
     "components.themeSwitcher.toggleDarkMode": "Toggle Dark Mode",
     "components.card.linkToPost": "Read more about {title}",
     "components.mobileNav.toggleMenu": "Toggle Menu",
