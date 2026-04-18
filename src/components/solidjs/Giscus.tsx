@@ -18,12 +18,12 @@ export default function Giscus() {
     const updateGiscusTheme = () => {
       const giscusTheme = resolveTheme();
       const iframe = document.querySelector(
-        "iframe.giscus-frame"
+        "iframe.giscus-frame",
       ) as HTMLIFrameElement | null;
       if (iframe?.contentWindow) {
         iframe.contentWindow.postMessage(
           { giscus: { setConfig: { theme: giscusTheme } } },
-          "https://giscus.app"
+          "https://giscus.app",
         );
       }
     };

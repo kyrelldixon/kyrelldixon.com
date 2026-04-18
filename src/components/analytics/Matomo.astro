@@ -6,8 +6,8 @@ export interface Props {
 
 const { id, url } = Astro.props;
 
-const scriptUrl = new URL('matomo.js', url).href;
-const trackerUrl = new URL('matomo.php', url).href;
+const scriptUrl = new URL("matomo.js", url).href;
+const trackerUrl = new URL("matomo.php", url).href;
 ---
 
 <script async src={scriptUrl}></script>

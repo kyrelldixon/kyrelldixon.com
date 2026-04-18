@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import FormattedDate from "./FormattedDate.astro";
 import type { CollectionEntry } from "astro:content";
 import { useTranslations } from "@/i18n";
+import FormattedDate from "./FormattedDate.astro";
 
 const t = useTranslations();
 
@@ -12,7 +12,9 @@ type Props = {
 };
 
 const {
-  post: {data: { cover, title, date }},
+  post: {
+    data: { cover, title, date },
+  },
 } = Astro.props;
 ---
 

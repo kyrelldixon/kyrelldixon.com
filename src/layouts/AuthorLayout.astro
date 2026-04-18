@@ -3,11 +3,11 @@ import { Image } from "astro:assets";
 import { type CollectionEntry, getCollection } from "astro:content";
 
 import SocialIcon from "@/components/social-icons/index.astro";
-import RootLayout from "./RootLayout.astro";
-import Link from "../components/Link.astro";
-import { sortBlogPosts } from "../functions";
-import { ITEMS_PER_PAGE } from "../consts";
 import { useTranslations } from "@/i18n";
+import Link from "../components/Link.astro";
+import { ITEMS_PER_PAGE } from "../consts";
+import { sortBlogPosts } from "../functions";
+import RootLayout from "./RootLayout.astro";
 
 const t = useTranslations();
 
@@ -33,7 +33,7 @@ const authorPosts = await getCollection(
   "blog",
   ({ data: { authors, draft } }) => {
     return !draft && authors.some((ref) => ref.id === Astro.props.slug);
-  }
+  },
 )
   .then(sortBlogPosts)
   .then((posts) => {

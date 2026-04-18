@@ -1,17 +1,17 @@
 ---
-import SectionContainer from "../components/SectionContainer.astro";
-import PageTitle from "../components/PageTitle.astro";
-import Link from "../components/Link.astro";
-import RootLayout from "./RootLayout.astro";
 import { type CollectionEntry, getEntries, render } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
 import ScrollTopAndComments from "@/components/solidjs/ScrollTopAndComments.tsx";
-import PostCover from "../components/PostCover.astro";
-import DetailsSummary from "../components/DetailsSummary.astro";
-import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
-import Comments from "../components/Comments.astro";
 import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
+import Comments from "../components/Comments.astro";
+import DetailsSummary from "../components/DetailsSummary.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Link from "../components/Link.astro";
+import PageTitle from "../components/PageTitle.astro";
+import PostCover from "../components/PostCover.astro";
+import SectionContainer from "../components/SectionContainer.astro";
+import SocialShareButtons from "../components/social-icons/SocialShareButtons.astro";
+import RootLayout from "./RootLayout.astro";
 
 const t = useTranslations();
 
@@ -23,7 +23,7 @@ interface Props {
 
 const { post, next, prev } = Astro.props as Props;
 const authors: CollectionEntry<"authors">[] = await getEntries(
-  post.data.authors
+  post.data.authors,
 );
 const tags: CollectionEntry<"tags">[] = await getEntries(post.data.tags);
 // const related: CollectionEntry<'blog'>[] = await getEntries(post.data.related);

@@ -1,6 +1,6 @@
 import { onMount } from "solid-js";
+import { POST_METADATA, SITE_METADATA } from "@/consts";
 import { useTranslations } from "@/i18n";
-import { SITE_METADATA, POST_METADATA } from "@/consts";
 
 const t = useTranslations();
 
@@ -10,45 +10,57 @@ const BOTTOM_THRESHOLD = 400; // px from bottom to show scroll-to-comments
 export default function ScrollTopAndComments() {
   let scrollTopRef!: HTMLDivElement;
   let scrollCommentsRef!: HTMLDivElement;
-  const showComments = SITE_METADATA.comments?.provider === 'giscus' && POST_METADATA.showComments;
+  const showComments =
+    SITE_METADATA.comments?.provider === "giscus" && POST_METADATA.showComments;
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleScrollToComments = () => {
-    const commentsSection = document.getElementById('comments');
+    const commentsSection = document.getElementById("comments");
     if (commentsSection) {
-      commentsSection.scrollIntoView({ behavior: 'smooth' });
+      commentsSection.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   onMount(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
 
       // Scroll to top: show when scrolled down
-      scrollTopRef.classList.toggle('md:hidden', scrollY < SCROLL_TOP_THRESHOLD);
-      scrollTopRef.classList.toggle('md:flex', scrollY >= SCROLL_TOP_THRESHOLD);
+      scrollTopRef.classList.toggle(
+        "md:hidden",
+        scrollY < SCROLL_TOP_THRESHOLD,
+      );
+      scrollTopRef.classList.toggle("md:flex", scrollY >= SCROLL_TOP_THRESHOLD);
 
       // Scroll to comments: show when near the bottom (or on short pages)
       if (showComments && scrollCommentsRef) {
         const nearBottom =
-          docHeight <= BOTTOM_THRESHOLD || scrollY >= docHeight - BOTTOM_THRESHOLD;
-        scrollCommentsRef.classList.toggle('hidden', !nearBottom);
-        scrollCommentsRef.classList.toggle('flex', nearBottom);
+          docHeight <= BOTTOM_THRESHOLD ||
+          scrollY >= docHeight - BOTTOM_THRESHOLD;
+        scrollCommentsRef.classList.toggle("hidden", !nearBottom);
+        scrollCommentsRef.classList.toggle("flex", nearBottom);
       }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // initial state
   });
 
   return (
     <>
       {/* Scroll to top: shown when user has scrolled down */}
-      <div class="fixed bottom-8 right-8 hidden flex-col gap-3 md:hidden z-10" ref={scrollTopRef}>
-        <button aria-label={t('components.scrollTopAndComments.scrollTop')} onClick={handleScrollToTop}
+      <div
+        class="fixed bottom-8 right-8 hidden flex-col gap-3 md:hidden z-10"
+        ref={scrollTopRef}
+      >
+        <button
+          type="button"
+          aria-label={t("components.scrollTopAndComments.scrollTop")}
+          onClick={handleScrollToTop}
           class="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         >
           <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -62,9 +74,13 @@ export default function ScrollTopAndComments() {
       </div>
       {/* Scroll to comments: shown when scrolled near the bottom */}
       {showComments && (
-        <div class="fixed bottom-20 right-8 hidden z-10" ref={scrollCommentsRef}>
+        <div
+          class="fixed bottom-20 right-8 hidden z-10"
+          ref={scrollCommentsRef}
+        >
           <button
-            aria-label={t('components.scrollTopAndComments.scrollToComments')}
+            type="button"
+            aria-label={t("components.scrollTopAndComments.scrollToComments")}
             onClick={handleScrollToComments}
             class="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
           >
@@ -79,5 +95,5 @@ export default function ScrollTopAndComments() {
         </div>
       )}
     </>
-  )
+  );
 }

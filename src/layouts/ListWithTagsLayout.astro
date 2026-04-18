@@ -1,14 +1,12 @@
 ---
-import { getCollection } from "astro:content";
-import { type CollectionEntry } from "astro:content";
-
-import Link from "../components/Link.astro";
-import Pagination from "../components/Pagination.astro";
-import RootLayout from "./RootLayout.astro";
-import Tag from "../components/Tag.astro";
-import FormattedDate from "../components/FormattedDate.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
 import type { Page } from "astro";
 import { useTranslations } from "@/i18n";
+import FormattedDate from "../components/FormattedDate.astro";
+import Link from "../components/Link.astro";
+import Pagination from "../components/Pagination.astro";
+import Tag from "../components/Tag.astro";
+import RootLayout from "./RootLayout.astro";
 
 const t = useTranslations();
 

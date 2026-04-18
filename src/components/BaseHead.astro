@@ -1,12 +1,12 @@
 ---
 import "@/styles/global.css";
-import { SITE_METADATA } from "@/consts";
 import { ClientRouter } from "astro:transitions";
+import { SITE_METADATA } from "@/consts";
 import "@fontsource/onest";
-import { SEO } from "astro-seo";
-import { getEntry, type CollectionEntry } from "astro:content";
-import Favicon from "@/assets/favicon.svg";
 import { getImage } from "astro:assets";
+import { type CollectionEntry, getEntry } from "astro:content";
+import { SEO } from "astro-seo";
+import Favicon from "@/assets/favicon.svg";
 import Analytics from "./Analytics.astro";
 
 interface Props {
@@ -52,7 +52,7 @@ if (article?.cover) {
   });
 } else {
   const importedOgImage = await import(`../assets/og-image.png`).then(
-    (m) => m.default
+    (m) => m.default,
   );
   openGraphImage = await getImage({
     src: importedOgImage,

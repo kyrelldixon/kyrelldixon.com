@@ -1,4 +1,11 @@
-import { createSignal, createEffect, For, Show, onMount, onCleanup } from "solid-js";
+import {
+  createEffect,
+  createSignal,
+  For,
+  onCleanup,
+  onMount,
+  Show,
+} from "solid-js";
 import { formatDate } from "@/utils";
 
 interface SearchResult {
@@ -37,12 +44,12 @@ export default function SearchButton() {
   // Perform search when query changes (with debouncing)
   createEffect((prevTimeout?: NodeJS.Timeout) => {
     const searchQuery = query().toLowerCase().trim();
-    
+
     // Clear previous timeout before setting up new one
     if (prevTimeout !== undefined) {
       clearTimeout(prevTimeout);
     }
-    
+
     if (!searchQuery) {
       setResults([]);
       return undefined;
@@ -55,14 +62,14 @@ export default function SearchButton() {
         const summaryMatch = post.summary.toLowerCase().includes(searchQuery);
         const contentMatch = post.content.toLowerCase().includes(searchQuery);
         const tagsMatch = post.tags.some((tag) =>
-          tag.toLowerCase().includes(searchQuery)
+          tag.toLowerCase().includes(searchQuery),
         );
         return titleMatch || summaryMatch || contentMatch || tagsMatch;
       });
 
       setResults(filtered);
     }, 150);
-    
+
     // Return timeout to be passed as prevTimeout in next run
     return timeout;
   });
@@ -102,6 +109,7 @@ export default function SearchButton() {
     <>
       {/* Search Button */}
       <button
+        type="button"
         onClick={openSearch}
         aria-label="Search"
         class="text-gray-900 dark:text-gray-100"
@@ -156,6 +164,7 @@ export default function SearchButton() {
                   autofocus={isOpen()}
                 />
                 <button
+                  type="button"
                   onClick={closeSearch}
                   class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
@@ -197,10 +206,17 @@ export default function SearchButton() {
                             <time>{formatDate(result.date)}</time>
                             <Show when={result.tags.length > 0}>
                               <span>•</span>
-                              <div class="flex gap-1" role="list" aria-label="Tags">
+                              <div
+                                class="flex gap-1"
+                                role="list"
+                                aria-label="Tags"
+                              >
                                 <For each={result.tags.slice(0, 3)}>
                                   {(tag) => (
-                                    <span class="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded" role="listitem">
+                                    <span
+                                      class="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded"
+                                      role="listitem"
+                                    >
                                       {tag}
                                     </span>
                                   )}
@@ -217,11 +233,13 @@ export default function SearchButton() {
 
               <Show when={!isLoading() && !query()}>
                 <div class="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
-                  <div class="text-sm">
-                    Start typing to search posts...
-                  </div>
+                  <div class="text-sm">Start typing to search posts...</div>
                   <div class="text-xs mt-2 text-gray-400">
-                    Tip: Press <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">⌘K</kbd> to open search
+                    Tip: Press{" "}
+                    <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">
+                      ⌘K
+                    </kbd>{" "}
+                    to open search
                   </div>
                 </div>
               </Show>

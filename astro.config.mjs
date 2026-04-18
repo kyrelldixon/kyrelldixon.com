@@ -1,12 +1,11 @@
-import { defineConfig, passthroughImageService} from 'astro/config';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
-import { SITE_METADATA } from "./src/consts.ts";
-import metaTags from "astro-meta-tags";
 import tailwindcss from "@tailwindcss/vite";
-
+import { defineConfig, passthroughImageService } from "astro/config";
+import metaTags from "astro-meta-tags";
 import robotsTxt from "astro-robots-txt";
+import { SITE_METADATA } from "./src/consts.ts";
 
 // https://astro.build/config
 export default defineConfig({

@@ -1,11 +1,11 @@
 ---
-import { SITE_METADATA, NAVIGATION } from "@/consts";
+import { NAVIGATION, SITE_METADATA } from "@/consts";
+import { useTranslations } from "@/i18n";
+import MobileNav from "@/solid/MobileNav.tsx";
+import SearchButton from "@/solid/SearchButton.tsx";
+import ThemeSwitcher from "@/solid/ThemeSwitcher.tsx";
 import HeaderLink from "./HeaderLink.astro";
 import Logo from "./Logo.astro";
-import MobileNav from "@/solid/MobileNav.tsx";
-import ThemeSwitcher from "@/solid/ThemeSwitcher.tsx";
-import SearchButton from "@/solid/SearchButton.tsx";
-import { useTranslations } from "@/i18n";
 
 const t = useTranslations();
 ---

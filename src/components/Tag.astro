@@ -1,6 +1,6 @@
 ---
-import Link from "./Link.astro";
 import { type CollectionEntry, getEntry } from "astro:content";
+import Link from "./Link.astro";
 
 interface Props {
   tag?: CollectionEntry<"tags">;
@@ -11,7 +11,6 @@ let TagProp = Astro.props.tag;
 if (!TagProp && Astro.props.slug) {
   TagProp = await getEntry("tags", Astro.props.slug);
 }
-
 ---
 
 {TagProp && (

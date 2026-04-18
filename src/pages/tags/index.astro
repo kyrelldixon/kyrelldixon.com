@@ -1,19 +1,19 @@
 ---
-import {type CollectionEntry, getCollection} from "astro:content";
-
-import RootLayout from "@/layouts/RootLayout.astro";
-import Tag from "@/components/Tag.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
 import Link from "@/components/Link.astro";
+import Tag from "@/components/Tag.astro";
 import { useTranslations } from "@/i18n";
+import RootLayout from "@/layouts/RootLayout.astro";
 
 const t = useTranslations();
 
-const tags = await getCollection('tags');
-const posts = await getCollection('blog');
+const tags = await getCollection("tags");
+const posts = await getCollection("blog");
 
 function tagCount(id: CollectionEntry<"tags">["id"]) {
   if (!posts) return 0;
-  return posts.filter((post) => post.data.tags.some((ref) => ref.id === id)).length;
+  return posts.filter((post) => post.data.tags.some((ref) => ref.id === id))
+    .length;
 }
 ---
 <RootLayout title={t('pages.tags.title')} description={t('pages.tags.description')}>

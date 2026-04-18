@@ -1,0 +1,20 @@
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-json" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  {
+    id = "biome-check",
+    name = "Biome check",
+    language = "system",
+    entry = "bunx biome check --write --error-on-warnings",
+    files = "\\.(ts|tsx|js|jsx|json|css)$",
+    pass_filenames = true,
+  },
+]
