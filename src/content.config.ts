@@ -1,5 +1,6 @@
-import { defineCollection, reference, z } from "astro:content";
+import { defineCollection, reference } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 import { POST_METADATA } from "./consts";
 
 const authors = defineCollection({
@@ -10,7 +11,7 @@ const authors = defineCollection({
     occupation: z.string().optional(),
     shortBio: z.string(),
     company: z.string().optional(),
-    email: z.string().email(),
+    email: z.email(),
     twitter: z.string().url().optional(),
     linkedin: z.string().url().optional(),
     github: z.string().url().optional(),
@@ -25,12 +26,16 @@ const blog = defineCollection({
       title: z.string(),
       cover: image().optional(),
       date: z.coerce.date(),
-      tags: z.array(reference("tags")).default(["default"]),
+      tags: z
+        .array(reference("tags"))
+        .default([{ collection: "tags", id: "default" }]),
       lastmod: z.coerce.date().optional(),
       draft: z.boolean().default(false),
       summary: z.string(),
       images: z.string().optional(),
-      authors: z.array(reference("authors")).default(["default"]),
+      authors: z
+        .array(reference("authors"))
+        .default([{ collection: "authors", id: "default" }]),
       postLayout: z
         .enum(["simple", "column"])
         .default(POST_METADATA.defaultLayout as "simple" | "column"),
