@@ -15,18 +15,18 @@
     --line-height-13: 3.25rem;
     --line-height-14: 3.5rem;
 
-    /* Map custom primary color scale to the default pink palette */
-    --color-primary-50: var(--color-pink-50);
-    --color-primary-100: var(--color-pink-100);
-    --color-primary-200: var(--color-pink-200);
-    --color-primary-300: var(--color-pink-300);
-    --color-primary-400: var(--color-pink-400);
-    --color-primary-500: var(--color-pink-500);
-    --color-primary-600: var(--color-pink-600);
-    --color-primary-700: var(--color-pink-700);
-    --color-primary-800: var(--color-pink-800);
-    --color-primary-900: var(--color-pink-900);
-    --color-primary-950: var(--color-pink-950);
+    /* Map custom primary color scale to the default blue palette (royal blue). */
+    --color-primary-50: var(--color-blue-50);
+    --color-primary-100: var(--color-blue-100);
+    --color-primary-200: var(--color-blue-200);
+    --color-primary-300: var(--color-blue-300);
+    --color-primary-400: var(--color-blue-400);
+    --color-primary-500: var(--color-blue-500);
+    --color-primary-600: var(--color-blue-600);
+    --color-primary-700: var(--color-blue-700);
+    --color-primary-800: var(--color-blue-800);
+    --color-primary-900: var(--color-blue-900);
+    --color-primary-950: var(--color-blue-950);
 }
 
 .task-list-item::before {

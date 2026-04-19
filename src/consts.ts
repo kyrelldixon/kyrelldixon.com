@@ -10,7 +10,7 @@ export const SITE_METADATA = {
   robots: "index, follow", // Options: index, noindex, follow, nofollow
   email: "kyrell@kyrelldixon.com",
   github: "https://github.com/kyrelldixon",
-  linkedin: "https://www.linkedin.com/in/kyrelldixon",
+  linkedin: "https://www.linkedin.com/in/kyrell-dixon/",
   twitter: "https://x.com/kyrelldixon",
   search: {
     provider: "custom", // Custom Solid.js search implementation
