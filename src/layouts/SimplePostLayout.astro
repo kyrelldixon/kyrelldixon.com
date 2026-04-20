@@ -74,7 +74,7 @@ const { Content, headings } = await render(post);
         }
       </header>
       <div
-        class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0"
+        class="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0 max-w-3xl mx-auto"
       >
         {
           post.data.draft && (
@@ -88,7 +88,7 @@ const { Content, headings } = await render(post);
         {
           headings.length > 0 && POST_METADATA.showTableOfContents && (
             <DetailsSummary
-              class="border border-gray-100 dark:border-gray-600 rounded mt-4 max-w-3xl mx-auto"
+              class="border border-gray-100 dark:border-gray-600 rounded mt-4 max-w-none"
               title={t("layouts.postLayout.tableOfContents")}
             >
               <ul class="space-y-2 list-none mt-0 ps-0">
@@ -114,7 +114,7 @@ const { Content, headings } = await render(post);
         <div
           class="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0"
         >
-          <div class="prose max-w-3xl mx-auto pb-8 pt-10 dark:prose-invert">
+          <div class="prose max-w-none pb-8 pt-10 dark:prose-invert">
             <slot />
             <Content />
           </div>
