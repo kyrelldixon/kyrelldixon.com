@@ -1,0 +1,121 @@
+---
+title: "Voice Memo to Obsidian Pipeline"
+date: 2026-04-19
+summary: "Walking thoughts end up as searchable markdown in my Obsidian vault — via a Voice Memos Shortcut, a Cloudflare Workers endpoint, Inngest, and Eleven Labs. Press record, hit share, come home to a transcript."
+tags:
+  - obsidian
+  - voice-memo
+  - kos
+  - building-in-public
+postLayout: simple
+draft: true
+---
+
+{/*
+WRITING NOTES (delete before publish):
+
+- Draft by Claude, revised 2026-04-19 after Kyrell corrected the pipeline.
+- Summary frontmatter intentionally left as placeholder for Kyrell to rewrite.
+- Specifics to verify or edit before publishing:
+  - "I extract claims with Claude Code on raw transcripts" (in "What I do with it after") — keep if true, drop if not.
+  - kos-kit mention in "For the curious" — confirm relevant / public, or remove.
+- Style anchor: drew.tech/posts/ios-memos-obsidian-claude by Drew Bredvick — conversational-technical hybrid, ~1200 words.
+*/}
+
+## I'm outside
+
+The best ideas I've had in the last year have shown up on walks. Some came back home with me. Most didn't.
+
+The pattern: I'd think something sharp, feel the click, tell myself I'd remember — and by the time I was at the laptop, there'd be a vague outline where the thought used to be. Sometimes not even that.
+
+Typing faster on my phone wasn't the fix. Thumbs aren't a recording device. The thought is already gone by the time I'm fighting autocorrect.
+
+What works: press record, keep walking, keep thinking. Here's the pipeline I built to make voice memos actually land somewhere I'll find them again.
+
+## The problem that kept happening
+
+Ideas were disappearing between "I just had a thought" and getting back to the laptop. The cost wasn't the frustration — I could live with that. The cost was everything downstream: posts I never wrote, decisions I re-litigated from scratch, problems I'd already solved and then re-solved.
+
+The ideas weren't bad. They just weren't durable.
+
+## What the capture looks like now
+
+Phone comes out. I press record in the Voice Memos app. I keep walking and keep talking.
+
+A recent one, from April 5, started like this:
+
+> Okay. So I'm outside. I'm gonna test doing voice recordings instead of writing it out as I walk. 'Cause, yeah, I think this is valuable time. I capture a lot of really good ideas, and I wanna have this time…
+
+Eight minutes and thirty-eight seconds of thinking-out-loud, most of which I'd have lost typing.
+
+Voice-first matters because thinking-on-the-move has a different shape than thinking-at-the-desk. You follow a thought further before deciding whether it's good. You catch yourself mid-sentence — "I don't like saying X because it's too vague" — in a way that typing suppresses. The memo preserves the texture of actual reasoning, not just the conclusion.
+
+## The pipeline, step by step
+
+When I'm done recording, I hit share in the Voice Memos app and pick a Shortcut I built called **Transcribe**. That's the whole interaction on the phone — no app to open, no file to rename, no copy-paste.
+
+The Shortcut POSTs the audio file to a Cloudflare Workers endpoint. The URL is public, but the Worker is gated behind a Cloudflare Access service token, so only requests carrying my token get through. Public in the sense that it's reachable from anywhere; private in the sense that only I can call it. I get Cloudflare's edge protections around what is effectively a private endpoint.
+
+From there, the Worker hands the job off to an [Inngest](https://www.inngest.com/) pipeline. Inngest does the async heavy lifting: calling [Eleven Labs](https://elevenlabs.io/)'s speech-to-text API and writing the result through to my Obsidian vault's `sources/` folder. I picked Eleven Labs over Whisper and Otter because the transcription quality on natural conversation — stammers, self-corrections, trailing-off sentences — was meaningfully better in my testing. Otter is built for meetings; a voice memo where I'm interrupting myself every few sentences isn't a meeting.
+
+The final write looks like this — a markdown file with frontmatter that makes it searchable and linkable:
+
+```yaml
+---
+categories:
+  - "[[Sources]]"
+source_type: voice-memo
+file_path: "/Users/kyrelldixon/.kos/agent/captures/voice-memo-1775438033884/audio.m4a"
+created: "[[2026-04-05]]"
+duration: "8:38"
+extraction_method: elevenlabs
+status: raw
+---
+```
+
+That frontmatter is the part that makes this more than a dump. `categories` links it to the Sources hub note. `created` is a wikilinked date, so the memo shows up on the daily note for April 5 automatically. `source_type: voice-memo` lets me filter voice memos separately from articles, tweets, videos. `status: raw` flags it as untouched — I know I haven't extracted anything from it yet.
+
+## What the output looks like
+
+Here's a real excerpt from that April 5 memo, unedited, straight out of the pipeline:
+
+> So really, I think for me, the, the challenge is content strategy. It's not what can I post. It's what, what can I post that gets me the best results in the least amount of time? 'Cause that's what's most valuable to me. Best results, least amount of time.
+
+That line — *best results, least amount of time* — turned out to be the sharpest articulation of what I actually want from a publishing habit. I'd have never surfaced it at a keyboard. Walking, it showed up buried a few minutes in, after I'd already rambled past three or four other thoughts.
+
+The transcript preserves everything: the stumbles, the stammers, the self-correction. That's what makes it usable later. I skim for the moments where my own voice gets sharp — those are usually the ideas worth pulling into a draft.
+
+## What I do with it after
+
+The capture isn't the value. What I do with it is.
+
+- **Search.** Obsidian full-text search across `sources/` surfaces the memo when I'm drafting something months later and vaguely remember "didn't I think about this on a walk?"
+- **Link.** When I write a post, I wikilink to the memo as a source — readers can't see it, but I can trace where an idea came from.
+- **Pull quotes.** A sharp line (like *best results, least amount of time*) is already citable — no re-typing, no paraphrasing.
+- **Extract.** I run Claude Code over a raw transcript and ask it to pull just the claims, stripped of filler. The raw stays; the distillate sits next to it. {/* Kyrell: keep if true, drop if not */}
+
+This beats a generic notes-app dump because the memo isn't orphaned. It's part of a graph — linked to a date, categorized with other sources, searchable alongside everything else I've captured.
+
+## Building it with Claude Code
+
+Most of this pipeline — the Shortcut, the Worker, the Inngest function, the write-to-vault step — was built with Claude Code. Most of it was wiring: HTTP handlers, API calls, file writes. The parts I had to steer on — picking Eleven Labs over other STT providers, the frontmatter schema so it played well with my existing vault conventions, the Cloudflare Access service-token model — were the parts that needed my judgment. The scaffolding was routine.
+
+That split shows up everywhere in AI work: the parts that need you, the parts that don't. Naming which is which is most of the skill.
+
+## Rough edges
+
+- **Nothing downstream is automatic yet.** The memo lands in `sources/`, but no agent reads it and suggests extractions. `status: raw` just sits there until I manually change it. Next iteration: an agent that reads raw memos and proposes topic tags + candidate pulls.
+
+{/* Kyrell: add other real friction points you've hit — the invented ones (long pauses, mobile capture not built) have been removed. */}
+
+## For the curious
+
+- **kos-kit** — the machine-setup + agent-capture toolkit this pipeline lives inside. {/* Kyrell: add URL when public, or remove this bullet if kos-kit isn't the right reference */}
+- **[Inngest](https://www.inngest.com/)** — the async / durable-workflow platform orchestrating the transcription job.
+- **[Cloudflare Workers](https://workers.cloudflare.com/)** and **[Cloudflare Access](https://www.cloudflare.com/products/zero-trust/access/)** — the public-endpoint + service-token combo.
+- **[Eleven Labs](https://elevenlabs.io)** — the transcription service.
+- **[Drew Bredvick — iOS Memos → Obsidian → Claude](https://drew.tech/posts/ios-memos-obsidian-claude)** — the reference style and an adjacent workflow.
+
+---
+
+I outlined this post as a voice memo. The transcript's in `sources/` now. It lost a few thoughts and sharpened a few others, which is exactly the point.
