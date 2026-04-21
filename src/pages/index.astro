@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import Link from "@/components/Link.astro";
-import ListPostCover from "@/components/ListPostCover.astro";
 import Tag from "@/components/Tag.astro";
 import { ITEMS_PER_PAGE } from "@/consts";
 import { excludeDrafts, sortBlogPosts } from "@/functions";
@@ -17,7 +16,7 @@ const posts = await getCollection("blog", excludeDrafts).then(sortBlogPosts);
   title={t("siteMetadata.title")}
   description={t("siteMetadata.description")}
 >
-  <div class="divide-y divide-gray-200 dark:divide-gray-700">
+  <div class="divide-y divide-gray-200 dark:divide-gray-700 max-w-4xl mx-auto">
     <div class="space-y-2 pb-8 pt-6 md:space-y-5">
       <h1
         class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
@@ -34,41 +33,36 @@ const posts = await getCollection("blog", excludeDrafts).then(sortBlogPosts);
         posts.slice(0, ITEMS_PER_PAGE).map((post) => {
           const { title, summary, tags } = post.data;
           return (
-            <li class="py-12">
-              <article>
-                <div class="space-y-2 xl:grid xl:grid-cols-4 space-x-4 xl:space-y-0 xl:items-stretch">
-                  <ListPostCover {post} class="space-y-5 xl:col-span-1" />
-                  <div class="space-y-5 xl:col-span-3">
-                    <div class="space-y-6">
-                      <div>
-                        <h2 class="text-2xl font-bold leading-8 tracking-tight">
-                          <Link
-                            href={`/blog/${post.id}`}
-                            class="text-gray-900 dark:text-gray-100"
-                          >
-                            {title}
-                          </Link>
-                        </h2>
-                        <div class="flex flex-wrap">
-                          {tags.map((ref) => (
-                            <Tag id={ref.id} />
-                          ))}
-                        </div>
-                      </div>
-                      <div class="prose max-w-none text-gray-500 dark:text-gray-400">
-                        {summary}
-                      </div>
-                    </div>
-                    <div class="text-base font-medium leading-6">
+            <li class="py-6">
+              <article class="space-y-5">
+                <div class="space-y-6">
+                  <div>
+                    <h2 class="text-2xl font-bold leading-8 tracking-tight">
                       <Link
                         href={`/blog/${post.id}`}
-                        class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                        aria-label={t('pages.home.readMoreAbout', {title})}
+                        class="text-gray-900 dark:text-gray-100"
                       >
-                        {t('pages.home.readMore')} &rarr;
+                        {title}
                       </Link>
+                    </h2>
+                    <div class="flex flex-wrap">
+                      {tags.map((ref) => (
+                        <Tag id={ref.id} />
+                      ))}
                     </div>
                   </div>
+                  <div class="prose max-w-none text-gray-500 dark:text-gray-400">
+                    {summary}
+                  </div>
+                </div>
+                <div class="text-base font-medium leading-6">
+                  <Link
+                    href={`/blog/${post.id}`}
+                    class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    aria-label={t('pages.home.readMoreAbout', {title})}
+                  >
+                    {t('pages.home.readMore')} &rarr;
+                  </Link>
                 </div>
               </article>
             </li>
@@ -79,7 +73,7 @@ const posts = await getCollection("blog", excludeDrafts).then(sortBlogPosts);
   </div>
   {
     posts.length > ITEMS_PER_PAGE && (
-      <div class="flex justify-end text-base font-medium leading-6">
+      <div class="flex justify-end text-base font-medium leading-6 max-w-4xl mx-auto">
         <Link
           href="/blog"
           class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
