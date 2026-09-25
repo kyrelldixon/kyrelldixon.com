@@ -19,10 +19,9 @@ export const ui = {
     "pages.tags.allTags": "All tags",
     "pages.tags.noTags": "No tags found",
     "pages.tags.viewPosts": "View all posts with tag {tag}",
-    "pages.projects.title": "Projects",
-    "pages.projects.description": "All projects",
-    "pages.projects.allProjects": "All projects",
-    "pages.projects.showcase": "Showcase your projects",
+    "pages.setup.title": "Setup",
+    "pages.setup.description":
+      "The tools I use to run my business and write code.",
     "pages.blog.title": "Blog",
     "pages.blog.description": "All blog posts",
     "pages.404.title": "404 - Not Found",
@@ -42,6 +41,7 @@ export const ui = {
     "nav.home": "Home",
     "nav.blog": "Blog",
     "nav.about": "About",
+    "nav.setup": "Setup",
 
     // Layouts
     "layouts.authorLayout.aboutAuthor": "About {author}",

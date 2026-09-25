@@ -1,0 +1,196 @@
+---
+import Link from "@/components/Link.astro";
+import { useTranslations } from "@/i18n";
+import RootLayout from "@/layouts/RootLayout.astro";
+
+const t = useTranslations();
+
+const sections = [
+  {
+    title: "Workflow",
+    tools: [
+      {
+        name: "Claude Code",
+        href: "https://claude.com/claude-code",
+        description: "AI agent that runs in the terminal. Does most of my work.",
+      },
+      {
+        name: "Ghostty",
+        href: "https://ghostty.org",
+        description: "Terminal app.",
+      },
+      {
+        name: "Herdr",
+        href: "https://github.com/herdrdev/herdr",
+        description:
+          "Terminal multiplexer that shows which agents are working, idle, or blocked.",
+      },
+      {
+        name: "Simplify output style",
+        href: "/setup/simplify.md",
+        description:
+          "My Claude Code output style. Short answers that lead with the next action. Drop it in ~/.claude/output-styles/.",
+      },
+      {
+        name: "Markdown files",
+        description:
+          "Docs, plans, and instructions live as markdown in git so Claude can read them.",
+      },
+      {
+        name: "Wispr Flow",
+        href: "https://wisprflow.ai",
+        description: "Voice dictation into any app.",
+      },
+      {
+        name: "Raycast",
+        href: "https://www.raycast.com",
+        description: "Launcher and shortcuts.",
+      },
+    ],
+  },
+  {
+    title: "Business",
+    tools: [
+      {
+        name: "Google Workspace",
+        href: "https://workspace.google.com",
+        description:
+          "Email on my own domain (me@mydomain.com, not @gmail.com), plus Docs, Sheets, and Calendar.",
+      },
+      {
+        name: "gog",
+        href: "https://gogcli.sh",
+        description:
+          "CLI for Gmail, Calendar, Drive, Docs, and Sheets, so Claude can work with them.",
+      },
+      {
+        name: "Linear",
+        href: "https://linear.app",
+        description: "Projects and tasks.",
+      },
+      {
+        name: "Bear",
+        href: "https://bear.app",
+        description: "Note taking.",
+      },
+      {
+        name: "Granola",
+        href: "https://www.granola.ai",
+        description: "Meeting recordings, notes, and transcripts.",
+      },
+      {
+        name: "1Password",
+        href: "https://1password.com",
+        description: "Passwords and secrets.",
+      },
+      {
+        name: "Slack",
+        href: "https://slack.com",
+        description: "Client communication.",
+      },
+      {
+        name: "CleanShot X",
+        href: "https://cleanshot.com",
+        description: "Screenshots and quick screen recordings.",
+      },
+      {
+        name: "Tella",
+        href: "https://www.tella.tv",
+        description: "Recorded video walkthroughs.",
+      },
+    ],
+  },
+  {
+    title: "Dev",
+    tools: [
+      {
+        name: "Matt Pocock's skills",
+        href: "https://github.com/mattpocock/skills",
+        description:
+          "Claude Code skills for planning, TDD, debugging, and architecture.",
+      },
+      {
+        name: "Cloudflare",
+        href: "https://www.cloudflare.com",
+        description: "Deploying sites and apps. This site runs on it.",
+      },
+      {
+        name: "Zed",
+        href: "https://zed.dev",
+        description: "Code editor.",
+      },
+      {
+        name: "Bun",
+        href: "https://bun.sh",
+        description: "TypeScript runtime for scripts and apps.",
+      },
+      {
+        name: "mise",
+        href: "https://mise.jdx.dev",
+        description: "Installs and pins CLI tool versions.",
+      },
+      {
+        name: "GitHub CLI",
+        href: "https://cli.github.com",
+        description: "GitHub from the terminal.",
+      },
+      {
+        name: "Varlock",
+        href: "https://varlock.dev",
+        description: "Environment variables and secrets, backed by 1Password.",
+      },
+      {
+        name: "agent-browser",
+        href: "https://agent-browser.dev",
+        description: "Lets Claude drive a browser.",
+      },
+    ],
+  },
+];
+---
+
+<RootLayout title={t("pages.setup.title")} description={t("pages.setup.description")}>
+  <div class="divide-y divide-gray-200 dark:divide-gray-700 max-w-4xl mx-auto">
+    <div class="space-y-2 pb-8 pt-6 md:space-y-5">
+      <h1
+        class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+      >
+        {t("pages.setup.title")}
+      </h1>
+      <p class="text-lg leading-7 text-gray-500 dark:text-gray-400">
+        {t("pages.setup.description")}
+      </p>
+    </div>
+    {
+      sections.map((section) => (
+        <section class="py-8">
+          <h2 class="text-2xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100">
+            {section.title}
+          </h2>
+          <ul class="mt-4 space-y-4">
+            {section.tools.map((tool) => (
+              <li>
+                {tool.href ? (
+                  <Link
+                    href={tool.href}
+                    class="font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  >
+                    {tool.name}
+                  </Link>
+                ) : (
+                  <span class="font-medium text-gray-900 dark:text-gray-100">
+                    {tool.name}
+                  </span>
+                )}
+                <span class="text-gray-500 dark:text-gray-400">
+                  {" "}
+                  — {tool.description}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</RootLayout>
